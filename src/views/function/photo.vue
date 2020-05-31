@@ -6,12 +6,12 @@
       >
         <v-text-field
 
-          prepend-icon="mdi-account-search"
+          prepend-icon="fa-search"
           single-line
         ></v-text-field>
   
         <v-btn icon>
-          <v-icon>mdi-pin</v-icon>
+          <v-icon>fa-map-marker</v-icon>
         </v-btn>
   
         <v-btn icon>
@@ -23,37 +23,37 @@
 
         <v-row>    
       <v-col cols="3" sm ="4" ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fas fa-street-view</v-icon>
         
       </v-btn><p class="text-center">ภาพถ่ายบุคคล</p></v-col>
 
       <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-user-graduate</v-icon>
         
       </v-btn><p class="text-center">รับปริญญา</p></v-col>
 
       <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-heart</v-icon>
         
       </v-btn><p class="text-center">พรีเวดดิ้ง</p></v-col>
 
       <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon > fa-venus-mars</v-icon>
         
       </v-btn><p class="text-center">งานแต่งงาน</p></v-col>
 
       <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-business-time</v-icon>
         
       </v-btn><p class="text-center">งานอีเวนต์</p></v-col>
 
       <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-hamburger</v-icon>
         
       </v-btn><p class="text-center">สินค้า/อาหาร</p></v-col>
 
       <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-building</v-icon>
         
       </v-btn><p class="text-center">สถาปัตยกรรม</p></v-col>
 </v-row>
@@ -74,7 +74,7 @@
         <v-list-item-avatar color="grey"></v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline">24Pixel</v-list-item-title>
-          <v-list-item-subtitle>5.0<br>2500-3000</v-list-item-subtitle>
+          <v-list-item-subtitle><i class="fas fa-star-half-alt"></i>5.0<br><i class="fas fa-money-bill-wave"></i>2500-3000</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 <v-chip

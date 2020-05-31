@@ -48,13 +48,13 @@ export default {
   data: () => {
     return {
       items: [
-        { title: "ข้อมูลส่วนตัว", icon: "mdi-home" },
-        { title: "สร้างProfileช่างภาพ", icon: "mdi-home" },
-        { title: "สร้างProfile นางแบบ/นายแบบ", icon: "mdi-home" },
-        { title: "คะแนน", icon: "mdi-home" },
-        { title: "ลงขายสินค้า", icon: "mdi-home" },
-        { title: "ลงรีวิว", icon: "mdi-home" },
-        { title: "ตั้งค่า", icon: "mdi-home" }
+        { title: "ข้อมูลส่วนตัว", icon: " fa-id-badge" },
+        { title: "สร้างProfileช่างภาพ", icon: "fa-address-card" },
+        { title: "สร้างProfile นางแบบ/นายแบบ", icon: "fa-address-card" },
+        { title: "คะแนน", icon: " fa-coins" },
+        { title: "ลงขายสินค้า", icon: "fa-cart-plus" },
+        { title: "ลงรีวิว", icon: " fa-star" },
+        { title: "ตั้งค่า", icon: " fa-cog" }
       ]
     };
   }

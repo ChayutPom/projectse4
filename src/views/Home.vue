@@ -37,27 +37,27 @@
       </v-btn><p class="text-center">Photo</p></v-col>
 
       <v-col  ><v-btn class="ma-6" outlined medium fab color="indigo" href="model.vue">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-female</v-icon>
         
       </v-btn><p class="text-center">model</p></v-col>
 
       <v-col  ><v-btn class="ma-6" outlined medium fab color="indigo" href="review.vue">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-star</v-icon>
         
       </v-btn><p class="text-center">review</p></v-col>
 
       <v-col  ><v-btn class="ma-6" outlined medium fab color="indigo" href="shop.vue">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-store</v-icon>
         
       </v-btn><p class="text-center">shop</p></v-col>
 
       <v-col  ><v-btn class="ma-6" outlined medium fab color="indigo" href="photographer.vue">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-images</v-icon>
         
       </v-btn><p class="text-center">photographer</p></v-col>
 
       <v-col  ><v-btn class="ma-6" outlined medium fab color="indigo" href="Modeling.vue">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-image</v-icon>
         
       </v-btn><p class="text-center">Modeling</p></v-col>
 </v-row>

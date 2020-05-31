@@ -57,7 +57,7 @@
  <v-list-item
                 ripple
               ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fas fa-street-view</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
@@ -68,60 +68,60 @@
       <v-col   cols="6"><v-list-item
                 ripple
               ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-user-graduate</v-icon>
       </v-btn>  
               <v-list-item-content>
-                <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
+                <v-list-item-title >รับปริญญา</v-list-item-title>
                 <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6"><v-list-item
                 ripple
               ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-heart</v-icon>
       </v-btn>  
               <v-list-item-content>
-                <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
+                <v-list-item-title >พรีเวดดิ้ง</v-list-item-title>
                 <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6"><v-list-item
                 ripple
               ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-venus-mars</v-icon>
       </v-btn>  
               <v-list-item-content>
-                <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
+                <v-list-item-title >งานแต่งงาน</v-list-item-title>
                 <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6"><v-list-item
                 ripple
               ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-business-time</v-icon>
       </v-btn>  
               <v-list-item-content>
-                <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
+                <v-list-item-title >งานอีเวนต์</v-list-item-title>
                 <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col  cols="6" ><v-list-item
                 ripple
               ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-hamburger</v-icon>
       </v-btn>  
               <v-list-item-content>
-                <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
+                <v-list-item-title >สินค้า/อาหาร</v-list-item-title>
                 <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6"><v-list-item
                 ripple
               ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
-        <v-icon >mdi-camera</v-icon>
+        <v-icon >fa-building</v-icon>
       </v-btn>  
               <v-list-item-content>
-                <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
+                <v-list-item-title >สถาปัตยกรรม</v-list-item-title>
                 <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 </v-row>
