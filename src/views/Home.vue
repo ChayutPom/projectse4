@@ -1,29 +1,18 @@
 <template>
 <div id="app">
   <v-app id="inspire">
-    <v-carousel
-      cycle
-      height="160"
+     <v-carousel
+                cycle
+      height="170"
       hide-delimiter-background
-      show-arrows-on-hover
-    >
+      show-arrows-on-hover>
       <v-carousel-item
-        v-for="(slide, i) in slides"
+        v-for="(item,i) in items"
         :key="i"
-      >
-        <v-sheet
-          :color="colors[i]"
-          height="100%"
-        >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
-            <div class="display-3"> Slide</div>
-          </v-row>
-        </v-sheet>
-      </v-carousel-item>
+        :src="item.src"
+        reverse-transition="fade-transition"
+        transition="fade-transition"
+      ></v-carousel-item>
     </v-carousel>
 
 
@@ -71,8 +60,7 @@
     >
       <v-slide-group >
         <v-slide-item
-          v-for="n in 5"
-          :key="n"  
+          v-for="(photos, i) in photos" :key="i"  
           
         >
           <v-card
@@ -82,24 +70,24 @@
     >
       <v-img
         height="155" max-width="100%"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png">     
+        :src="photos.img" >     
         </v-img>
 
       <v-card > 
-Cafe Badilico
+{{photos.name}}
         <v-row
           align="center"
           class="mx-2"
         >
           <v-rating
-            :value="4.5"
+            :value="photos.star"
             color="amber"
             dense
             half-increments
             readonly
             size="10"
           ></v-rating>
-          <div class="grey--text ml-4">4.5 (413)</div>
+          <div class="grey--text ml-4">{{photos.star}} ({{photos.num}})</div>
         </v-row>
       </v-card>
     </v-card>
@@ -241,8 +229,32 @@ Cafe Badilico
         'mdi-star-circle'
 
       ],
+      photos:[
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"ABC",star:"5.0",num:"243" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"asd",star:"5.0",num:"212" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"Photossss",star:"4.5",num:"234" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"tooos",star:"4.5",num:"123" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"sdfsdf" ,star:"4",num:"222"},
+      ],
       
+      items: [
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+        },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+        },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+        },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+        },
+      ],
+    
     }
+
+    
   },
 
   }

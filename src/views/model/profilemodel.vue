@@ -36,7 +36,7 @@
       </v-list-item>
   
       <v-card-actions >
-        <v-btn text>Button</v-btn>
+        <v-btn text >ติดต่อ</v-btn>
       </v-card-actions>
       </v-container>
     </v-card>

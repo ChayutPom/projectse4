@@ -14,8 +14,19 @@ import photographer from '../views/function/photographer.vue';
 import profile from '../views/photo/profile.vue';
 import achievement from '../views/photo/achievement.vue';
 import profilemodel from '../views/model/profilemodel.vue';
-Vue.use(VueRouter)
 
+import photo1 from '../views/forms/photo1.vue';
+import photo2 from '../views/forms/photo2.vue';
+import photo3 from '../views/forms/photo3.vue';
+import photo4 from '../views/forms/photo4.vue';
+import photo5 from '../views/forms/photo5.vue';
+import photo6 from '../views/forms/photo6.vue';
+import photo7 from '../views/forms/photo7.vue';
+
+import addphotograf from '../views/forms/addphotograf.vue';
+import addmodel from '../views/forms/addmodel.vue';
+
+Vue.use(VueRouter)
   const routes = [
   {
     
@@ -89,6 +100,51 @@ Vue.use(VueRouter)
       path: '/profilemodel.vue',
       name: 'profilemodel',
       component: profilemodel
+    },
+    {
+      path: '/photo1.vue',
+      name: 'photo1',
+      component: photo1
+    },
+    {
+      path: '/photo2.vue',
+      name: 'photo2',
+      component: photo2
+    },
+    {
+      path: '/photo3.vue',
+      name: 'photo3',
+      component: photo3
+    },
+    {
+      path: '/photo4.vue',
+      name: 'photo4',
+      component: photo4
+    },
+    {
+      path: '/photo5.vue',
+      name: 'photo5',
+      component: photo5
+    },
+    {
+      path: '/photo6.vue',
+      name: 'photo6',
+      component: photo6
+    },
+    {
+      path: '/photo7.vue',
+      name: 'photo7',
+      component: photo7
+    },
+    {
+      path: '/addphotograf.vue',
+      name: 'addphotograf',
+      component: addphotograf
+    },
+    {
+      path: '/addmodel.vue',
+      name: 'addmodel',
+      component: addmodel
     },
 ]
 

@@ -56,7 +56,7 @@
       <v-col  cols="6" >
  <v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo1.vue">
         <v-icon >fas fa-street-view</v-icon>
       </v-btn>  
               <v-list-item-content>
@@ -67,7 +67,7 @@
 
       <v-col   cols="6"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo2.vue">
         <v-icon >fa-user-graduate</v-icon>
       </v-btn>  
               <v-list-item-content>
@@ -77,7 +77,7 @@
 
       <v-col   cols="6"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo3.vue">
         <v-icon >fa-heart</v-icon>
       </v-btn>  
               <v-list-item-content>
@@ -87,7 +87,7 @@
 
       <v-col   cols="6"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo4.vue">
         <v-icon >fa-venus-mars</v-icon>
       </v-btn>  
               <v-list-item-content>
@@ -97,7 +97,7 @@
 
       <v-col   cols="6"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo5.vue">
         <v-icon >fa-business-time</v-icon>
       </v-btn>  
               <v-list-item-content>
@@ -107,7 +107,7 @@
 
       <v-col  cols="6" ><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo6.vue">
         <v-icon >fa-hamburger</v-icon>
       </v-btn>  
               <v-list-item-content>
@@ -117,7 +117,7 @@
 
       <v-col   cols="6"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo7.vue">
         <v-icon >fa-building</v-icon>
       </v-btn>  
               <v-list-item-content>
@@ -128,20 +128,20 @@
     </v-container>
 
 
-    <center>ผลงาน</center>
+    <center><v-btn text color="primary" href="achievement.vue">ผลงาน</v-btn> </center>
      <v-row class="">
        <v-col cols="4" sm>
       <v-img
         src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
         height="100" max-width=""
-      href="achievement.vue"></v-img></v-col >
+      ></v-img></v-col >
    <v-col cols="4" sm><v-img
         src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
         height="100" max-width=""
-      href="achievement.vue"></v-img> </v-col >
+      ></v-img> </v-col >
       <v-col cols="4" sm><v-img
         src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-        height="100" max-width="" href="achievement.vue"
+        height="100" max-width="" 
       ></v-img> </v-col >
       </v-row>
 
