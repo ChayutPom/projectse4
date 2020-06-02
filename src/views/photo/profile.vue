@@ -1,5 +1,5 @@
 <template>
-
+<v-container  >
     <v-card
       class="mx-auto"
       max-width="434"
@@ -40,9 +40,12 @@
           </v-col>
         </v-row>
       </v-img>
+          </v-card>
+    
+
+
       
-      
-       <template>
+     
 <v-container  >
  <v-row><v-icon>mdi-account</v-icon>  Fathan</v-row> 
    <v-row><v-icon>mdi-account-box</v-icon> Fathan@gmail.com</v-row> 
@@ -160,7 +163,8 @@
       </v-list-item>
   
 
-    </v-card><v-card
+    </v-card>
+    <v-card
       max-width="auto"
       class="mx-auto"
     >
@@ -173,9 +177,6 @@
       </v-list-item>
   
 
-    </v-card>
+    </v-card></v-container  >
 </template>
-    </v-card>
-    
-
 

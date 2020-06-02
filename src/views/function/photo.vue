@@ -1,7 +1,6 @@
 <template>
 
- <v-card
-    >
+ <v-card>
       <v-toolbar
       >
         <v-text-field
@@ -57,7 +56,7 @@
         
       </v-btn><p class="text-center">สถาปัตยกรรม</p></v-col>
 </v-row>
-    </v-container>
+    
 
 
 <!-- ------------------------- -->
@@ -105,14 +104,9 @@
       ></v-img></v-col>
       </v-row>
   
-    </v-card>
+    </v-card></v-container>
+ </v-card>
 
-    </v-card>
-
-
-
-
-  
 </template>
 
 <script>

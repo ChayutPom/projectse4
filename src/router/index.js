@@ -26,6 +26,11 @@ import photo7 from '../views/forms/photo7.vue';
 import addphotograf from '../views/forms/addphotograf.vue';
 import addmodel from '../views/forms/addmodel.vue';
 
+import addproduct from '../views/tabprofile/addproduct.vue';
+import addreview from '../views/tabprofile/addreview.vue';
+import Personal from '../views/tabprofile/Personal.vue';
+import Point from '../views/tabprofile/Point.vue';
+
 Vue.use(VueRouter)
   const routes = [
   {
@@ -145,6 +150,26 @@ Vue.use(VueRouter)
       path: '/addmodel.vue',
       name: 'addmodel',
       component: addmodel
+    },
+    {
+      path: '/addproduct.vue',
+      name: 'addproduct',
+      component: addproduct
+    },
+    {
+      path: '/addreview.vue',
+      name: 'addreview',
+      component: addreview
+    },
+    {
+      path: '/Personal.vue',
+      name: 'Personal',
+      component: Personal
+    },
+    {
+      path: '/Point.vue',
+      name: 'Point',
+      component: Point
     },
 ]
 
