@@ -13,33 +13,37 @@
           align="end"
           class="fill-height"
         >
+        <v-col  cols="3" ></v-col>
           <v-col
-            align-self="start"
-            class="pa-0"
-            cols="12"
+            class=""
+            cols="7"
           >
             <v-avatar
               class="profile"
               color="grey"
               size="164"
-              tile
+              
+              
             >
-              <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+              <v-img  src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
             </v-avatar>
           </v-col>
-          <v-col class="py-0">
+          
+          
+          <v-col  cols="3"></v-col>
+          <v-col class="7">
             <v-list-item
               color="rgba(0, 0, 0, .4)"
               dark
             >
               <v-list-item-content>
                 <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
-                <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-col>
         </v-row>
       </v-img>
+      
           </v-card>
     
 

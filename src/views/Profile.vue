@@ -4,29 +4,30 @@
     <v-container >
       <v-row align="center"
             justify="center">
-            <v-col >
+            <v-col col="3" class=" ml-6">
       <v-avatar  color="indigo" height="90" width="90">
         <v-icon size="85" dark>mdi-account-circle</v-icon>
         
       </v-avatar></v-col >
       
-      <v-col >
+      <v-col col="9" class=" mr-12">
       <p class=" title center ">Chayut Auitakul</p></v-col >
       </v-row>
     </v-container>
 
     <v-container fluid>
-      <v-row align="center"
-            justify="center">
-        <v-col >
+      <v-row 
+            centered
+        grow
+        padless>
+        <v-col col="4" class=" mt-5">
 
-        
     <v-icon  >mdi-currency-btc</v-icon>15000  
         </v-col > 
 
-        <v-btn class="ma-3 sm-12 center" outlined color="indigo">เติมเครดิต</v-btn>
+          <v-col col="4"><v-btn class="ma-3 sm-12 center" outlined color="indigo">เติมเครดิต</v-btn></v-col > 
 
-        <v-btn class="ma-3 sm-12 center" outlined color="indigo">ถอนเครดิต</v-btn> 
+          <v-col col="4"><v-btn class="ma-3 sm-12 center" outlined color="indigo">ถอนเครดิต</v-btn> </v-col > 
       </v-row>
     </v-container>
 
@@ -53,8 +54,8 @@ export default {
         { title: "สร้างProfileช่างภาพ", icon: "fa-address-card",route:"/addphotograf.vue" },
         { title: "สร้างProfile นางแบบ/นายแบบ", icon: "fa-address-card",route:"/addmodel.vue" },
         { title: "คะแนน", icon: " fa-coins",route:"/Point.vue" },
-        { title: "ลงขายสินค้า", icon: "fa-cart-plus",route:"/addproduct" },
-        { title: "ลงรีวิว", icon: " fa-star",route:"/addreview" },
+        { title: "ลงขายสินค้า", icon: "fa-cart-plus",route:"/addproduct.vue" },
+        { title: "ลงรีวิว", icon: " fa-star",route:"/addreview.vue" },
         { title: "ตั้งค่า", icon: " fa-cog" ,route:"/"}
       ],
 

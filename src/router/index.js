@@ -25,6 +25,8 @@ import photo7 from '../views/forms/photo7.vue';
 
 import addphotograf from '../views/forms/addphotograf.vue';
 import addmodel from '../views/forms/addmodel.vue';
+import productform from '../views/forms/productform.vue';
+import reviewform from '../views/forms/reviewform.vue';
 
 import addproduct from '../views/tabprofile/addproduct.vue';
 import addreview from '../views/tabprofile/addreview.vue';
@@ -170,6 +172,16 @@ Vue.use(VueRouter)
       path: '/Point.vue',
       name: 'Point',
       component: Point
+    },
+    {
+      path: '/productform.vue',
+      name: 'productform',
+      component: productform
+    },
+    {
+      path: '/reviewform.vue',
+      name: 'reviewform',
+      component: reviewform
     },
 ]
 

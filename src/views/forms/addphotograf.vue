@@ -34,19 +34,19 @@
     <v-col cols="12" sm="6" md="3">
       ประเภทงานที่รับและราคา
       <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="ภาพถ่ายบุคคล" color="success" value="success" hide-details></v-checkbox></v-col>
-      <v-col cols="7" ><v-text-field label="Solo" solo></v-text-field></v-col></v-row>
+      <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
       <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="รับปริญญา" color="success" value="success" hide-details></v-checkbox></v-col>
-        <v-col cols="7" ><v-text-field label="Solo" solo></v-text-field></v-col></v-row>
+        <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
       <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="พรีเวดดิ้ง" color="success" value="success" hide-details></v-checkbox></v-col>
-        <v-col cols="7" ><v-text-field label="Solo" solo></v-text-field></v-col></v-row>
+        <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
       <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="งานแต่งงาน" color="success" value="success" hide-details></v-checkbox></v-col>
-        <v-col cols="7" ><v-text-field label="Solo" solo></v-text-field></v-col></v-row>
+        <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
       <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="งานอีเวน" color="success" value="success" hide-details></v-checkbox></v-col>
-        <v-col cols="7" ><v-text-field label="Solo" solo></v-text-field></v-col></v-row>
+        <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
       <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="สินค้า/อาหาร" color="success" value="success" hide-details></v-checkbox></v-col>
-        <v-col cols="7" ><v-text-field label="Solo" solo></v-text-field></v-col></v-row>
+        <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
       <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="สถาปัตตยกรรม" color="success" value="success" hide-details></v-checkbox></v-col>
-       <v-col cols="7" > <v-text-field label="Solo" solo></v-text-field></v-col></v-row>
+       <v-col cols="7" > <v-text-field label="" solo></v-text-field></v-col></v-row>
     </v-col>
   </v-container>
 </template>

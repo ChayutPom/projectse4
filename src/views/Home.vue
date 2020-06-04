@@ -65,7 +65,7 @@
         >
           <v-card
       :loading="loading"
-      class="mx-2 my-auto"
+      class="mx-1 my-2"
       max-width="200"
     >
       <v-img
@@ -99,7 +99,7 @@
 <v-container>
 <h2 BOLD > แบบแนะนำ</h2></v-container>
     <v-sheet
-      class=""
+      class="mx-1 my-2"
       max-width="auto"
     >
       <v-slide-group >
@@ -145,7 +145,7 @@ Cafe Badilico
     <v-container>
 <h2 BOLD > รีวิวแนะนำ</h2></v-container>
     <v-sheet
-      class=""
+      class="mx-1 my-2 "
       max-width="auto"
     >
       <v-slide-group >

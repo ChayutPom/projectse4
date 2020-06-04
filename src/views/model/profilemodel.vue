@@ -35,9 +35,10 @@
       
       </v-list-item>
   
-      <v-card-actions >
-        <v-btn text >ติดต่อ</v-btn>
-      </v-card-actions>
+     <v-col class="text-center" cols="12" sm="4">
+        <div class="my-2">
+          <v-btn color="primary" >ติดต่อ</v-btn>
+        </div></v-col>
       </v-container>
     </v-card>
 </template>
