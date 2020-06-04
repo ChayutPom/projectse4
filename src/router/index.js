@@ -33,6 +33,9 @@ import addreview from '../views/tabprofile/addreview.vue';
 import Personal from '../views/tabprofile/Personal.vue';
 import Point from '../views/tabprofile/Point.vue';
 
+import detailreview from '../views/review/detailreview.vue';
+import detailshop from '../views/shop/detailshop.vue';
+
 Vue.use(VueRouter)
   const routes = [
   {
@@ -182,6 +185,16 @@ Vue.use(VueRouter)
       path: '/reviewform.vue',
       name: 'reviewform',
       component: reviewform
+    },
+    {
+      path: '/detailreview.vue',
+      name: 'detailreview',
+      component: detailreview
+    },
+    {
+      path: '/detailshop.vue',
+      name: 'detailshop',
+      component: detailshop
     },
 ]
 
