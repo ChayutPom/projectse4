@@ -36,6 +36,7 @@ import Point from '../views/tabprofile/Point.vue';
 import detailreview from '../views/review/detailreview.vue';
 import detailshop from '../views/shop/detailshop.vue';
 
+import regis from '../views/regis.vue';
 Vue.use(VueRouter)
   const routes = [
   {
@@ -195,6 +196,11 @@ Vue.use(VueRouter)
       path: '/detailshop.vue',
       name: 'detailshop',
       component: detailshop
+    },
+    {
+      path: '/regis.vue',
+      name: 'regis',
+      component: regis
     },
 ]
 

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app >
     <v-app-bar
       app
       color="primary"
@@ -21,12 +21,16 @@
   </v-app>
   
 </template>
+ <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
 
 <script>
 import Footer from './components/Footer.vue';
 
 
 export default {
+  
   name: 'App',
 
   components: {

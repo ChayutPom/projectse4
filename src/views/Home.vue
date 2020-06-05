@@ -64,7 +64,7 @@
           
         >
           <v-card
-      :loading="loading"
+      loading="loading"
       class="mx-1 my-2"
       max-width="200"
     >
@@ -80,8 +80,8 @@
           class="mx-2"
         >
           <v-rating
-            :value="photos.star"
-            color="amber"
+            
+            :value= 5
             dense
             half-increments
             readonly
@@ -108,7 +108,7 @@
           :key="n"  
         >
           <v-card
-      :loading="loading"
+      loading="loading"
       class="mx-1 my-auto"
       max-width="200"
     >
@@ -124,7 +124,7 @@ Cafe Badilico
           class="mx-1"
         >
           <v-rating
-            :value="4.5"
+            :value= 4.5
             color="amber"
             dense
             half-increments
@@ -154,7 +154,7 @@ Cafe Badilico
           :key="n"  
         >
           <v-card
-      :loading="loading"
+      loading="loading"
       class="mx-1 my-auto"
       max-width="200"
     >
@@ -170,7 +170,7 @@ Cafe Badilico
           class="mx-1"
         >
           <v-rating
-            :value="4.5"
+            :value= 4.5
             color="amber"
             dense
             half-increments
@@ -230,11 +230,11 @@ Cafe Badilico
 
       ],
       photos:[
-        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"ABC",star:"5.0",num:"243" },
-        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"asd",star:"5.0",num:"212" },
-        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"Photossss",star:"4.5",num:"234" },
-        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"tooos",star:"4.5",num:"123" },
-        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"sdfsdf" ,star:"4",num:"222"},
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"ABC",star:5.0,num:"243" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"asd",star:5.0,num:"212" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"Photossss",star:4.5,num:"234" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"tooos",star:4.5,num:"123" },
+        {img:"https://cdn.vuetifyjs.com/images/cards/cooking.png" , name:"sdfsdf" ,star:4,num:"222"},
       ],
       
       items: [
