@@ -37,6 +37,31 @@ export default {
     Footer,
    
   },
+  methods: {
+  userSignOut() {
+    this.$store.dispatch("userSignOut");
+  }
+},
+  // ----------------
+isAuthenticated() {
+  return (
+    this.$store.getters.getUser !== null &&
+    this.$store.getters.getUser !== undefined
+  );
+},
+toolbarItems() {
+  return this.isAuthenticated ? [] : [
+    {
+      icon: "face",
+      title: "Sign Up",
+      link: "/singup"
+    }, {
+      icon: "lock_open",
+      title: "Sign In",
+      link: "/singin"
+    }
+  ];
+},
 
   data: () => ({
     //

@@ -31,7 +31,7 @@
     <v-col cols="12" sm="6" md="3">
       <v-text-field label="ที่อยู่"  v-model="address"></v-text-field>
     </v-col>
-    <button @click="insertToContact(name, realname,email,phone,introduce,address)">Add</button>
+    <button @click="insertToPhotographer(name, realname,email,phone,introduce,address)">Add</button>
     <v-col cols="12" sm="6" md="3">
       ประเภทงานที่รับและราคา
       <v-row><v-col cols="5" ><v-checkbox v-model="ex1" label="ภาพถ่ายบุคคล" color="success" value="success" hide-details></v-checkbox></v-col>
@@ -53,54 +53,54 @@
   </v-container>
 </template>
 <script>
-// import firebase from "firebase";
+import firebase from './firebaseConfig'
 
-// var database = firebase.database()
-// var contactRef = database.ref('/contacts')
-// export default {
-//   data: () => ({
-//     items: ["1", "2", "3", "4", "5"],
+var database = firebase.database()
+var photographerRef = database.ref('/photographer')
+export default {
+  data: () => ({
+    items: ["1", "2", "3", "4", "5"],
 
-//         contacts: {},
-//      name: '', 
-//      realname: '',
-//      email: '',
-//      phone: '',
-//      introduce: '',
-//      address: '',
-//      ex1: '',
-//      ex2: '',
-//      ex3: '',
-//      ex4: '',
-//      ex5: '',
-//      ex6: '',
-//      ex7: '',
-//   }),
-//  methods: {
-//     insertToContact (name, realname,email,phone,introduce,address) {
-//       let data = {
-//         name: name,
-//         realname: realname,
-//         email: email,
-//         phone: phone,
-//         introduce: introduce,
-//         address: address,
-//       }
-//       contactRef.push(data)
-//       this.name = ''
-//       this.realname = ''
-//       this.email = ''
-//       this.phone = ''
-//       this.introduce = ''
-//       this.address = ''
-//     },
+        photographer: {},
+     name: '', 
+     realname: '',
+     email: '',
+     phone: '',
+     introduce: '',
+     address: '',
+     ex1: '',
+     ex2: '',
+     ex3: '',
+     ex4: '',
+     ex5: '',
+     ex6: '',
+     ex7: '',
+  }),
+ methods: {
+    insertToPhotographer (name, realname,email,phone,introduce,address) {
+      let data = {
+        name: name,
+        realname: realname,
+        email: email,
+        phone: phone,
+        introduce: introduce,
+        address: address,
+      }
+      photographerRef.push(data)
+      this.name = ''
+      this.realname = ''
+      this.email = ''
+      this.phone = ''
+      this.introduce = ''
+      this.address = ''
+    },
     
-//   },
-//   mounted () {
-//     contactRef.on('value', (snapshot) => {
-//       this.contacts = snapshot.val()
-//     })
-//   }
+  },
+  mounted () {
+    photographerRef.on('value', (snapshot) => {
+      this.photographers = snapshot.val()
+    })
+  }
 
-// };
+};
 </script>

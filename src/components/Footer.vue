@@ -4,10 +4,11 @@
           tile
           width="100%"
           class=" text-center " 
+           v-if="!$route.meta.hideNavigation"
+
        >
 
       <v-tabs
-      v-model="tab"
         light
         icons-and-text
         centered
@@ -33,7 +34,7 @@
   data () {
     return {
       lists:[
-        {icon:"mdi-home" , text:"Home" ,route:"/"},
+        {icon:"mdi-home" , text:"Home" ,route:"/home"},
         {icon:"mdi-clipboard-text" , text:"Schedule" ,route:"/schedule"},
         {icon:"mdi-message-text-outline" , text:"Message" ,route:"message"},
         {icon:"mdi-account-box" , text:"Profile" ,route:"profile"},

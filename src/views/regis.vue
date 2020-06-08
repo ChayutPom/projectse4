@@ -1,105 +1,93 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Register</div>
-          <div class="card-body">
-            <div v-if="error" class="alert alert-danger">{{error}}</div>
-            <form action="#" @submit.prevent="submit">
-              <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="name"
-                    type="name"
-                    class="form-control"
-                    name="name"
-                    value
-                    required
-                    autofocus
-                    v-model="form.name"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="email"
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    value
-                    required
-                    autofocus
-                    v-model="form.email"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    required
-                    v-model="form.password"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary">Register</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-layout column>
+    <v-flex xs12 class="text-xs-center" mt-5>
+      <h3>Sign Up</h3>
+    </v-flex>
+    <v-flex xs12 sm6 offset-sm3 mt-3>
+      <form @submit.prevent="userSignUp">
+        <v-layout column>
+          <v-flex>
+            <v-alert error dismissible v-model="alert">
+              {{ error }}
+            </v-alert>
+          </v-flex>
+          <v-flex>
+            <v-text-field
+              name="email"
+              label="Email"
+              id="email"
+              type="email"
+              v-model="email"
+              required></v-text-field>
+          </v-flex>
+          <v-flex>
+            <v-text-field
+              name="password"
+              label="Password"
+              id="password"
+              type="password"
+              v-model="password"
+              required></v-text-field>
+          </v-flex>
+          <v-flex>
+            <v-text-field
+              name="confirmPassword"
+              label="Confirm Password"
+              id="confirmPassword"
+              type="password"
+              v-model="passwordConfirm"
+              :rules="[comparePasswords]"
+            ></v-text-field>
+          </v-flex>
+          <v-flex class="text-xs-center" mt-5>
+            <v-btn primary type="submit" :disabled="loading">Sign Up</v-btn>
+          </v-flex>
+        </v-layout>
+      </form>
+    </v-flex>
+  </v-layout>
 </template>
 
-
 <script>
-import firebase from "firebase";
-
-export default {
-  data() {
-    return {
-      form: {
-        name: "",
-        email: "",
-        password: ""
+  export default {
+    data () {
+      return {
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        alert: false
+      }
+    },
+    computed: {
+      comparePasswords () {
+        return this.password === this.passwordConfirm ? true : 'Password and confirm password don\'t match'
       },
-      error: null
-    };
-  },
-  methods: {
-    submit() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
-          data.user
-            .updateProfile({
-              displayName: this.form.name
-            })
-            .then(() => {});
-        })
-        .catch(err => {
-          this.error = err.message;
-        });
+      error () {
+        return this.$store.getters.getError
+      },
+      loading () {
+        return this.$store.getters.getLoading
+      }
+    },
+    methods: {
+      userSignUp () {
+        if (this.comparePasswords !== true) {
+          return
+        }
+        this.$store.dispatch('userSignUp', { email: this.email, password: this.password })
+      }
+    },
+    watch: {
+      error (value) {
+        if (value) {
+          this.alert = true
+        }
+      },
+      alert (value) {
+        if (!value) {
+          this.$store.dispatch('setError', null)
+        }
+      }
     }
   }
-};
 </script>

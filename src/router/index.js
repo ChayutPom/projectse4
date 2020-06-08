@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// import firebase from 'firebase';
+
 import Home from '../views/Home.vue';
 import Message from '../views/Message';
 import Profile from '../views/Profile';
@@ -37,11 +39,12 @@ import detailreview from '../views/review/detailreview.vue';
 import detailshop from '../views/shop/detailshop.vue';
 
 import regis from '../views/regis.vue';
+import login from '../views/login.vue';
 Vue.use(VueRouter)
   const routes = [
   {
     
-      path: '/',
+      path: '/home',
       name: 'Home',
       component: Home
     },
@@ -68,139 +71,172 @@ Vue.use(VueRouter)
     {
       path: '/photo.vue',
       name: 'photo',
-      component: photo
+      component: photo,
+      meta: { hideNavigation: true }
     },
     {
       path: '/model.vue',
       name: 'model',
-      component: model
+      component: model,
+      meta: { hideNavigation: true }
     },
     {
       path: '/review.vue',
       name: 'review',
-      component: review
+      component: review,
+      meta: { hideNavigation: true }
     },
 
     {
       path: '/shop.vue',
       name: 'shop',
-      component: shop
+      component: shop,
+      meta: { hideNavigation: true }
     },
     {
       path: '/Modeling.vue',
       name: 'Modeling',
-      component: Modeling
+      component: Modeling,
+      meta: { hideNavigation: true }
     },
 
     {
       path: '/photographer.vue',
       name: 'photographer',
-      component: photographer
+      component: photographer,
+      meta: { hideNavigation: true }
     },
     {
       path: '/profile.vue',
       name: 'profile',
-      component: profile
+      component: profile,
+      meta: { hideNavigation: true }
     },
     {
       path: '/achievement.vue',
       name: 'achievement',
-      component: achievement
+      component: achievement,
+      meta: { hideNavigation: true }
     },
     {
       path: '/profilemodel.vue',
       name: 'profilemodel',
-      component: profilemodel
+      component: profilemodel,
+      meta: { hideNavigation: true }
     },
     {
       path: '/photo1.vue',
       name: 'photo1',
-      component: photo1
+      component: photo1,
+      meta: { hideNavigation: true }
     },
     {
       path: '/photo2.vue',
       name: 'photo2',
-      component: photo2
+      component: photo2,
+      meta: { hideNavigation: true }
     },
     {
       path: '/photo3.vue',
       name: 'photo3',
-      component: photo3
+      component: photo3,
+      meta: { hideNavigation: true }
     },
     {
       path: '/photo4.vue',
       name: 'photo4',
-      component: photo4
+      component: photo4,
+      meta: { hideNavigation: true }
     },
     {
       path: '/photo5.vue',
       name: 'photo5',
-      component: photo5
+      component: photo5,
+      meta: { hideNavigation: true }
     },
     {
       path: '/photo6.vue',
       name: 'photo6',
-      component: photo6
+      component: photo6,
+      meta: { hideNavigation: true }
     },
     {
       path: '/photo7.vue',
       name: 'photo7',
-      component: photo7
+      component: photo7,
+      meta: { hideNavigation: true }
     },
     {
       path: '/addphotograf.vue',
       name: 'addphotograf',
-      component: addphotograf
+      component: addphotograf,
+      meta: { hideNavigation: true }
     },
     {
       path: '/addmodel.vue',
       name: 'addmodel',
-      component: addmodel
+      component: addmodel,
+      meta: { hideNavigation: true }
     },
     {
       path: '/addproduct.vue',
       name: 'addproduct',
-      component: addproduct
+      component: addproduct,
+      meta: { hideNavigation: true }
     },
     {
       path: '/addreview.vue',
       name: 'addreview',
-      component: addreview
+      component: addreview,
+      meta: { hideNavigation: true }
     },
     {
       path: '/Personal.vue',
       name: 'Personal',
-      component: Personal
+      component: Personal,
+      meta: { hideNavigation: true }
     },
     {
       path: '/Point.vue',
       name: 'Point',
-      component: Point
+      component: Point,
+      meta: { hideNavigation: true }
     },
     {
       path: '/productform.vue',
       name: 'productform',
-      component: productform
+      component: productform,
+      meta: { hideNavigation: true }
     },
     {
       path: '/reviewform.vue',
       name: 'reviewform',
-      component: reviewform
+      component: reviewform,
+      meta: { hideNavigation: true }
     },
     {
       path: '/detailreview.vue',
       name: 'detailreview',
-      component: detailreview
+      component: detailreview,
+      meta: { hideNavigation: true }
     },
     {
       path: '/detailshop.vue',
       name: 'detailshop',
-      component: detailshop
+      component: detailshop,
+      meta: { hideNavigation: true }
     },
     {
       path: '/regis.vue',
       name: 'regis',
-      component: regis
+      component: regis,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/',
+      name: 'login',
+      component: login,
+      meta: { hideNavigation: true }
     },
 ]
 
@@ -209,5 +245,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+
+
 
 export default router

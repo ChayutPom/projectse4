@@ -6,19 +6,19 @@
     <br />
 
     <v-col cols="12" sm="6" md="3">
-      <v-text-field label="ชื่อ โปรไฟล์" ></v-text-field>
-      <v-text-field label="ชื่อจริง-นามสกุล" ></v-text-field>
+      <v-text-field label="ชื่อ โปรไฟล์" v-model="name" ></v-text-field>
+      <v-text-field label="ชื่อจริง-นามสกุล" v-model="realname" ></v-text-field>
     </v-col>
 
     <v-col cols="12" sm="6" md="3">
-      <v-text-field label="อีเมล" ></v-text-field>
-      <v-text-field label="เบอร์โทรศัพท์" ></v-text-field>
+      <v-text-field label="อีเมล" v-model="email"></v-text-field>
+      <v-text-field label="เบอร์โทรศัพท์" v-model="phone"></v-text-field>
     </v-col>
 
     <v-row>
       <v-col cols="4">รูปภาพ</v-col>
       <v-col cols="4">
-        <v-btn small color="primary">สร้างอัลบั้ม</v-btn>   
+        <v-btn small color="primary" >สร้างอัลบั้ม</v-btn>   
       </v-col>
       <v-col cols="4">
         <v-btn small color="primary">เพิ่มรูปภาพ</v-btn>
@@ -26,16 +26,16 @@
     </v-row>
 
     <v-col cols="12" sm="6" md="3">
-      <v-textarea label="คำแนะนำตัว" ></v-textarea>
+      <v-textarea label="คำแนะนำตัว" v-model="introduce"></v-textarea>
     </v-col>
     <v-col cols="12" sm="6" md="3">
-    <v-text-field label="นำ้หนัก" ></v-text-field>
-    <v-text-field label="ส่วนสูง" ></v-text-field>
+    <v-text-field label="นำ้หนัก" v-model="weight"></v-text-field>
+    <v-text-field label="ส่วนสูง" v-model="height" ></v-text-field>
     <v-select
             :items="dropdown_font"
-            label="เพศ "
+            label="เพศ " v-model="sex" 
           ></v-select>
-              <button @click="insertToModel(name, realname,email,phone,introduce,we,ta)">Add</button>
+              <button @click="insertToModel(name, realname,email,phone,introduce,weight,height,sex)">Add</button>
 
       <v-text-field label="ที่อยู่" ></v-text-field>
     </v-col>
@@ -45,14 +45,55 @@
 
 <script>
 
+import firebase from './firebaseConfig'
+
+var database = firebase.database()
+var modelRef = database.ref('/model')
 export default {
   data: () => ({
     items: ["1", "2", "3", "4", "5"],
         dropdown_font: ['ชาย', 'หญิง'],
 
-
-
+        contacts: {},
+     name: '', 
+     realname: '',
+     email: '',
+     phone: '',
+     introduce: '',
+     weight: '',
+     height: '',
+     sex: '',
+    
   }),
-  
+ methods: {
+    insertToModel (name, realname,email,phone,introduce,weight,height,sex) {
+      let data = {
+        name: name,
+        realname: realname,
+        email: email,
+        phone: phone,
+        introduce: introduce,
+        weight: weight,
+         height: height,
+        sex: sex,
+      }
+      modelRef.push(data)
+      this.name = ''
+      this.realname = ''
+      this.email = ''
+      this.phone = ''
+      this.introduce = ''
+      this.weight = ''
+      this.height = ''
+      this.sex = ''
+    },
+    
+  },
+  mounted () {
+    modelRef.on('value', (snapshot) => {
+      this.models = snapshot.val()
+    })
+  }
+
 };
 </script>

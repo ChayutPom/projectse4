@@ -64,7 +64,6 @@
           
         >
           <v-card
-      loading="loading"
       class="mx-1 my-2"
       max-width="200"
     >
@@ -108,7 +107,6 @@
           :key="n"  
         >
           <v-card
-      loading="loading"
       class="mx-1 my-auto"
       max-width="200"
     >
@@ -154,7 +152,6 @@ Cafe Badilico
           :key="n"  
         >
           <v-card
-      loading="loading"
       class="mx-1 my-auto"
       max-width="200"
     >
@@ -196,7 +193,6 @@ Cafe Badilico
 </template>
 
 <script>
-
 
   export default {
 
