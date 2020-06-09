@@ -4,9 +4,11 @@
       app
       color="primary"
       dark
-    >
+    ><button onclick="window.history.go(-1); return false;"
+               v-if="!$route.meta.hideBack" ><v-icon >mdi-keyboard-backspace</v-icon></button>
+
       <div class="d-flex align-center" centered>
-        Photo
+        
       </div>
       <v-spacer></v-spacer>
     </v-app-bar>

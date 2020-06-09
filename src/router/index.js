@@ -46,22 +46,27 @@ Vue.use(VueRouter)
     
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: { hideBack: true }
+
     },
     {
       path: '/message',
       name: 'Message',
-      component: Message
+      component: Message,
+      meta: { hideBack: true }
     },
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
+      meta: { hideBack: true }
     },
     {
       path: '/schedule',
       name: 'Schedule',
-      component: Schedule
+      component: Schedule,
+      meta: { hideBack: true }
     },
     {
       path: '/app2.vue',
@@ -230,13 +235,16 @@ Vue.use(VueRouter)
       path: '/regis.vue',
       name: 'regis',
       component: regis,
-      meta: { hideNavigation: true }
+      meta: { hideNavigation: true,
+        hideBack: true },
+   
     },
     {
       path: '/',
       name: 'login',
       component: login,
-      meta: { hideNavigation: true }
+      meta: { hideNavigation: true,
+        hideBack: true },
     },
 ]
 
