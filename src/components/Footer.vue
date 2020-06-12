@@ -1,5 +1,5 @@
 <template >
-   <v-footer fixed  padless>
+   <v-footer fixed  padless >
     <v-card flat
           tile
           width="100%"

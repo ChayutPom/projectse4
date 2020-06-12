@@ -7,10 +7,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    appName: 'NBK48',
+    appName: 'photo',
     user: null,
     error: null,
-    loading: false
+    loading: false,
   },
   mutations: {
     setUser (state, payload) {
@@ -43,7 +43,7 @@ export default new Vuex.Store({
         .then(firebaseUser => {
           commit('setUser', firebaseUser)
           commit('setLoading', false)
-          commit('setError', null)
+          commit('setError', null)              
           router.push('/home')
         })
         .catch(error => {
@@ -51,9 +51,13 @@ export default new Vuex.Store({
           commit('setLoading', false)
         })
     },
+    
     autoSignIn ({commit}, payload) {
       commit('setUser', payload)
+      console.log(payload.uid);
+
      },
+   
      userSignOut ({commit}) {
       firebase.auth().signOut()
       commit('setUser', null)
@@ -64,14 +68,15 @@ export default new Vuex.Store({
     appTitle (state) {
       return state.appName
     },
-    getUser (state) {
+    setUser (state) {
       return state.user
     },
-    getError (state) {
+    setError (state) {
       return state.error
     },
-    getLoading (state) {
+    setLoading (state) {
       return state.loading
-    }
+    },
+    
   }
 })

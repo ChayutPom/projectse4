@@ -16,12 +16,22 @@
     </v-col>
 
     <v-row>
-      <v-col cols="4">รูปภาพ</v-col>
-      <v-col cols="4">
-        <v-btn small color="primary">สร้างอัลบั้ม</v-btn>
-      </v-col>
-      <v-col cols="4">
-        <v-btn small color="primary">เพิ่มรูปภาพ</v-btn>
+
+      <v-col cols="" >
+        <div >
+    <div >
+      รูปภาพ
+      
+      <input type="file" @change="previewImage"  accept="image/*" >
+            <!-- <button @click="onUpload" >Upload</button> -->
+    </div>
+  
+    <div v-if="imageData!=null" >
+        <img class="preview" :src="picture" >
+
+        <br>
+    </div>
+  </div>
       </v-col>
     </v-row>
 
@@ -31,8 +41,8 @@
     <v-col cols="12" sm="6" md="3">
       <v-text-field label="ที่อยู่"  v-model="address"></v-text-field>
     </v-col>
-    <button @click="insertToPhotographer(name, realname,email,phone,introduce,address)">Add</button>
-    <v-col cols="12" sm="6" md="3">
+
+    <v-col cols="12" sm="6" md="3" >
       ประเภทงานที่รับและราคา
       <v-row><v-col cols="5" ><v-checkbox v-model="ex1" label="ภาพถ่ายบุคคล" color="success" value="success" hide-details></v-checkbox></v-col>
       <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
@@ -49,6 +59,7 @@
       <v-row><v-col cols="5" ><v-checkbox v-model="ex7" label="สถาปัตตยกรรม" color="success" value="success" hide-details></v-checkbox></v-col>
        <v-col cols="7" > <v-text-field label="" solo></v-text-field></v-col></v-row>
     </v-col>
+    <button @click="insertToPhotographer(name, realname,email,phone,introduce,address,picture)">Add</button>
 
   </v-container>
 </template>
@@ -75,17 +86,42 @@ export default {
      ex5: '',
      ex6: '',
      ex7: '',
+     img: '',
+     imageData: null,
+      picture: null,
+      uploadValue: 0
   }),
  methods: {
-    insertToPhotographer (name, realname,email,phone,introduce,address) {
-      let data = {
+   
+  //  อัฟรูปขึ้นfirebase
+  //  onUpload(){
+  //     this.picture=null;
+  //     const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+  //     storageRef.on(`state_changed`,snapshot=>{
+  //       this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+  //     }, error=>{console.log(error.message)},
+  //     ()=>{this.uploadValue=100;
+  //       storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+  //         this.picture =url;
+          
+  //       });
+  //     }
+  //     );
+  //   },
+    
+    insertToPhotographer (name, realname,email,phone,introduce,address,picture) {
+    console.log(picture)
+
+       let data = {
         name: name,
         realname: realname,
         email: email,
         phone: phone,
         introduce: introduce,
         address: address,
+        img: picture,
       }
+      
       photographerRef.push(data)
       this.name = ''
       this.realname = ''
@@ -94,13 +130,34 @@ export default {
       this.introduce = ''
       this.address = ''
     },
+
+    previewImage(event) {
+      this.uploadValue=0;
+      this.picture=null;
+      this.imageData = event.target.files[0];
+      // this.picture=null;
+      const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+      storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      }, error=>{console.log(error.message)},
+      ()=>{this.uploadValue=100;
+        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+          this.picture =url;
+          
+        });
+      }
+      );
+    },
+  
     
   },
+  
   mounted () {
     photographerRef.on('value', (snapshot) => {
       this.photographers = snapshot.val()
     })
-  }
+  },
+  
 
 };
 </script>

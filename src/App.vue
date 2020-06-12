@@ -1,5 +1,6 @@
 <template>
   <v-app >
+    <div class=" ">
     <v-app-bar
       app
       color="primary"
@@ -14,12 +15,20 @@
     </v-app-bar>
 
     <v-content >
-        <router-view></router-view>
+        <router-view ></router-view>
     </v-content>
+    
+     
 
-
+ </div>
+ <v-footer
+        color="white"
+        class=""
+         height="75"
+      >
+      </v-footer>
           <Footer/> 
-
+   
   </v-app>
   
 </template>
@@ -70,3 +79,4 @@ toolbarItems() {
   }),
 };
 </script>
+
