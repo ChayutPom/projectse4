@@ -30,6 +30,7 @@ export default new Vuex.Store({
         .then(firebaseUser => {
           commit('setUser', firebaseUser)
           commit('setLoading', false)
+          
           router.push('/')
         })
         .catch(error => {
@@ -43,7 +44,9 @@ export default new Vuex.Store({
         .then(firebaseUser => {
           commit('setUser', firebaseUser)
           commit('setLoading', false)
-          commit('setError', null)              
+          commit('setError', null)    
+          console.log(payload.email);
+                    
           router.push('/home')
         })
         .catch(error => {
@@ -61,7 +64,7 @@ export default new Vuex.Store({
      userSignOut ({commit}) {
       firebase.auth().signOut()
       commit('setUser', null)
-      router.push('/signin')
+      router.push('/')
     }
   },
   getters: {

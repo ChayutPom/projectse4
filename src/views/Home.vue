@@ -10,6 +10,15 @@
           transition="fade-transition"
         ></v-carousel-item>
       </v-carousel>
+      <!-- <ul>
+        <li v-for="user_data in users" :key="user_data.uid_user = uid" >
+          <h1 >{{user_data.email}}</h1>
+
+        </li>
+      </ul> -->
+      {{uid}}
+      {{email}}
+      
 
       <v-container fluid>
         <v-row>
@@ -109,7 +118,7 @@
               <v-img  height="155" max-width="auto" :src="review.img"></v-img>
 
               <v-card>
-                 {{review.name}}
+                 {{review.titel}}
                 <v-row align="center" class="mx-1">
                   <v-rating :value="4.5" color="amber" dense half-increments readonly size="10"></v-rating>
                   <div class="grey--text ml-4">4.5 (413)</div>
@@ -130,15 +139,19 @@ var database = firebase.database();
 var photographerRef = database.ref("/photographer");
 var modelRef = database.ref("/model");
 var reviewRef = database.ref("/review");
+var userRef = database.ref("/user_data");
+// const db = firebase.firestore();
 
 
 
 export default {
+ 
   data: () => {
     return {
       photographers: {},
       models: {},
       reviews: {},
+      users:{},
       name: "",
       realname: "",
       email: "",
@@ -146,6 +159,9 @@ export default {
       introduce: "",
       address: "",
       img: "",
+      uid_user: "",
+      uid: "",
+      
 
 
       lists: [
@@ -226,6 +242,32 @@ export default {
     });
     reviewRef.on("value", snapshot => {
       this.reviews = snapshot.val();
+      
+    });
+    userRef.on("value", snapshot => {
+      this.users = snapshot.val();
+      this.email = firebase.auth().currentUser.email;
+      this.uid = firebase.auth().currentUser.uid;
+      console.log( this.uid);
+      //       let employeesData = [];
+
+      // db.collection("userdata")
+      //   .where('uid_user','==','rrf8nXO18ngDxEYrME7gI7mNWVw1')
+      //   .get()
+      //   .then((querySnapshot) => {
+      //     querySnapshot.forEach((doc) => {
+      //      employeesData.push({
+       
+      //         email: doc.data().email,
+          
+      //       });
+      //       console.log(employeesData);
+      //     });
+      //     return employeesData
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error getting documents: ", error);
+      //   });
     });
 
   }

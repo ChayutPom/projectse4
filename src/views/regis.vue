@@ -94,14 +94,11 @@
                   color="grey darken-2"
                   prepend-inner-icon="mdi-lock-outline"
                 ></v-text-field>
-
-                
-
               </v-flex>
 
               <br />
 
-              <v-btn primary type="submit" :disabled="loading" @click="addUser(firstname,lastname,phone,email,password)">Sign Up</v-btn>
+              <v-btn primary  :disabled="loading" @click="addUser(firstname,lastname,phone,email,password)">Sign Up </v-btn>
             </v-layout>
           </v-layout>
         </form>
@@ -113,8 +110,9 @@
 <script>
 import firebase from './forms/firebaseConfig'
 
+const db = firebase.firestore();
 var database = firebase.database()
-var userdataRef = database.ref('/user_data')
+var userdataRef = database.ref('/userdata')
 export default {
   data() {
     return {
@@ -128,6 +126,9 @@ export default {
     };
   },
   computed: {
+    user() {
+      return this.$store.getters.user;
+    },
     comparePasswords() {
       return this.password === this.passwordConfirm
         ? true
@@ -141,18 +142,7 @@ export default {
     }
   },
   methods: {
-
-    // userSignUp() {
-    //   if (this.comparePasswords !== true) {
-    //     return;
-    //   }
-    //   this.$store.dispatch("userSignUp", {
-    //     email: this.email,
-    //     password: this.password        
-    //   });
-
-    // },
-    addUser(firstname,lastname,phone,email,password){
+    userSignUp() {
       if (this.comparePasswords !== true) {
         return;
       }
@@ -160,8 +150,38 @@ export default {
         email: this.email,
         password: this.password        
       });
+      
+    },
+    addUser(firstname,lastname,phone,email,password){
 
-    let data = {
+      if (this.comparePasswords !== true) {
+        return;
+      }
+      this.$store.dispatch("userSignUp", {
+        email: this.email,
+        password: this.password        
+      });
+      
+      
+  
+      db.collection("userdata")
+          .add({firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        phone: phone,
+        status_photogra:false ,
+        status_model: false,
+        })
+          .then(() => {
+            console.log("Document successfully written!");
+            console.log(firebase.auth().currentUser.email);
+      console.log(firebase.auth().currentUser.uid);
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+          });
+          let data = {
         firstname: firstname,
         lastname: lastname,
         email: email,
@@ -169,24 +189,25 @@ export default {
         phone: phone,
         status_photogra:false ,
         status_model: false,
-        uid_user: firebase.auth().currentUser.uid,
+        // uid_user: firebase.auth().currentUser.uid,
       }
-      
       userdataRef.push(data)
+      // this.$router.push('/home'+ '/'+firebase.auth().currentUser.uid)
+
   },
   },
-  watch: {
-    error(value) {
-      if (value) {
-        this.alert = true;
-      }
-    },
-    alert(value) {
-      if (!value) {
-        this.$store.dispatch("setError", null);
-      }
-    }
-  },
+  // watch: {
+  //   error(value) {
+  //     if (value) {
+  //       this.alert = true;
+  //     }
+  //   },
+  //   alert(value) {
+  //     if (!value) {
+  //       this.$store.dispatch("setError", null);
+  //     }
+  //   }
+  // },
   
 };
 </script>

@@ -236,7 +236,7 @@ Vue.use(VueRouter)
       name: 'regis',
       component: regis,
       meta: { hideNavigation: true,
-        hideBack: true },
+ },
    
     },
     {

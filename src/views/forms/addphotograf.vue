@@ -44,19 +44,19 @@
 
     <v-col cols="12" sm="6" md="3" >
       ประเภทงานที่รับและราคา
-      <v-row><v-col cols="5" ><v-checkbox v-model="ex1" label="ภาพถ่ายบุคคล" color="success" value="success" hide-details></v-checkbox></v-col>
+      <v-row><v-col cols="5" ><v-checkbox v-model="photo1" label="ภาพถ่ายบุคคล" color="success" value="success" hide-details></v-checkbox></v-col>
       <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
-      <v-row><v-col cols="5" ><v-checkbox v-model="ex2" label="รับปริญญา" color="success" value="success" hide-details></v-checkbox></v-col>
+      <v-row><v-col cols="5" ><v-checkbox v-model="photo2" label="รับปริญญา" color="success" value="success" hide-details></v-checkbox></v-col>
         <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
-      <v-row><v-col cols="5" ><v-checkbox v-model="ex3" label="พรีเวดดิ้ง" color="success" value="success" hide-details></v-checkbox></v-col>
+      <v-row><v-col cols="5" ><v-checkbox v-model="photo3" label="พรีเวดดิ้ง" color="success" value="success" hide-details></v-checkbox></v-col>
         <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
-      <v-row><v-col cols="5" ><v-checkbox v-model="ex4" label="งานแต่งงาน" color="success" value="success" hide-details></v-checkbox></v-col>
+      <v-row><v-col cols="5" ><v-checkbox v-model="photo4" label="งานแต่งงาน" color="success" value="success" hide-details></v-checkbox></v-col>
         <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
-      <v-row><v-col cols="5" ><v-checkbox v-model="ex5" label="งานอีเวน" color="success" value="success" hide-details></v-checkbox></v-col>
+      <v-row><v-col cols="5" ><v-checkbox v-model="photo5" label="งานอีเวน" color="success" value="success" hide-details></v-checkbox></v-col>
         <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
-      <v-row><v-col cols="5" ><v-checkbox v-model="ex6" label="สินค้า/อาหาร" color="success" value="success" hide-details></v-checkbox></v-col>
+      <v-row><v-col cols="5" ><v-checkbox v-model="photo6" label="สินค้า/อาหาร" color="success" value="success" hide-details></v-checkbox></v-col>
         <v-col cols="7" ><v-text-field label="" solo></v-text-field></v-col></v-row>
-      <v-row><v-col cols="5" ><v-checkbox v-model="ex7" label="สถาปัตตยกรรม" color="success" value="success" hide-details></v-checkbox></v-col>
+      <v-row><v-col cols="5" ><v-checkbox v-model="photo7" label="สถาปัตตยกรรม" color="success" value="success" hide-details></v-checkbox></v-col>
        <v-col cols="7" > <v-text-field label="" solo></v-text-field></v-col></v-row>
     </v-col>
     <button @click="insertToPhotographer(name, realname,email,phone,introduce,address,picture)">Add</button>
@@ -79,13 +79,13 @@ export default {
      phone: '',
      introduce: '',
      address: '',
-     ex1: '',
-     ex2: '',
-     ex3: '',
-     ex4: '',
-     ex5: '',
-     ex6: '',
-     ex7: '',
+     photo1: '',
+     photo2: '',
+     photo3: '',
+     photo4: '',
+     photo5: '',
+     photo6: '',
+     photo7: '',
      img: '',
      imageData: null,
       picture: null,
@@ -123,6 +123,14 @@ export default {
       }
       
       photographerRef.push(data)
+      .then(() => {
+            console.log("Document successfully written!");
+            console.log(data);
+            
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+          });
       this.name = ''
       this.realname = ''
       this.email = ''

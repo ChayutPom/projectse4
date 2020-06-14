@@ -34,9 +34,48 @@
 </template>
 
 <script>
+import firebase from './firebaseConfig'
+
+var database = firebase.database()
+var taskPhotoRef = database.ref('/taskphoto')
 export default {
   data: () => ({
-    items: ["1", "2", "3", "4", "5"]
-  })
+  
+  }),
+ methods: {
+    
+    insertToTaskphoto () {
+
+       let data = {
+        
+      }
+      
+      taskPhotoRef.push(data)
+      .then(() => {
+            console.log("Document successfully written!");
+            console.log(data);
+            
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+          });
+      // this.name = ''
+      // this.realname = ''
+      // this.email = ''
+      // this.phone = ''
+      // this.introduce = ''
+      // this.address = ''
+    },
+  
+    
+  },
+  
+  mounted () {
+    taskPhotoRef.on('value', (snapshot) => {
+      this.taskphoto = snapshot.val()
+    })
+  },
+  
+
 };
 </script>
