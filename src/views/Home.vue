@@ -247,25 +247,7 @@ export default {
       this.email = firebase.auth().currentUser.email;
       this.uid = firebase.auth().currentUser.uid;
       console.log('uid' + this.uid);
-      //       let employeesData = [];
-
-      // db.collection("userdata")
-      //   .where('uid_user','==','rrf8nXO18ngDxEYrME7gI7mNWVw1')
-      //   .get()
-      //   .then((querySnapshot) => {
-      //     querySnapshot.forEach((doc) => {
-      //      employeesData.push({
-       
-      //         email: doc.data().email,
-          
-      //       });
-      //       console.log(employeesData);
-      //     });
-      //     return employeesData
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error getting documents: ", error);
-      //   });
+      
     });
 
   }

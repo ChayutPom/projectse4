@@ -64,15 +64,15 @@
       max-width="auto"
       class="mx-auto"
       href="profile.vue"
-      v-for="n in 6"
-              :key="n"
+     :key="key" v-for="(photographer, key) in photographers"
               tile
               outlined
+              
     >
-      <v-list-item>
+      <v-list-item >
         <v-list-item-avatar color="grey"></v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title class="headline">24Pixel</v-list-item-title>
+        <v-list-item-content >
+      <v-list-item-title class="headline">{{photographer.name}}</v-list-item-title>
           <v-list-item-subtitle><i class="fas fa-star-half-alt"></i>5.0<br><i class="fas fa-money-bill-wave"></i>2500-3000</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -110,12 +110,40 @@
 </template>
 
 <script>
+import firebase from "../forms/firebaseConfig";
 
+var database = firebase.database();
+var photographerRef = database.ref("/photographer");
 export default {
  
 
-  data: () => ({
-    //
-  }),
+  data: () => {
+    return {
+      photographers: {},
+      models: {},
+      reviews: {},
+      users:{},
+      name: "",
+      realname: "",
+      email: "",
+      phone: "",
+      introduce: "",
+      address: "",
+      img: "",
+      uid_user: "",
+      uid: "",
+      
+
+    
+    };
+  },
+
+  mounted() {
+    photographerRef.on("value", snapshot => {
+      this.photographers = snapshot.val();
+      console.log(this.photographers.name);
+      
+    });
+  }
 };
 </script>
