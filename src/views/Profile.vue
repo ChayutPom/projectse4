@@ -11,7 +11,7 @@
       
       <v-col col="9" class=" mr-12">
 
-      <p class=" title center " > {{users.firstname}}  {{users.lastname}}</p></v-col >
+      <p class=" title center " >{{users.firstname}} {{users.lastname}}</p></v-col >
       </v-row>
     </v-container>
 
@@ -54,11 +54,13 @@ var userRef = database.ref("/userdata");
 export default {
   data: () => {
     return {
-      users: [],
       userdata: "",
+      usersdata: {},
       firstname: "",
             email: "",
  name: "",
+       users:{},
+
 
       items: [
         { title: "ข้อมูลส่วนตัว", icon: " fa-id-badge" ,route:"/Personal.vue"},
@@ -103,39 +105,31 @@ export default {
 
 
     userRef.on("value", snapshot => {
-var key = Object.keys(snapshot.val())[0];
-console.log(key);
 
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
 
-      var data = snapshot.child(key).val();
-      this.users = data;
+var data = snapshot.child(key).val();
+      // console.log(data.email);
+
+      if(data.email == firebase.auth().currentUser.email){
+        console.log(data.email);
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+  // console.log(snapshot.val().firstname);
+    
+     var key2 = Object.keys(snapshot.val())[0];
+console.log(key2);
+  this.users = snapshot.val()[key2];
+  console.log(this.users.email);
+  
+});
+        
+      }
       
-      // if (snapshot.val() == "test1@gmail.com") {
-      //     var email = snapshot.val().email;
-      //     console.log('username:', email)
-      //   }
-     
-    //  let employeesData = [];
-    //   db.collection("userdata")
-    //   .where('email','==',this.email)
-    //     .get()
-    //     .then((querySnapshot) => {
-    //       querySnapshot.forEach((doc) => {
-    //        employeesData.push({
-    //           email: doc.data().email,
-    //       firstname: doc.data().firstname
-    //         });
-    //         console.log(doc.id, " => ", doc.data());
-
-    //           console.log(doc.data().firstname);
-    //       });
-
-    //       console.log(employeesData[0].email);
-    //       return employeesData
-    //     })
-    //     .catch((error) => {
-    //       console.log("Error getting documents: ", error);
-    //     });
+}
+      
     
     });
     

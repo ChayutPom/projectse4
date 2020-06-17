@@ -16,8 +16,6 @@
 
         </li>
       </ul> -->
-      {{uid}}
-      {{email}}
       
 
       <v-container fluid>
@@ -248,7 +246,7 @@ export default {
       this.users = snapshot.val();
       this.email = firebase.auth().currentUser.email;
       this.uid = firebase.auth().currentUser.uid;
-      console.log( this.uid);
+      console.log('uid' + this.uid);
       //       let employeesData = [];
 
       // db.collection("userdata")
