@@ -72,7 +72,7 @@
       <v-list-item >
         <v-list-item-avatar color="grey"></v-list-item-avatar>
         <v-list-item-content >
-      <v-list-item-title class="headline">{{photographer.name}}</v-list-item-title>
+      <v-list-item-title class="headline">{{photographer.name}}{{key}}</v-list-item-title>
           <v-list-item-subtitle><i class="fas fa-star-half-alt"></i>5.0<br><i class="fas fa-money-bill-wave"></i>2500-3000</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -85,24 +85,12 @@
         งานแต่งงาน
       </v-chip>
 
-      <v-row class="">
-       <v-col cols="3" sm><v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+      <v-row >
+        <v-col cols="3" :v-for = "img in photographers" sm><v-img 
+        :src="photographer.img"
         height="90" max-width=""
-      ></v-img></v-col>
-    <v-col cols="3" sm><v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-        height="90" max-width=""
-      ></v-img> </v-col>
-       <v-col cols="3" sm><v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-        height="90" max-width=""
-      ></v-img></v-col>
-       <v-col cols="3" sm> <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-        height="90" max-width=""
-      ></v-img></v-col>
-      </v-row>
+      ></v-img>{{photographer.img}}</v-col>
+</v-row>
   
     </v-card></v-container>
  </v-card>
@@ -141,7 +129,6 @@ export default {
   mounted() {
     photographerRef.on("value", snapshot => {
       this.photographers = snapshot.val();
-      console.log(this.photographers.name);
       
     });
   }

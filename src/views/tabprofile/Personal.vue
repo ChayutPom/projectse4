@@ -73,10 +73,11 @@ var userRef = database.ref("/userdata");
 export default {
   data: () => {
     return {
-      users: [],
+
       updataFirstname: '',
       updateLastname: '',
       updatePhone: '',
+      users:{},
 
       items: [
         { title: "ข้อมูลส่วนตัว", icon: " fa-id-badge" ,route:"/Personal.vue"},
@@ -96,26 +97,45 @@ export default {
           
           firebase.database().ref(userRef).once('value', function(snapshot) {
     // var data = snapshot.val()
-     var key = Object.keys(snapshot.val())[0];
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
 var data = snapshot.child(key).val();
+ if(data.email == firebase.auth().currentUser.email){
+        console.log(data.email);
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+  // console.log(snapshot.val().firstname);
+    
+     var key2 = Object.keys(snapshot.val())[0];
+console.log(snapshot.val()[key2].email);
 
-if(updataFirstname==''){
-              updataFirstname = data.firstname;          
+
+  // this.users = snapshot.val()[key2];
+  // console.log(this.users);
+
+  if(updataFirstname==''){
+              updataFirstname = snapshot.val()[key2].firstname;          
           }
            if(updateLastname == ''){
-updateLastname = data.lastname;        
+updateLastname = snapshot.val()[key2].lastname;        
           }
            if(updatePhone == ''){
-updatePhone = data.phone ;        
+updatePhone = snapshot.val()[key2].phone ;        
           }
-    console.log(key);
-    console.log(updataFirstname);
-    
-    userRef.child(key).update({
+  
+    userRef.child(key2).update({
     firstname: updataFirstname,
        lastname: updateLastname,
     phone: updatePhone
   })
+});
+        
+      }
+
+}
+
+    
+  
     // if (data) {
     //     data.edit = true;
     //     firebase.database().ref(ref).update(data);
@@ -124,40 +144,37 @@ updatePhone = data.phone ;
 
         
       },
-// readEmployees(){
-//   let employeesData = [];
-//       db.collection("userdata")
-//       .where('email','==',this.email)
-//         .get()
-//         .then((querySnapshot) => {
-//           querySnapshot.forEach((doc) => {
-//            employeesData.push({
-//               email: doc.data().email,
-//           firstname: doc.data().firstname
-//             });
-//             console.log(doc.id, " => ", doc.data());
 
-//               console.log(doc.data().firstname);
-//           });
-
-//           console.log(employeesData[0].email);
-//           return employeesData
-//         })
-//         .catch((error) => {
-//           console.log("Error getting documents: ", error);
-//         });
-// }
 
 
     },
-  mounted() {
-    userRef.on("value", snapshot => {
-var key = Object.keys(snapshot.val())[0];
-console.log(key);
+ mounted() {
 
+userRef.on("value", snapshot => {
 
-      var data = snapshot.child(key).val();
-      this.users = data;
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+
+var data = snapshot.child(key).val();
+      // console.log(data.email);
+
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+  // console.log(snapshot.val().firstname);
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+
+  // console.log(this.users);
+  
+  
+});
+        
+      }
+      
+}
       
     
     });

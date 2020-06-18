@@ -58,7 +58,8 @@ export default {
          taskStart: taskStart,
          taskEnd: taskEnd,
          taskLocation: taskLocation,
-         taskNum: taskNum
+         taskNum: taskNum,
+         taskType: 'photo1'
       }
       
       taskPhotoRef.push(data)
