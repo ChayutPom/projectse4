@@ -1,104 +1,154 @@
 <template>
- 
 
+ <v-card>
+      <v-toolbar
+      >
+        <v-text-field
+
+          prepend-icon="fa-search"
+          single-line
+        ></v-text-field>
+  
+        <v-btn icon>
+          <v-icon>fa-map-marker</v-icon>
+        </v-btn>
+  
+        <v-btn icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <!-- ------------------------ -->
+<v-container  fluid>
+
+        <v-row>    
+      <v-col cols="3" sm ="4" ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+        <v-icon >fas fa-street-view</v-icon>
+        
+      </v-btn><p class="text-center">ภาพถ่ายบุคคล</p></v-col>
+
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+        <v-icon >fa-user-graduate</v-icon>
+        
+      </v-btn><p class="text-center">รับปริญญา</p></v-col>
+
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+        <v-icon >fa-heart</v-icon>
+        
+      </v-btn><p class="text-center">พรีเวดดิ้ง</p></v-col>
+
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+        <v-icon > fa-venus-mars</v-icon>
+        
+      </v-btn><p class="text-center">งานแต่งงาน</p></v-col>
+
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+        <v-icon >fa-business-time</v-icon>
+        
+      </v-btn><p class="text-center">งานอีเวนต์</p></v-col>
+
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+        <v-icon >fa-hamburger</v-icon>
+        
+      </v-btn><p class="text-center">สินค้า/อาหาร</p></v-col>
+
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+        <v-icon >fa-building</v-icon>
+        
+      </v-btn><p class="text-center">สถาปัตยกรรม</p></v-col>
+</v-row>
     
-<div>
-<div class="form-group">
-                      <label for="product_image">Product Images</label>
-                      <input type="file" @change="uploadImage" class="form-control">
-                    </div>
 
-                    <div class="form-group d-flex">
-                      <div class="img-wrapp p-1" v-for="(image, index) in product.images" :key = index>
-                
-                              <img :src="image" alt="" width="80px">
-                              <span class="delete-img" @click="deleteImage(image,index)">X</span>
 
-                      </div>
-                    </div>
-</div>
-   
+<!-- ------------------------- -->
+     <v-card
+      max-width="auto"
+      class="mx-auto"
+      href="profile.vue"
+     :key="key" v-for="(photographer, key) in photographers"
+              tile
+              outlined
+              
+    >
+      <v-list-item >
+        <v-list-item-avatar color="grey"></v-list-item-avatar>
+        <v-list-item-content >
+      <v-list-item-title class="headline">{{photographer.name}}</v-list-item-title>
+          <v-list-item-subtitle><i class="fas fa-star-half-alt"></i>5.0<br><i class="fas fa-money-bill-wave"></i>2500-3000</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+<v-chip
+        class="ma-2"
+        x-small
+          
+      >
+        งานแต่งงาน
+      </v-chip>
+
+      <v-row >
+          <v-col cols="3"  sm :key="key" v-for="(ima, key) in photographer.img"
+        ><v-img 
+        :src="ima"
+        height="90" max-width=""
+      ></v-img>{{ima}}</v-col>
+</v-row>
+  
+    </v-card></v-container>
+ </v-card>
+
 </template>
 
 <script>
-import firebase from './forms/firebaseConfig'
+import firebase from "./forms/firebaseConfig";
+
+var database = firebase.database();
+var photographerRef = database.ref("/photographer");
+
+
 export default {
-  name: "Products",
-  data(){
+ 
+
+  data: () => {
     return {
-        products: [],
-        product: {
-          name:null,
-          description:null,
-          price:null,
-          tags:[],
-          images:[]
-        },
-        activeItem:null,
-        modal: null,
-        tag: null
-    }
+      photographers: {},
+      models: {},
+      reviews: {},
+      users:{},
+      name: "",
+      realname: "",
+      email: "",
+      phone: "",
+      introduce: "",
+      address: "",
+      img: "",
+      uid_user: "",
+      uid: "",
+      
+
+    
+    };
   },
 
-  methods:{
-    deleteImage(img,index){
-      let image = firebase.storage().refFromURL(img);
-      this.product.images.splice(index,1);
-      image.delete().then(function() {
-        console.log('image deleted');
-      }).catch(function(error) {
-        console.log(error);
-        
-        // Uh-oh, an error occurred!
-        console.log('an error occurred');
-      });
-    },
+  mounted() {
+    photographerRef.on("value", snapshot => {
+            this.photographers = snapshot.val();
 
-    uploadImage(e){
-      if(e.target.files[0]){
-        
-          let file = e.target.files[0];
-    
-          var storageRef = firebase.storage().ref('products/'+ Math.random() + '_'  + file.name);
-    
-          let uploadTask  = storageRef.put(file);
-    
-          uploadTask.on('state_changed', (snapshot) => {
-            console.log(snapshot);
-            
-          }, (error) => {
-            // Handle unsuccessful uploads
-            console.log(error);
-            
-          }, () => {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-              this.product.images.push(downloadURL);
-            });
-          });
-      }
-    },
+      var i=0
+      for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+
+console.log(key);
+
+      // console.log(data.email);
+ photographerRef.on("value", snapshot => {
+   this.imgs = snapshot.child(key).val();
+   console.log(snapshot.child(key).val());
    
-
+        });
+      }
+      
+      
+    });
   
-  },
-  
+  }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-.img-wrapp{
-  position: relative;
-}
-.img-wrapp span.delete-img{
-    position: absolute;
-    top: -14px;
-    left: -2px;
-}
-.img-wrapp span.delete-img:hover{
-  cursor: pointer;
-}
-</style>

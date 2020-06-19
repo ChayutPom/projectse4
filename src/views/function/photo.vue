@@ -86,10 +86,10 @@
       </v-chip>
 
       <v-row >
-        <v-col cols="3" :v-for = "img in photographers" sm><v-img 
-        :src="photographer.img"
+        <v-col cols="3" :key="key" v-for="(photographer2, key) in photographer.img" sm><v-img 
+        :src="photographer2"
         height="90" max-width=""
-      ></v-img>{{photographer.img}}</v-col>
+      ></v-img></v-col>
 </v-row>
   
     </v-card></v-container>
@@ -102,6 +102,7 @@ import firebase from "../forms/firebaseConfig";
 
 var database = firebase.database();
 var photographerRef = database.ref("/photographer");
+
 export default {
  
 

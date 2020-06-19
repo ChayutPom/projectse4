@@ -143,9 +143,23 @@ products: [],
     insertToPhotographer (name, realname,email,phone,introduce,address,images,photo1,photo2,photo3,photo4,photo5,photo6,photo7,price1,price2,price3,price4,price5,price6,price7) {
     
 console.log(photo1);
-console.log(photo2);
+console.log(images);
+ userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
 
-       let data = {
+var data = snapshot.child(key).val();
+
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+  console.log(  key2 );
+
+    let data = {
         name: name,
         realname: realname,
         email: email,
@@ -153,10 +167,10 @@ console.log(photo2);
         introduce: introduce,
         address: address,
         img: images,
+        keyUser:key2,
         typePhoto: {
        type: {photo1,photo2,photo3,photo4,photo5,photo6,photo7},
        price: {price1,price2,price3,price4,price5,price6,price7},
-      //  keyUser:
      }
 
       }
@@ -176,6 +190,16 @@ console.log(photo2);
       this.phone = ''
       this.introduce = ''
       this.address = ''
+  
+});
+        
+      }
+      
+}
+      
+    
+    });
+     
     },
 deleteImage(img,index){
       let image = firebase.storage().refFromURL(img);
@@ -225,17 +249,9 @@ deleteImage(img,index){
   mounted () {
     photographerRef.on('value', (snapshot) => {
       this.photographers = snapshot.val()
-    }),
-    userRef.on("value", snapshot => {
-var key = Object.keys(snapshot.val())[0];
-console.log(key);
+    })
 
 
-      var data = snapshot.child(key).val();
-      this.users = data;
-    console.log(data);
-    
-    });
     
   },
   
