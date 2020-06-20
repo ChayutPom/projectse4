@@ -63,7 +63,7 @@
      <v-card
       max-width="auto"
       class="mx-auto"
-      href="profile.vue"
+        :href="'/profilephoto/' + key"
      :key="key" v-for="(photographer, key) in photographers"
               tile
               outlined

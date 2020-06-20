@@ -4,6 +4,7 @@
       class="mx-auto"
       max-width="434"
       tile
+      :key="key" v-for="(photographer, key) in photographers"
     >
       <v-img
         height="100%"
@@ -37,7 +38,7 @@
               dark
             >
               <v-list-item-content>
-                <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
+                <v-list-item-title class="title">{{ photographer.name }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -50,9 +51,9 @@
 
       
      
-<v-container  >
- <v-row><v-icon>mdi-account</v-icon>  Fathan</v-row> 
-   <v-row><v-icon>mdi-account-box</v-icon> Fathan@gmail.com</v-row> 
+<v-container  :key="key" v-for="(photographer, key) in photographers">
+ <v-row><v-icon>mdi-account</v-icon>  {{ photographer.realname }}</v-row> 
+   <v-row><v-icon>mdi-account-box</v-icon> {{ photographer.email }}</v-row> 
    <v-row><v-icon>mdi-pin</v-icon> สถานที่รับงาน:  ภูเก็ต</v-row> 
 </v-container>
 
@@ -184,3 +185,45 @@
     </v-card></v-container  >
 </template>
 
+<script>
+import firebase from "../forms/firebaseConfig";
+
+var database = firebase.database();
+var photographerRef = database.ref("/photographer");
+
+export default {
+
+
+  data: () => {
+    return {
+      photographers: {},
+      models: {},
+      reviews: {},
+      users:{},
+      name: "",
+      realname: "",
+      email: "",
+      phone: "",
+      introduce: "",
+      address: "",
+      img: "",
+      uid_user: "",
+      uid: "",
+      
+
+    
+    };
+  },
+
+  mounted() {
+    photographerRef.orderByKey().equalTo(this.$route.params.key).on("value", snapshot => {
+      this.photographers = snapshot.val();
+      console.log(this.photographers);
+      
+    });
+
+    console.log(this.$route.params.key);
+    
+  }
+};
+</script>

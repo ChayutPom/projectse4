@@ -20,42 +20,42 @@
 
       <v-container fluid>
         <v-row>
-          <v-col>
+          <v-col cols="4">
             <v-btn class="ma-6" outlined medium fab color="indigo" href="photo.vue">
               <v-icon>mdi-camera</v-icon>
             </v-btn>
             <p class="text-center">Photo</p>
           </v-col>
 
-          <v-col>
+          <v-col cols="4">
             <v-btn class="ma-6" outlined medium fab color="indigo" href="model.vue">
               <v-icon>fa-female</v-icon>
             </v-btn>
             <p class="text-center">model</p>
           </v-col>
 
-          <v-col>
+          <v-col cols="4">
             <v-btn class="ma-6" outlined medium fab color="indigo" href="review.vue">
               <v-icon>fa-star</v-icon>
             </v-btn>
             <p class="text-center">review</p>
           </v-col>
 
-          <v-col>
+          <v-col cols="4">
             <v-btn class="ma-6" outlined medium fab color="indigo" href="shop.vue">
               <v-icon>fa-store</v-icon>
             </v-btn>
             <p class="text-center">shop</p>
           </v-col>
 
-          <v-col>
+          <v-col cols="4" v-if="users.status_photogra == true">
             <v-btn class="ma-6" outlined medium fab color="indigo" href="photographer.vue">
               <v-icon>fa-images</v-icon>
             </v-btn>
             <p class="text-center">photographer</p>
           </v-col>
 
-          <v-col>
+          <v-col cols="4" v-if="users.status_model == true">
             <v-btn class="ma-6" outlined medium fab color="indigo" href="Modeling.vue">
               <v-icon>fa-image</v-icon>
             </v-btn>
@@ -137,7 +137,7 @@ var database = firebase.database();
 var photographerRef = database.ref("/photographer");
 var modelRef = database.ref("/model");
 var reviewRef = database.ref("/review");
-var userRef = database.ref("/user_data");
+var userRef = database.ref("/userdata");
 // const db = firebase.firestore();
 
 
@@ -149,7 +149,7 @@ export default {
       photographers: {},
       models: {},
       reviews: {},
-      users:{},
+      users: {},
       name: "",
       realname: "",
       email: "",
@@ -243,11 +243,27 @@ export default {
       
     });
     userRef.on("value", snapshot => {
-      this.users = snapshot.val();
-      this.email = firebase.auth().currentUser.email;
-      this.uid = firebase.auth().currentUser.uid;
-      console.log('uid' + this.uid);
+
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+
+var data = snapshot.child(key).val();
+
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+  console.log(this.users);
+  
+});
+        
+      }
       
+}
+    
     });
 
   }

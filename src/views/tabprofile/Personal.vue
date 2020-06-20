@@ -134,12 +134,6 @@ updatePhone = snapshot.val()[key2].phone ;
 
 }
 
-    
-  
-    // if (data) {
-    //     data.edit = true;
-    //     firebase.database().ref(ref).update(data);
-    // }
 })
 
         

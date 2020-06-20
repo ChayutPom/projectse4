@@ -55,11 +55,11 @@ export default new Vuex.Store({
         })
     },
     
-    autoSignIn ({commit}, payload) {
-      commit('setUser', payload)
-      console.log(payload.uid);
+    // autoSignIn ({commit}, payload) {
+    //   commit('setUser', payload)
+    //   console.log(payload.uid);
 
-     },
+    //  },
    
      userSignOut ({commit}) {
       firebase.auth().signOut()

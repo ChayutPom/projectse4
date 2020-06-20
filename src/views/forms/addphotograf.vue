@@ -1,7 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container fluid >
+    <div v-if="users.status_photogra == false">
     <center>
-      <h2>โปรไฟล์ ช่างภาพ</h2>
+      <h2>โปรไฟล์ ช่างภาพ{{users.status_photogra}}</h2>
     </center>
     <br />
 
@@ -23,7 +24,7 @@
       รูปภาพ
 
       <div class="form-group">
-                      <label for="product_image">Product Images</label>
+                      <!-- <label for="product_image">Product Images</label> -->
                       <input type="file" @change="uploadImage" class="form-control">
                     </div>
 
@@ -35,33 +36,10 @@
 
                       </div>
                     </div>
-       <!-- <input type="file" @change="previewImage" multiple accept="image/*" >
-       <img :src="picture"  alt="" width="80px"> -->
-
-
-      <!-- <div class="form-group">
-                      <input type="file" @change="previewImage"  accept="image/*" >
-                                            <input type="file" @change="previewImage"  accept="image/*" >
-
-                    </div> -->
-
-                    <!-- <div class="form-group d-flex">
-                      <div class="p-1" >
-                          <div class="img-wrapp">
-                              <img :src="picture"  alt="" width="80px">
-                          </div>
-                      </div>
-                    </div> -->
-
       
-            <!-- <button @click="onUpload" >Upload</button> -->
     </div>
   
-    <!-- <div v-if="imageData!=null" >
-        <img class="preview" :src="picture" >
 
-        <br>
-    </div> -->
   </div>
       </v-col>
     </v-row>
@@ -91,8 +69,12 @@
        <v-col cols="7" > <v-text-field v-model="price7" label="" solo></v-text-field></v-col></v-row>
     </v-col>
     <button @click="insertToPhotographer(name, realname,email,phone,introduce,address,product.images,photo1,photo2,photo3,photo4,photo5,photo6,photo7,price1,price2,price3,price4,price5,price6,price7)">Add</button>
-
+    </div>
+    <div >{{users.status_photogra}}
+    </div>
   </v-container>
+
+
 </template>
 <script>
 import firebase from './firebaseConfig'
@@ -105,6 +87,7 @@ export default {
   data: () => ({
     items: ["1", "2", "3", "4", "5"],
 products: [],
+users: {},
         product: {
           images:[]
         },
@@ -157,7 +140,7 @@ var data = snapshot.child(key).val();
     
      var key2 = Object.keys(snapshot.val())[0];
   this.users = snapshot.val()[key2];
-  console.log(  key2 );
+  console.log(  this.users.status_photogra );
 
     let data = {
         name: name,
@@ -174,6 +157,9 @@ var data = snapshot.child(key).val();
      }
 
       }
+         userRef.child(key2).update({
+status_photogra: true,
+  })
       
       photographerRef.push(data)
       .then(() => {
@@ -249,7 +235,34 @@ deleteImage(img,index){
   mounted () {
     photographerRef.on('value', (snapshot) => {
       this.photographers = snapshot.val()
-    })
+    }),
+    userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+
+var data = snapshot.child(key).val();
+      // console.log(data.email);
+
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+  // console.log(snapshot.val().firstname);
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+
+  // console.log(this.users);
+  
+  
+});
+        
+      }
+      
+}
+      
+    
+    });
 
 
     

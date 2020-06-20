@@ -13,7 +13,7 @@ import review from '../views/function/review.vue';
 import shop from '../views/function/shop.vue';
 import Modeling from '../views/function/Modeling.vue';
 import photographer from '../views/function/photographer.vue';
-import profile from '../views/photo/profile.vue';
+import profilephoto from '../views/photo/profilephoto.vue';
 import achievement from '../views/photo/achievement.vue';
 import profilemodel from '../views/model/profilemodel.vue';
 
@@ -112,9 +112,10 @@ Vue.use(VueRouter)
       meta: { hideNavigation: true }
     },
     {
-      path: '/profile.vue',
-      name: 'profile',
-      component: profile,
+      path: '/profilephoto/:key',
+      name: 'profilephoto',
+      component: profilephoto,
+      props: true,
       meta: { hideNavigation: true }
     },
     {

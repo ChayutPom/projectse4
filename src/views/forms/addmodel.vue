@@ -16,13 +16,24 @@
     </v-col>
 
     <v-row>
-      <v-col cols="4">รูปภาพ</v-col>
-      <v-col cols="4">
-        <v-btn small color="primary" >สร้างอัลบั้ม</v-btn>   
-      </v-col>
-      <v-col cols="4">
-        <v-btn small color="primary">เพิ่มรูปภาพ</v-btn>
-      </v-col>
+      <div >
+      รูปภาพ
+
+      <div class="form-group">
+                      <input type="file" @change="uploadImage" class="form-control">
+                    </div>
+
+                    <div class="form-group d-flex">
+                      <div class="img-wrapp p-1" v-for="(image, index) in product.images" :key = index>
+                
+                              <img :src="image" alt="" width="80px">
+                              <span class="delete-img" @click="deleteImage(image,index)">X</span>
+
+                      </div>
+                    </div>
+      
+    </div>
+
     </v-row>
 
     <v-col cols="12" sm="6" md="3">
@@ -63,7 +74,12 @@ export default {
      weight: '',
      height: '',
      sex: '',
-    
+         img: {},
+         product: {
+          images:[]
+        },
+        products: [],
+users: {},
   }),
  methods: {
     insertToModel (name, realname,email,phone,introduce,weight,height,sex) {
@@ -87,7 +103,47 @@ export default {
       this.height = ''
       this.sex = ''
     },
+    deleteImage(img,index){
+      let image = firebase.storage().refFromURL(img);
+      this.product.images.splice(index,1);
+      image.delete().then(function() {
+        console.log('image deleted');
+      }).catch(function(error) {
+        console.log(error);
+        
+        // Uh-oh, an error occurred!
+        console.log('an error occurred');
+      });
+    },
+
+    uploadImage(e){
+      if(e.target.files[0]){
+        
+          let file = e.target.files[0];
     
+          var storageRef = firebase.storage().ref('products/'+ Math.random() + '_'  + file.name);
+    
+          let uploadTask  = storageRef.put(file);
+    
+          uploadTask.on('state_changed', (snapshot) => {
+            console.log(snapshot);
+            
+          }, (error) => {
+            // Handle unsuccessful uploads
+            console.log(error);
+            
+          }, () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              this.product.images.push(downloadURL);
+              console.log( this.product.images);
+              
+            });
+          });
+      }
+    },
   },
   mounted () {
     modelRef.on('value', (snapshot) => {
