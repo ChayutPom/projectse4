@@ -15,7 +15,7 @@
         grow
         padless
       >
-        <v-tabs-slider></v-tabs-slider>
+        <!-- <v-tabs-slider></v-tabs-slider> -->
 
         <v-tab v-for="list in lists" :key="list.text"  router :to="list.route" >
           {{list.text}}

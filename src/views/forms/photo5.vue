@@ -33,10 +33,12 @@
 </template>
 
 <script>
-import firebase from './firebaseConfig'
+import firebase from '../forms/firebaseConfig'
 
 var database = firebase.database()
 var taskPhotoRef = database.ref('/taskphoto')
+var userRef = database.ref("/userdata");
+
 export default {
   data: () => ({
      items: ["1", "2", "3", "4"],
@@ -48,13 +50,30 @@ export default {
  methods: {
     
     insertToTaskphoto (taskDetail,taskLocation,taskStart,taskEnd) {
+      userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
 
+var data = snapshot.child(key).val();
+
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+  console.log(this.users);
        let data = {
         taskDetail: taskDetail,
         taskLocation: taskLocation,
         taskStart: taskStart,
         taskEnd: taskEnd,
-        taskType: 'photo5'
+        taskType: 'งานอีเวนต์',
+                 keyUser: key2 ,
+         keyPhoto:  this.$route.params.key,
+                  statusTask: 'รอการตอบรับ'
+
       }
       
       taskPhotoRef.push(data)
@@ -65,7 +84,15 @@ export default {
           })
           .catch((error) => {
             console.error("Error writing document: ", error);
-          });
+             });
+});
+        
+      }
+      
+}
+    
+    });
+      
  
     },
   

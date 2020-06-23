@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import firebase from './firebaseConfig'
+import firebase from '../forms/firebaseConfig'
 
 var database = firebase.database()
 var taskPhotoRef = database.ref('/taskphoto')
@@ -55,31 +55,16 @@ export default {
     
     insertToTaskphoto (taskDetail, taskStart,taskEnd,taskLocation,taskNum) {
 
-      userRef.on("value", snapshot => {
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-
-var data = snapshot.child(key).val();
-
-      if(data.email == firebase.auth().currentUser.email){
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-    
-     var key2 = Object.keys(snapshot.val())[0];
-  this.users = snapshot.val()[key2];
-  console.log(this.users);
-  
-   let data = {
+       let data = {
         taskDetail: taskDetail,
          taskStart: taskStart,
          taskEnd: taskEnd,
          taskLocation: taskLocation,
          taskNum: taskNum,
-         taskType: 'ภาพถ่ายบุคคล',
-         keyUser: key2 ,
-         keyPhoto:  this.$route.params.key,
-         statusTask: 'รอการตอบรับ'
+         taskType: 'photo1',
+         keyUser:'' ,
+         keyPhoto:'' ,
+
       }
       
       taskPhotoRef.push(data)
@@ -91,14 +76,6 @@ var data = snapshot.child(key).val();
           .catch((error) => {
             console.error("Error writing document: ", error);
           });
-});
-        
-      }
-      
-}
-    
-    });
-      
  
     },
   
@@ -108,10 +85,29 @@ var data = snapshot.child(key).val();
   mounted () {
     taskPhotoRef.on('value', (snapshot) => {
       this.taskphoto = snapshot.val()
-    })
+    }),
+       userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
 
+var data = snapshot.child(key).val();
+      // console.log(data.email);
 
-
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+  // console.log(snapshot.val().firstname);
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+  console.log(this.users);  
+  console.log(key2);
+  
+});       
+      }      
+}   
+    });
   },
   
 

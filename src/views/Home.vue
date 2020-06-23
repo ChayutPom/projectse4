@@ -49,7 +49,7 @@
           </v-col>
 
           <v-col cols="4" v-if="users.status_photogra == true">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="photographer.vue">
+            <v-btn class="ma-6" outlined medium fab color="indigo" href="tab1.vue">
               <v-icon>fa-images</v-icon>
             </v-btn>
             <p class="text-center">photographer</p>

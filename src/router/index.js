@@ -25,6 +25,19 @@ import photo5 from '../views/forms/photo5.vue';
 import photo6 from '../views/forms/photo6.vue';
 import photo7 from '../views/forms/photo7.vue';
 
+import tab1 from '../views/tabphotographer/tab1.vue';
+import tab2 from '../views/tabphotographer/tab2.vue';
+import tab3 from '../views/tabphotographer/tab3.vue';
+import tab4 from '../views/tabphotographer/tab4.vue';
+
+import type1 from '../views/formtype/type1.vue';
+import type2 from '../views/formtype/type2.vue';
+import type3 from '../views/formtype/type3.vue';
+import type4 from '../views/formtype/type4.vue';
+import type5 from '../views/formtype/type5.vue';
+import type6 from '../views/formtype/type6.vue';
+import type7 from '../views/formtype/type7.vue';
+
 import addphotograf from '../views/forms/addphotograf.vue';
 import addmodel from '../views/forms/addmodel.vue';
 import productform from '../views/forms/productform.vue';
@@ -131,47 +144,114 @@ Vue.use(VueRouter)
       meta: { hideNavigation: true }
     },
     {
-      path: '/photo1.vue',
+      path: '/profilephoto/:key/photo1.vue',
       name: 'photo1',
       component: photo1,
       meta: { hideNavigation: true }
     },
     {
-      path: '/photo2.vue',
+      path: '/profilephoto/:key/photo2.vue',
       name: 'photo2',
       component: photo2,
       meta: { hideNavigation: true }
     },
     {
-      path: '/photo3.vue',
+      path: '/profilephoto/:key/photo3.vue',
       name: 'photo3',
       component: photo3,
       meta: { hideNavigation: true }
     },
     {
-      path: '/photo4.vue',
+      path: '/profilephoto/:key/photo4.vue',
       name: 'photo4',
       component: photo4,
       meta: { hideNavigation: true }
     },
     {
-      path: '/photo5.vue',
+      path: '/profilephoto/:key/photo5.vue',
       name: 'photo5',
       component: photo5,
       meta: { hideNavigation: true }
     },
     {
-      path: '/photo6.vue',
+      path: '/profilephoto/:key/photo6.vue',
       name: 'photo6',
       component: photo6,
       meta: { hideNavigation: true }
     },
     {
-      path: '/photo7.vue',
+      path: '/profilephoto/:key/photo7.vue',
       name: 'photo7',
       component: photo7,
       meta: { hideNavigation: true }
     },
+    {
+      path: '/type1.vue',
+      name: 'type1',
+      component: type1,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/type2.vue',
+      name: 'type2',
+      component: type2,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/type3.vue',
+      name: 'type3',
+      component: type3,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/type4.vue',
+      name: 'type4',
+      component: type4,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/type5.vue',
+      name: 'type5',
+      component: type5,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/type6.vue',
+      name: 'type6',
+      component: type6,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/type7.vue',
+      name: 'type7',
+      component: type7,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/tab1.vue',
+      name: 'tab1',
+      component: tab1,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/tab2.vue',
+      name: 'tab2',
+      component: tab2,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/tab3.vue',
+      name: 'tab3',
+      component: tab3,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/tab4.vue',
+      name: 'tab4',
+      component: tab4,
+      meta: { hideNavigation: true }
+    },
+
     {
       path: '/addphotograf.vue',
       name: 'addphotograf',

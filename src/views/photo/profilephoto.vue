@@ -51,86 +51,86 @@
 
       
      
-<v-container  :key="key" v-for="(photographer, key) in photographers">
+<v-container  :key="key2" v-for="(photographer, key2) in photographers">
  <v-row><v-icon>mdi-account</v-icon>  {{ photographer.realname }}</v-row> 
    <v-row><v-icon>mdi-account-box</v-icon> {{ photographer.email }}</v-row> 
    <v-row><v-icon>mdi-pin</v-icon> สถานที่รับงาน:  ภูเก็ต</v-row> 
 </v-container>
 
 
-<v-container  fluid>
-ราคาและประเภทงาน
+<v-container  fluid       >
+ราคาและประเภทงาน 
         <v-row>    
-      <v-col  cols="6" >
+      <v-col  cols="6" v-if="this.phototype.photo1 == 'success'">
  <v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo1.vue">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" :href="'/profilephoto/' + this.$route.params.key + '/photo1.vue'" >
         <v-icon >fas fa-street-view</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
-                <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price1}}</v-list-item-subtitle>
               </v-list-item-content></v-list-item>
       </v-col>
 
-      <v-col   cols="6"><v-list-item
+      <v-col   cols="6" v-if="this.phototype.photo2 == 'success'"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo2.vue">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" :href="'/profilephoto/' + this.$route.params.key + '/photo2.vue'">
         <v-icon >fa-user-graduate</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >รับปริญญา</v-list-item-title>
-                <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price2}}</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
-      <v-col   cols="6"><v-list-item
+      <v-col   cols="6" v-if="this.phototype.photo3 == 'success'"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo3.vue">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" :href="'/profilephoto/' + this.$route.params.key + '/photo3.vue'">
         <v-icon >fa-heart</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >พรีเวดดิ้ง</v-list-item-title>
-                <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price3}}</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
-      <v-col   cols="6"><v-list-item
+      <v-col   cols="6" v-if="this.phototype.photo4 == 'success'"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo4.vue">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" :href="'/profilephoto/' + this.$route.params.key + '/photo4.vue'">
         <v-icon >fa-venus-mars</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >งานแต่งงาน</v-list-item-title>
-                <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price4}}</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
-      <v-col   cols="6"><v-list-item
+      <v-col   cols="6" v-if="this.phototype.photo5 == 'success'"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo5.vue">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" :href="'/profilephoto/' + this.$route.params.key + '/photo5.vue'">
         <v-icon >fa-business-time</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >งานอีเวนต์</v-list-item-title>
-                <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price5}}</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
-      <v-col  cols="6" ><v-list-item
+      <v-col  cols="6" v-if="this.phototype.photo6 == 'success'"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo6.vue">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" :href="'/profilephoto/' + this.$route.params.key + '/photo6.vue'">
         <v-icon >fa-hamburger</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >สินค้า/อาหาร</v-list-item-title>
-                <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price6}}</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
-      <v-col   cols="6"><v-list-item
+      <v-col   cols="6" v-if="this.phototype.photo7 == 'success'"><v-list-item
                 ripple
-              ><v-btn class="ma-3" outlined medium fab color="indigo" href="photo7.vue">
+              ><v-btn class="ma-3" outlined medium fab color="indigo" :href="'/profilephoto/' + this.$route.params.key + '/photo7.vue'">
         <v-icon >fa-building</v-icon>
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >สถาปัตยกรรม</v-list-item-title>
-                <v-list-item-subtitle>เริ่มต้น 1000/ชั่วโมง</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price7}}</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 </v-row>
     </v-container>
@@ -197,6 +197,7 @@ export default {
   data: () => {
     return {
       photographers: {},
+      phototype: {},
       models: {},
       reviews: {},
       users:{},
@@ -219,10 +220,12 @@ export default {
     photographerRef.orderByKey().equalTo(this.$route.params.key).on("value", snapshot => {
       this.photographers = snapshot.val();
       console.log(this.photographers);
+      this.phototype = snapshot.child(this.$route.params.key+"/typePhoto/type").val();
+      this.photoprice = snapshot.child(this.$route.params.key+"/typePhoto/price").val();
+
+      console.log(snapshot.child(this.$route.params.key+"/typePhoto/type").val());
       
     });
-
-    console.log(this.$route.params.key);
     
   }
 };
