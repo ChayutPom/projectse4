@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <div v-if="users.status_model == false">
     <center>
       <h2>โปรไฟล์ mODEL</h2>
     </center>
@@ -46,64 +47,225 @@
             :items="dropdown_font"
             label="เพศ " v-model="sex" 
           ></v-select>
-              <button @click="insertToModel(name, realname,email,phone,introduce,weight,height,sex)">Add</button>
+           
 
       <v-text-field label="ที่อยู่" ></v-text-field>
+         <button @click="insertToModel(name, realname,email,phone,introduce,weight,height,sex,product.images)">Add</button>
     </v-col>
-   
+    </div>
+
+
+
+        <div v-if="users.status_model == true">
+          <v-container  >
+    <v-card
+      class="mx-auto"
+      max-width="434"
+      tile
+    >
+      <v-img
+        height="100%"
+        
+      >
+        <v-row
+          align="end"
+          class="fill-height"
+        >
+        <v-col  cols="3" ></v-col>
+          <v-col
+            class=""
+            cols="7"
+          >
+            <v-avatar
+              class="profile"
+              color="grey"
+              size="164"
+              
+              
+            >
+              <v-img  src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+            </v-avatar>
+          </v-col>
+          
+          
+         
+        </v-row>
+      </v-img>
+
+
+
+      <v-form>
+      <v-container class="center" style="width:80%;">
+        <v-row >
+  
+            <v-text-field 
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+
+              <v-text-field
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+
+              <v-text-field
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+
+              <v-text-field
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+        
+  
+         
+  
+        </v-row>
+      </v-container>
+    </v-form>
+
+      
+          </v-card>
+    
+      
+    <center><v-btn text color="primary" href="">อัลบั้ม</v-btn> </center>
+     <v-row class="">
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+   <v-col cols="4" sm><v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img> </v-col >
+      <v-col cols="4" sm><v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width="" 
+      ></v-img> </v-col >
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+       
+      </v-row>
+
+  
+
+     
+    </v-container  >
+        </div>
   </v-container>
 </template>
 
 <script>
-
 import firebase from './firebaseConfig'
 
 var database = firebase.database()
 var modelRef = database.ref('/model')
+var userRef = database.ref("/userdata");
+
 export default {
   data: () => ({
     items: ["1", "2", "3", "4", "5"],
-        dropdown_font: ['ชาย', 'หญิง'],
-
-        contacts: {},
+    dropdown_font:["ชาย", "หญิง"],
+products: [],
+users: {},
+ images:[],
+        product: {
+          images:[]
+        },
      name: '', 
      realname: '',
      email: '',
      phone: '',
      introduce: '',
-     weight: '',
-     height: '',
-     sex: '',
-         img: {},
-         product: {
-          images:[]
-        },
-        products: [],
-users: {},
+     address: '',
+
+     img: {},
+  weight:'',
+  height: '',
+  sex: '',
+     imageData: null,
+      uploadValue: 0
+      
   }),
  methods: {
-    insertToModel (name, realname,email,phone,introduce,weight,height,sex) {
-      let data = {
+  
+    
+    insertToModel (name, realname,email,phone,introduce,weight,height,sex,images) {
+
+console.log(images);
+ userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+
+var data = snapshot.child(key).val();
+
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+  console.log(  this.users.status_model );
+
+    let data = {
         name: name,
         realname: realname,
         email: email,
         phone: phone,
         introduce: introduce,
-        weight: weight,
-         height: height,
-        sex: sex,
+        img: images,
+        keyUser:key2,
+        weight:weight,
+        height:height,
+        sex:sex
+
       }
+         userRef.child(key2).update({
+status_photogra: true,
+  })
+      
       modelRef.push(data)
-      this.name = ''
-      this.realname = ''
-      this.email = ''
-      this.phone = ''
-      this.introduce = ''
-      this.weight = ''
-      this.height = ''
-      this.sex = ''
+      .then(() => {
+            console.log("Document successfully written!");
+            console.log(data);
+            
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+          });
+
+  
+});
+        
+      }
+      
+}
+      
+    
+    });
+     
     },
-    deleteImage(img,index){
+deleteImage(img,index){
       let image = firebase.storage().refFromURL(img);
       this.product.images.splice(index,1);
       image.delete().then(function() {
@@ -144,12 +306,46 @@ users: {},
           });
       }
     },
+
+    
   },
+  
   mounted () {
     modelRef.on('value', (snapshot) => {
       this.models = snapshot.val()
-    })
-  }
+    }),
+    userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+
+var data = snapshot.child(key).val();
+      // console.log(data.email);
+
+      if(data.email == firebase.auth().currentUser.email){
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+  // console.log(snapshot.val().firstname);
+    
+     var key2 = Object.keys(snapshot.val())[0];
+  this.users = snapshot.val()[key2];
+
+  // console.log(this.users);
+  
+  
+});
+        
+      }
+      
+}
+      
+    
+    });
+
+
+    
+  },
+  
 
 };
 </script>

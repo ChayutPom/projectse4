@@ -70,7 +70,125 @@
     </v-col>
     <button @click="insertToPhotographer(name, realname,email,phone,introduce,address,product.images,photo1,photo2,photo3,photo4,photo5,photo6,photo7,price1,price2,price3,price4,price5,price6,price7)">Add</button>
     </div>
-    <div >{{users.status_photogra}}
+
+
+
+
+
+    <div v-if="users.status_photogra == true">
+      <v-container  >
+    <v-card
+      class="mx-auto"
+      max-width="434"
+      tile
+    >
+      <v-img
+        height="100%"
+        
+      >
+        <v-row
+          align="end"
+          class="fill-height"
+        >
+        <v-col  cols="3" ></v-col>
+          <v-col
+            class=""
+            cols="7"
+          >
+            <v-avatar
+              class="profile"
+              color="grey"
+              size="164"
+              
+              
+            >
+              <v-img  src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+            </v-avatar>
+          </v-col>
+          
+          
+         
+        </v-row>
+      </v-img>
+
+
+
+      <v-form>
+      <v-container class="center" style="width:80%;">
+        <v-row >
+  
+            <v-text-field 
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+
+              <v-text-field
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+
+              <v-text-field
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+
+              <v-text-field
+              label="Text input"
+              single-line
+              solo
+            ></v-text-field>
+        
+  
+         
+  
+        </v-row>
+      </v-container>
+    </v-form>
+
+      
+          </v-card>
+    
+      
+    <center><v-btn text color="primary" href="">อัลบั้ม</v-btn> </center>
+     <v-row class="">
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+   <v-col cols="4" sm><v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img> </v-col >
+      <v-col cols="4" sm><v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width="" 
+      ></v-img> </v-col >
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+       <v-col cols="4" sm>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        height="100" max-width=""
+      ></v-img></v-col >
+       
+      </v-row>
+
+  
+
+     
+    </v-container  >
     </div>
   </v-container>
 

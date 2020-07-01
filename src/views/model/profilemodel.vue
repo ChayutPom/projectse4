@@ -37,12 +37,16 @@
   
      <v-col class="text-center" cols="12" sm="4">
         <div class="my-2">
-          <v-btn color="primary" >ติดต่อ</v-btn>
+          <v-btn color="primary" :href="'/profilemodel/' + this.$route.params.key + '/formmodel'" >ติดต่อ</v-btn>
         </div></v-col>
       </v-container>
     </v-card>
 </template>
 <script>
+import firebase from "../forms/firebaseConfig";
+
+var database = firebase.database();
+var modelRef = database.ref("/model");
 export default {
   data: () => ({
    cards: [
@@ -53,5 +57,17 @@ export default {
     ],
   }),
 
+mounted() {
+    modelRef.orderByKey().equalTo(this.$route.params.key).on("value", snapshot => {
+      this.models = snapshot.val();
+      console.log(this.models);
+      // this.phototype = snapshot.child(this.$route.params.key+"/typePhoto/type").val();
+      // this.photoprice = snapshot.child(this.$route.params.key+"/typePhoto/price").val();
+
+      // console.log(snapshot.child(this.$route.params.key+"/typePhoto/type").val());
+      
+    });
+    
+  }
 };
 </script>

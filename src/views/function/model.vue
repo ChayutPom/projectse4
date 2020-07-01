@@ -7,43 +7,30 @@
             class="grey lighten-5"
           >
             <v-card max-width="50%" class="mx-auto" 
-            v-for="n in 6"
-              :key="n"
+
               tile
               outlined
-              href="profilemodel.vue">
+               :href="'/profilemodel/' + key"
+                :key="key" v-for="(model, key) in models">
     <v-list-item>
       <v-list-item-avatar color="grey"></v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title class="">Name Model</v-list-item-title>
+        <v-list-item-title class="">{{model.name}}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-  นำ้หนัก<br>
-  ส่วนสูง <br>
-  แนะนำตัว<br>
-    <v-row >
-      <v-col cols="4" sm>
+  ส่วนสูง: {{model.height}} <br>
+  นำ้หนัก: {{model.weight}}<br>
+    แนะนำตัว: {{model.introduce}}<br>
+    <v-row  
+    >
+      <v-col cols="4" sm :key="key" v-for="(modelimg, key) in model.img">
         <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-          height="50"
-          max-width="100"
+          :src="modelimg"
+          height="70"
+          
         ></v-img>
       </v-col>
 
-      <v-col cols="4" sm>
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-          height="50"
-          max-width="100"
-        ></v-img>
-      </v-col>
-      <v-col cols="4" sm>
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-          height="50"
-          max-width="100"
-        ></v-img>
-      </v-col>
     </v-row>
   </v-card>
           </v-row>
@@ -54,9 +41,40 @@
 </template>
 
 <script>
+import firebase from "../forms/firebaseConfig";
+
+var database = firebase.database();
+var modelRef = database.ref("/model");
+
 export default {
-  data: () => ({
-    //
-  })
+ 
+
+  data: () => {
+    return {
+      models: {},
+      reviews: {},
+      users:{},
+      name: "",
+      realname: "",
+      email: "",
+      phone: "",
+      introduce: "",
+      address: "",
+      img: "",
+      uid_user: "",
+      uid: "",
+      
+
+    
+    };
+  },
+
+  mounted() {
+    modelRef.on("value", snapshot => {
+      this.models = snapshot.val();
+      console.log(this.models);
+      
+    });
+  }
 };
 </script>

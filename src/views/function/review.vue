@@ -5,12 +5,10 @@
           <v-card
             max-width="49%"
             class="mx-auto"
-            v-for="card in cards"
-            :key="card.title"
-            :cols="card.flex"
+            :key="key" v-for="(review, key) in reviews"
             tile
             outlined
-            href="detailreview.vue"
+            :href="'detailreview/' + key"
           >
             <v-list-item>
               <v-list-item-avatar color="grey"></v-list-item-avatar>
@@ -23,17 +21,11 @@
 
             <v-row>
               <v-col cols="4" sm>
-                <v-img :src="card.src" height="50" max-width="100"></v-img>
+                <v-img :src="review.img" height="50" max-width="100"></v-img>
               </v-col>
 
-              <v-col cols="4" sm>
-                <v-img :src="card.src" height="50" max-width="100"></v-img>
-              </v-col>
-              <v-col cols="4" sm>
-                <v-img :src="card.src" height="50" max-width="100"></v-img>
-              </v-col>
 </v-row>
-              <v-card-text>“หาดป่าตอง” ถือเป็นหาดที่มีชื่อเสียงมากที่สุดของภูเก็ตเลยก็ว่าได้ และเป็นหาดขวัญใจนักท่องเที่ยวที่อยากจะมาพักผ่อน อ่านต่อได้ที่</v-card-text>
+              <v-card-text>{{review.detailReview}}</v-card-text>
 
          
              <v-row><v-col cols="6"> <v-btn class=""  icons-and-text color="lighten-12">
@@ -52,31 +44,42 @@
 
 
 <script>
+import firebase from "../forms/firebaseConfig";
+
+var database = firebase.database();
+var reviewRef = database.ref("/review");
+
 export default {
-  data: () => ({
-    cards: [
-      {
-        title: "หาดป่าตอง",
-        src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
-        flex: 6
-      },
-      {
-        title: "ภูเก็ตทาว์น",
-        src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
-        flex: 6
-      },
-      {
-        title: "เมืองเก่าภูเก็ต",
-        src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
-        flex: 6
-      },
-      {
-        title: "คลับเฮ้าส์",
-        src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
-        flex: 6
-      }
-    ],
-  })
+ 
+
+  data: () => {
+    return {
+      photographers: {},
+      models: {},
+      reviews: {},
+      users:{},
+      name: "",
+      realname: "",
+      email: "",
+      phone: "",
+      introduce: "",
+      address: "",
+      img: "",
+      uid_user: "",
+      uid: "",
+      
+
+    
+    };
+  },
+
+  mounted() {
+    reviewRef.on("value", snapshot => {
+      this.reviews = snapshot.val();
+      console.log(this.reviews);
+      
+    });
+  }
 };
 </script>
 

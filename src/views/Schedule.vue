@@ -1,42 +1,58 @@
 <template>
   <v-card>
-    <v-tabs v-model="tabs" fixed-tabs>
-      <v-tabs-slider></v-tabs-slider>
-      <v-tab href="#mobile-tabs-5-1" class="primary--text">งานที่คุณค้นหา</v-tab>
+<sctab/>
 
-      <v-tab href="#mobile-tabs-5-3" class="primary--text">งานที่คุณประกาศหา</v-tab>
-    </v-tabs>
-
-    <v-card class="mx-auto" max-width="auto" outlined>
+    <v-card class="mx-auto" max-width="auto" outlined
+         :key="keystatus" v-for="(tasks, keystatus) in task"
+>
       <v-list-item three-line>
         <v-list-item-content>
-          <div class="font-weight-bold mb-2">ภาพถ่ายบุคคล</div>
-          <v-list-item-title class="mb-1">ช่างภาพที่คุณเลือก : 24Pixel</v-list-item-title>
-          <v-list-item-subtitle>สถานะงาน : ทำการชำระเงิน</v-list-item-subtitle>
+          <div class="font-weight-bold mb-2">{{tasks.taskType}}</div>
+          <v-list-item-title class="mb-1">ช่างภาพที่คุณเลือก : {{tasks.keyPhoto}}</v-list-item-title>
+          <v-list-item-subtitle>สถานะงาน : {{tasks.statusTask}}</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
       </v-list-item>
+
+       <v-stepper  vertical>
+      <v-stepper-step step="1" complete>
+        Name of step 1
+      </v-stepper-step>
+  
+      <!-- <v-stepper-content step="1">
+        <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
+        <v-btn color="primary" @click="e13 = 2">Continue</v-btn>
+        <v-btn text>Cancel</v-btn>
+      </v-stepper-content> -->
+  
+      <v-stepper-step step="2" complete>Name of step 2</v-stepper-step>
+  
+      <v-stepper-content step="2">
+        <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
+        <v-btn color="primary" @click="e13 = 3">Continue</v-btn>
+        <v-btn text>Cancel</v-btn>
+      </v-stepper-content>
+  
+      <!-- <v-stepper-step :rules="[() => false]" step="3">
+        Ad templates
+        <small>Alert message</small>
+      </v-stepper-step> -->
+  
+     
+  
+      <v-stepper-step step="3">View setup instructions</v-stepper-step>
+  
+      <v-stepper-content step="4">
+        <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
+        <v-btn color="primary" @click="e13 = 1">Continue</v-btn>
+        <v-btn text>Cancel</v-btn>
+      </v-stepper-content>
+    </v-stepper>
     </v-card>
 
-    <v-stepper >
-      <v-stepper-header >
-        <v-stepper-step  complete  step="1">รอช่างภาพตกลง</v-stepper-step>
-
-        <v-divider></v-divider>
-
-        <v-stepper-step complete step="2">ชำระเงิน</v-stepper-step>
-
-        <v-divider></v-divider>
-
-        <v-stepper-step step="3" editable>ดำเนินงาน</v-stepper-step>
-
-        <v-divider></v-divider>
-
-        <v-stepper-step step="4" editable>เสร็จเรียบร้อย</v-stepper-step>
-      </v-stepper-header>
-    </v-stepper>
-
-    <v-card class="mx-auto" max-width="auto" outlined>
+   
+<br>
+    <!-- <v-card class="mx-auto" max-width="auto" outlined>
       <v-list-item three-line>
         <v-list-item-content>
           <div class="font-weight-bold mb-2">หา Model</div>
@@ -45,20 +61,68 @@
         </v-list-item-content>
         <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
       </v-list-item>
-    </v-card>
+    </v-card> -->
   </v-card>
 </template>
 
 
 
 <script>
+import sctab from './sctab.vue';
+import firebase from "./forms/firebaseConfig";
+var database = firebase.database();
+var userRef = database.ref("/userdata");
+var taskRef = database.ref("/taskphoto");
+
 export default {
+    components: {
+    sctab,
+   
+  },
   data() {
     return {
-      tabs: null,
+      task:{},
+
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
+  },
+
+  mounted() {
+    userRef.on("value", snapshot => {
+
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+
+var data = snapshot.child(key).val();
+      // console.log(data.email);
+
+      if(data.email == firebase.auth().currentUser.email){
+        console.log(data.email);
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+  // console.log(snapshot.val().firstname);
+    
+     var key2 = Object.keys(snapshot.val())[0];
+     this.users = snapshot.val()[key2];
+  console.log(this.users.email);
+
+     
+taskRef.orderByChild("keyUser").equalTo(key2).on("value", snapshot => {
+        this.task = snapshot.val();
+          console.log(this.task);  
+        
+   }); 
+
+});    
+      }     
+}  
+    });
+    
+
   }
+
+
 };
 </script>

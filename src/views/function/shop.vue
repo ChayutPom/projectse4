@@ -3,10 +3,10 @@
     <v-container fluid>
       <v-row>
         <v-col class="d-flex" style="margin-top: -12px;" >
-          <v-select :items="items1" label="ประเภทสินค้า" dense solo></v-select>
+          <v-select label="ประเภทสินค้า" dense solo></v-select>
         </v-col>
         <v-col class="d-flex"  style="margin-top: -12px;">
-          <v-select :items="items2" label="ราคา" dense solo></v-select>
+          <v-select label="ราคา" dense solo></v-select>
         </v-col>
 
         <v-btn icon >
@@ -19,21 +19,19 @@
           <v-card
             max-width="49%"
             class="mx-auto"
-            v-for="card in cards"
-            :key="card.title"
-            :cols="card.flex"
+            :key="key" v-for="(shop, key) in shops"
             tile
             outlined
-            href="detailshop.vue"
+            :href="'detailshop/'  + key"
           >
             <v-row>
               <v-col>
-                <v-img :src="card.src" height="150px" max-width="auto"></v-img>
+                <!-- <v-img :src="card.src" height="150px" max-width="auto"></v-img> -->
               </v-col>
 
-              <v-card-title v-text="card.title"></v-card-title>
-              <v-card-text>“ความละเอียดอยู่ที่ 24 ล้านพิกเซล จำนวนพิกเซลเท่านี้ก็ถือว่ามาตรฐานครับ เหมาะกับการใช้งานทั่วๆไป</v-card-text>
-              <v-card-title > 14,500</v-card-title>
+              <v-card-title>{{shop.name}}</v-card-title>
+              <v-card-text>{{shop.detailProduct}}</v-card-text>
+              <v-card-title > {{shop.price}}</v-card-title>
 
               
             </v-row>
@@ -45,35 +43,42 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    items1: ["กล้อง", "เลนส์"],
-    items2: ["0-5,000", "5,001-10,000"],
-    cards: [
-      {
-        title: "Canon Eos M50",
-        src:
-          "https://www.กล้องมือสอง.net/images/full/camera120200201082737.jpg",
-        flex: 6
-      },
-      {
-        title: "Canon eos 200d",
-        src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
-        flex: 6
-      },
-      {
-        title: "Canon eos 80d",
-        src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
-        flex: 6
-      },
-      {
-        title: "Canon eos 5d mark II",
-        src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
-        flex: 6
-      },
-    ],
 
-    //
-  })
+import firebase from "../forms/firebaseConfig";
+
+var database = firebase.database();
+var shopRef = database.ref("/shop");
+
+export default {
+ 
+
+  data: () => {
+    return {
+      photographers: {},
+      models: {},
+      reviews: {},
+      users:{},
+      name: "",
+      realname: "",
+      email: "",
+      phone: "",
+      introduce: "",
+      address: "",
+      img: "",
+      uid_user: "",
+      uid: "",
+      
+
+    
+    };
+  },
+
+  mounted() {
+    shopRef.on("value", snapshot => {
+      this.shops = snapshot.val();
+      console.log(this.shops);
+      
+    });
+  }
 };
 </script>

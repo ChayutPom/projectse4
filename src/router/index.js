@@ -6,6 +6,7 @@ import Home from '../views/Home.vue';
 import Message from '../views/Message';
 import Profile from '../views/Profile';
 import Schedule from '../views/Schedule';
+import Schedule2 from '../views/Schedule2';
 import app2 from '../views/app2.vue';
 import photo from '../views/function/photo.vue';
 import model from '../views/function/model.vue';
@@ -16,6 +17,7 @@ import photographer from '../views/function/photographer.vue';
 import profilephoto from '../views/photo/profilephoto.vue';
 import achievement from '../views/photo/achievement.vue';
 import profilemodel from '../views/model/profilemodel.vue';
+import formmodel from '../views/model/formmodel.vue';
 
 import photo1 from '../views/forms/photo1.vue';
 import photo2 from '../views/forms/photo2.vue';
@@ -29,6 +31,8 @@ import tab1 from '../views/tabphotographer/tab1.vue';
 import tab2 from '../views/tabphotographer/tab2.vue';
 import tab3 from '../views/tabphotographer/tab3.vue';
 import tab4 from '../views/tabphotographer/tab4.vue';
+import tabmodel1 from '../views/model/tabmodel1.vue';
+import tabmodel2 from '../views/model/tabmodel2.vue';
 
 import type1 from '../views/formtype/type1.vue';
 import type2 from '../views/formtype/type2.vue';
@@ -73,6 +77,12 @@ Vue.use(VueRouter)
       path: '/profile',
       name: 'Profile',
       component: Profile,
+      meta: { hideBack: true }
+    },
+    {
+      path: '/Schedule2',
+      name: 'Schedule2',
+      component: Schedule2,
       meta: { hideBack: true }
     },
     {
@@ -138,7 +148,7 @@ Vue.use(VueRouter)
       meta: { hideNavigation: true }
     },
     {
-      path: '/profilemodel.vue',
+      path: '/profilemodel/:key',
       name: 'profilemodel',
       component: profilemodel,
       meta: { hideNavigation: true }
@@ -183,6 +193,12 @@ Vue.use(VueRouter)
       path: '/profilephoto/:key/photo7.vue',
       name: 'photo7',
       component: photo7,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/profilemodel/:key/formmodel',
+      name: 'formmodel',
+      component: formmodel,
       meta: { hideNavigation: true }
     },
     {
@@ -251,7 +267,18 @@ Vue.use(VueRouter)
       component: tab4,
       meta: { hideNavigation: true }
     },
-
+    {
+      path: '/tabmodel1',
+      name: 'tabmodel1',
+      component: tabmodel1,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/tabmodel2',
+      name: 'tabmodel2',
+      component: tabmodel2,
+      meta: { hideNavigation: true }
+    },
     {
       path: '/addphotograf.vue',
       name: 'addphotograf',
@@ -301,13 +328,13 @@ Vue.use(VueRouter)
       meta: { hideNavigation: true }
     },
     {
-      path: '/detailreview.vue',
+      path: '/detailreview/:key',
       name: 'detailreview',
       component: detailreview,
       meta: { hideNavigation: true }
     },
     {
-      path: '/detailshop.vue',
+      path: '/detailshop/:key',
       name: 'detailshop',
       component: detailshop,
       meta: { hideNavigation: true }
@@ -327,6 +354,8 @@ Vue.use(VueRouter)
       meta: { hideNavigation: true,
         hideBack: true },
     },
+
+
 ]
 
 const router = new VueRouter({

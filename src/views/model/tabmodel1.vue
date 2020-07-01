@@ -1,13 +1,13 @@
 <template >
 <div>
-<photographer/>
+<tabmodel/>
     <v-card
       class="mx-auto"
       max-width="auto"
       outlined
      :key="keystatus" v-for="(tasks, keystatus) in task"
     >
-    <div      v-if="tasks.statusTask == 'เสร็จสิ้น'">
+    <div      v-if="tasks.statusTask == 'รอการตอบรับ'">
       <v-list-item three-line>
         <v-list-item-content>
           <div class=" mb-4">ชื่อ{{keystatus}}</div>
@@ -21,14 +21,18 @@
           color="grey"
         ></v-list-item-avatar>
       </v-list-item>
-
+  
+      <v-card-actions>
+        <v-btn text @click="cancelTask(keystatus)">ยกเลิก</v-btn>
+        <v-btn text @click="confirmTask(keystatus)">รับงาน</v-btn>
+      </v-card-actions>
     </div>
     </v-card>
     </div>
 </template>
 
 <script>
-import photographer from '../function/photographer.vue';
+import tabmodel from './tabmodel.vue';
 import firebase from "../forms/firebaseConfig";
 var database = firebase.database();
 var userRef = database.ref("/userdata");
@@ -36,7 +40,7 @@ var taskRef = database.ref("/taskphoto");
 var photograRef = database.ref("/photographer");
   export default {
   components: {
-    photographer,
+    tabmodel,
    
   },
 

@@ -56,7 +56,7 @@
           </v-col>
 
           <v-col cols="4" v-if="users.status_model == true">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="Modeling.vue">
+            <v-btn class="ma-6" outlined medium fab color="indigo" href="/tabmodel1">
               <v-icon>fa-image</v-icon>
             </v-btn>
             <p class="text-center">Modeling</p>
