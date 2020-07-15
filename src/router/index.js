@@ -8,6 +8,7 @@ import Profile from '../views/Profile';
 import Schedule from '../views/Schedule';
 import Schedule2 from '../views/Schedule2';
 import app2 from '../views/app2.vue';
+import test from '../views/test';
 import photo from '../views/function/photo.vue';
 import model from '../views/function/model.vue';
 import review from '../views/function/review.vue';
@@ -351,6 +352,14 @@ Vue.use(VueRouter)
       path: '/',
       name: 'login',
       component: login,
+      meta: { hideNavigation: true,
+        hideBack: true },
+    },
+
+    {
+      path: '/test',
+      name: 'test',
+      component: test,
       meta: { hideNavigation: true,
         hideBack: true },
     },
