@@ -8,8 +8,11 @@
       <v-list-item three-line>
         <v-list-item-content>
           <div class="font-weight-bold mb-2">{{tasks.taskType}}</div>
-          <v-list-item-title class="mb-1">ช่างภาพที่คุณเลือก : {{tasks.keyPhoto}}</v-list-item-title>
+          <div v-if="tasks.taskType != 'model'"><v-list-item-title class="mb-1" >ช่างภาพที่คุณเลือก : {{tasks.keyPhoto}}</v-list-item-title></div>
+          <div v-if="tasks.taskType == 'model'"><v-list-item-title class="mb-1" >Modelที่เลือก : {{tasks.keyModel}}</v-list-item-title></div>
+<!-- :href="'/schedule/PrivateChat/' + tasks.keyUser" -->
           <v-list-item-subtitle>สถานะงาน : {{tasks.statusTask}}</v-list-item-subtitle>
+          <v-btn     @click="chat(tasks.keyPhoto,tasks.keyModel)"    >{{tasks.keyUser}}</v-btn>
         </v-list-item-content>
         <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
       </v-list-item>
@@ -73,6 +76,10 @@ import firebase from "./forms/firebaseConfig";
 var database = firebase.database();
 var userRef = database.ref("/userdata");
 var taskRef = database.ref("/taskphoto");
+var modelRef = database.ref("/model");
+var photographerRef = database.ref("/photographer");
+
+
 
 export default {
     components: {
@@ -87,8 +94,36 @@ export default {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
   },
+methods: {
+chat(keyPhoto,keyModel){
+  console.log(keyPhoto);
+  console.log(keyModel);
+  if(keyPhoto==null){
+    console.log('a');
+    modelRef.orderByKey().equalTo(keyModel).on("value", snapshot => {
+      var keyM =Object.keys(snapshot.val())
+      console.log(snapshot.val()[keyM].keyUser);
 
+          this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyM].keyUser)
+
+         }); 
+
+  }else{
+    console.log('b');
+    photographerRef.orderByKey().equalTo(keyPhoto).on("value", snapshot => {
+           var keyP =Object.keys(snapshot.val())
+      console.log(snapshot.val()[keyP].keyUser);
+    this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyP].keyUser)
+
+         }); 
+  }
+
+}
+},
   mounted() {
+    // userRef.on("value", snapshot => {
+
+    //     });  
     userRef.on("value", snapshot => {
 
 var i=0
@@ -112,7 +147,7 @@ var data = snapshot.child(key).val();
 taskRef.orderByChild("keyUser").equalTo(key2).on("value", snapshot => {
         this.task = snapshot.val();
           console.log(this.task);  
-        
+
    }); 
 
 });    

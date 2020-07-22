@@ -9,6 +9,7 @@ import Schedule from '../views/Schedule';
 import Schedule2 from '../views/Schedule2';
 import app2 from '../views/app2.vue';
 import test from '../views/test';
+import PrivateChat from '../views/PrivateChat.vue';
 import photo from '../views/function/photo.vue';
 import model from '../views/function/model.vue';
 import review from '../views/function/review.vue';
@@ -364,6 +365,13 @@ Vue.use(VueRouter)
         hideBack: true },
     },
 
+    {
+      path: '/schedule/PrivateChat/:key',
+      name: 'PrivateChat',
+      component: PrivateChat,
+      meta: { hideNavigation: true,
+        hideBack: true },
+    },
 
 ]
 
