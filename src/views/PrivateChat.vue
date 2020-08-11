@@ -12,11 +12,12 @@
         <v-list ref="chat" height= "400">
           <template v-for="(chatM, key) in chat">
             <v-subheader class="d-flex flex-row-reverse"   :key="key"><div v-if="chatM.id1 == kkk">{{ chatM.Message }}</div ></v-subheader>
+             <v-subheader class="d-flex flex-row"   :key="key"><div v-if="chatM.id1 == $route.params.key">{{ chatM.Message }}</div ></v-subheader>
           </template>
           
-          <template v-for="(chatM, key) in chat">
+          <!-- <template v-for="(chatM, key) in chat">
             <v-subheader class="d-flex flex-row"   :key="key"><div v-if="chatM.id1 == $route.params.key">{{ chatM.Message }}</div ></v-subheader>
-          </template>
+          </template> -->
         </v-list>
             </v-card-text>
             <v-card-actions>
