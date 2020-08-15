@@ -6,7 +6,10 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import * as firebase from 'firebase'
 
+import Chat from 'vue-beautiful-chat'
 
+
+Vue.use(Chat)
 
 
 

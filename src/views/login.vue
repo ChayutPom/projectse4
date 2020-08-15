@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content>
+
       <v-container fluid pa-0>
         <form @submit.prevent="onSignin">
           <v-layout row wrap>
@@ -64,18 +64,12 @@
           </v-layout>
         </form>
       </v-container>
-    </v-content>
+
   </v-app>
 </template>
 
 
-
-
-
-
 <script>
-
-
 
 export default {
   data() {

@@ -18,46 +18,125 @@
       </ul> -->
       
 
-      <v-container fluid>
+      <v-container fluid >
         <v-row>
           <v-col cols="4">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="photo.vue">
-              <v-icon>mdi-camera</v-icon>
+            <v-btn class="ma-6"   fab color="#90CAF9" href="photo.vue">
+<v-img
+                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/32officeicons-6_89731.png?alt=media&token=62dff3cf-1100-4b84-89bd-bdb28ef4cac3"        
+                    aspect-ratio="1"
+                  >
+                    <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
             </v-btn>
             <p class="text-center">Photo</p>
           </v-col>
 
           <v-col cols="4">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="model.vue">
-              <v-icon>fa-female</v-icon>
+            <v-btn class="ma-6"  medium fab color="#B39DDB" href="model.vue">
+              <v-img
+                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Favatar_people_person_profile_user_woman_icon_123358.png?alt=media&token=32945597-98a6-4428-8568-37a191cf5427"        
+                    aspect-ratio="1"
+                  >
+                    <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
             </v-btn>
             <p class="text-center">model</p>
           </v-col>
 
           <v-col cols="4">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="review.vue">
-              <v-icon>fa-star</v-icon>
+            <v-btn class="ma-6"  medium fab color="#BBDEFB" href="review.vue">
+               <v-img
+                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2F1-61_icon-icons.com_68882.png?alt=media&token=ffd1e780-6430-4e50-aec9-a86392be8fc7"        
+                    aspect-ratio="1"
+                  >
+                    <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
             </v-btn>
             <p class="text-center">review</p>
           </v-col>
 
           <v-col cols="4">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="shop.vue">
-              <v-icon>fa-store</v-icon>
+            <v-btn class="ma-6"  medium fab color="indigo" href="shop.vue">
+              <v-img
+                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Fshop-icon_34368.png?alt=media&token=cc72c297-6897-422f-a546-11d854d09714"        
+                    aspect-ratio="1"
+                  >
+                    <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
             </v-btn>
             <p class="text-center">shop</p>
           </v-col>
 
           <v-col cols="4" v-if="users.status_photogra == true">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="tab1.vue">
-              <v-icon>fa-images</v-icon>
+            <v-btn class="ma-6"  medium fab color="#80CBC4
+" href="tab1.vue">
+<v-img
+                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Fphotographermale_101118.png?alt=media&token=5f5279f9-feb3-46ad-89a0-03047d2c2f23"        
+                    aspect-ratio="1"
+                  >
+                    <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
             </v-btn>
             <p class="text-center">photographer</p>
           </v-col>
 
           <v-col cols="4" v-if="users.status_model == true">
-            <v-btn class="ma-6" outlined medium fab color="indigo" href="/tabmodel1">
-              <v-icon>fa-image</v-icon>
+            <v-btn class="ma-6"  medium fab color="#FFAB91" href="/tabmodel1">
+            <v-img
+                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Fperson_target_user_icon_127193.png?alt=media&token=f7e308b6-45fd-4476-82b0-e08829ba23ab"        
+                    aspect-ratio="1"
+                  >
+                    <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
             </v-btn>
             <p class="text-center">Modeling</p>
           </v-col>
@@ -113,7 +192,8 @@
         <v-slide-group>
           <v-slide-item :key="key" v-for="(review, key) in reviews">
             <v-card class="mx-1 my-auto" max-width="200">
-              <v-img  height="155" max-width="auto" :src="review.img"></v-img>
+              <v-img  height="155" max-width="auto" :src="review.img"
+              ></v-img>
 
               <v-card>
                  {{review.titel}}
@@ -162,12 +242,7 @@ export default {
       
 
 
-      lists: [
-        { iconmenu: "mdi-home", menu: "Photo" },
-        { iconmenu: "mdi-clipboard-text", menu: "Model" },
-        { iconmenu: "mdi-message-text-outline", menu: "Review" },
-        { iconmenu: "mdi-account-box", menu: "Shop" }
-      ],
+      
       colors: [
         "indigo",
         "warning",
