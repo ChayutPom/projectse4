@@ -57,6 +57,8 @@ import Point from '../views/tabprofile/Point.vue';
 import detailreview from '../views/review/detailreview.vue';
 import detailshop from '../views/shop/detailshop.vue';
 
+import selectPhoto from '../views/schedule/selectPhoto.vue';
+
 import regis from '../views/regis.vue';
 import login from '../views/login.vue';
 Vue.use(VueRouter)
@@ -361,6 +363,14 @@ Vue.use(VueRouter)
       path: '/test',
       name: 'test',
       component: test,
+      meta: { hideNavigation: true,
+        hideBack: true },
+    },
+
+    {
+      path: '/selectPhoto',
+      name: 'selectPhoto',
+      component: selectPhoto,
       meta: { hideNavigation: true,
         hideBack: true },
     },

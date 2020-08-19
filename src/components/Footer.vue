@@ -20,7 +20,6 @@
           {{list.text}}
    <v-img
                    max-width="40px" max-height="40px" :src="list.icon" 
-                    aspect-ratio="1"
                     :lazy-src="list.icon"
                   >
                     <template v-slot:placeholder>

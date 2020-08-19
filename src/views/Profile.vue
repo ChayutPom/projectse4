@@ -34,7 +34,17 @@
     <v-list-item-group color="primary" v-for="(item, i) in items" :key="i">
       <a  :href="item.route">  <v-list-item  >
         <v-list-item-icon>
-<v-img   max-width="40px" max-height="40px" :src="item.icon"></v-img>
+<v-img   max-width="40px" max-height="40px" :src="item.icon">
+  <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate ></v-progress-circular>
+                      </v-row>
+                    </template>
+</v-img>
           <!-- <v-icon v-text="item.icon"></v-icon> -->
         </v-list-item-icon>
         <v-list-item-content>

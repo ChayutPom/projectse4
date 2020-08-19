@@ -19,7 +19,7 @@
 
        <v-stepper  vertical>
       <v-stepper-step step="1" complete>
-        Name of step 1
+        รอช่างภาพตกลง
       </v-stepper-step>
   
       <!-- <v-stepper-content step="1">
@@ -28,7 +28,7 @@
         <v-btn text>Cancel</v-btn>
       </v-stepper-content> -->
   
-      <v-stepper-step step="2" complete>Name of step 2</v-stepper-step>
+      <v-stepper-step step="2" complete>ชำระเงิน</v-stepper-step>
   
       <v-stepper-content step="2">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
@@ -43,7 +43,16 @@
   
      
   
-      <v-stepper-step step="3">View setup instructions</v-stepper-step>
+      <v-stepper-step step="3">ดำเนินการ</v-stepper-step>
+  
+      <v-stepper-content step="4">
+        <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
+        <v-btn color="primary" @click="e13 = 1">Continue</v-btn>
+        <v-btn text>Cancel</v-btn>
+      </v-stepper-content>
+
+
+      <v-stepper-step step="4">เสร็จสิ้น</v-stepper-step>
   
       <v-stepper-content step="4">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
@@ -78,6 +87,7 @@ var userRef = database.ref("/userdata");
 var taskRef = database.ref("/taskphoto");
 var modelRef = database.ref("/model");
 var photographerRef = database.ref("/photographer");
+var chatRoomRef = database.ref("/chatRoom");
 
 
 
@@ -103,8 +113,101 @@ chat(keyPhoto,keyModel){
     modelRef.orderByKey().equalTo(keyModel).on("value", snapshot => {
       var keyM =Object.keys(snapshot.val())
       console.log(snapshot.val()[keyM].keyUser);
+      var key123 = snapshot.val()[keyM].keyUser;
 
           this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyM].keyUser)
+        userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+var data = snapshot.child(key).val();
+      if(data.email == firebase.auth().currentUser.email){
+        console.log(data.email);
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+     var key2 = Object.keys(snapshot.val())[0];
+
+    chatRoomRef.on("value", snapshot => {
+var i=0
+var id;
+console.log(snapshot.val());
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+var data = snapshot.child(key).val();
+      console.log(data.id1);
+      console.log(key2);
+      if(data.id1 == key2){
+ id = 1    
+      }     else { 
+ id =2    
+
+}
+}  
+
+if(id == 1 ){
+console.log('5555555');
+}else {
+ userRef.on("value", snapshot => {
+var i=0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+var data = snapshot.child(key).val();
+      if(data.email == firebase.auth().currentUser.email){
+        console.log(data.email);
+        
+        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+     var key2 = Object.keys(snapshot.val())[0];
+
+    chatRoomRef.on("value", snapshot => {
+var i=0
+var id;
+console.log(snapshot.val());
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+var key = Object.keys(snapshot.val())[i];
+var data = snapshot.child(key).val();
+      console.log(data.id1);
+      console.log(key2);
+      if(data.id1 == key2){
+ id = 1    
+      }     else { 
+ id =2    
+
+}
+}  
+
+if(id == 1 ){
+console.log('5555555');
+}else {
+let data = {
+
+        id1:  key2,
+        id2: key123,
+      }
+      chatRoomRef.push(data)
+}
+
+
+    });
+
+});    
+      }     
+}  
+    });
+}
+
+
+    });
+
+});    
+      }     
+}  
+    });
+
+
+
+
+
+
 
          }); 
 
@@ -114,6 +217,14 @@ chat(keyPhoto,keyModel){
            var keyP =Object.keys(snapshot.val())
       console.log(snapshot.val()[keyP].keyUser);
     this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyP].keyUser)
+    /////////////สร้างห้องแชท
+     let data = {
+
+        id1:  snapshot.val()[keyP].keyUser,
+        id2: 'asdasd',
+      }
+      
+      chatRoomRef.push(data)
 
          }); 
   }
