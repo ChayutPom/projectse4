@@ -92,7 +92,53 @@
       ></v-img></v-col>
 </v-row>
   
-    </v-card></v-container>
+    </v-card>
+    <v-footer
+        fixed
+        class="font-weight-medium"
+      >
+        <v-col
+          class="text-center"
+          cols="12"
+        >
+ <v-dialog v-model="dialog" scrollable max-width="300px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            ค้นหาช่างภาพเพื่อเปรียบเทียบ
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>เลือกประเภทงาน</v-card-title>
+          <v-divider></v-divider>
+          <v-card-text style="height: 300px;">
+            <v-radio-group v-model="dialogm1" column>
+              <v-radio label="ภาพถ่ายบุคคล, The" value="photo1"></v-radio>
+              <v-radio label="รับปริญญา" value="photo2"></v-radio>
+              <v-radio label="พรีเวดดิ้ง" value="photo3"></v-radio>
+              <v-radio label="งานแต่งงาน" value="photo4"></v-radio>
+              <v-radio label="งานอีเวนต์" value="photo5"></v-radio>
+              <v-radio label="สินค้า/อาหาร" value="photo6"></v-radio>
+              <v-radio label="สถาปัตตยกรรม" value="photo7"></v-radio>
+            </v-radio-group>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn color="blue darken-1" text @click="dialog = false">ยกเลิก</v-btn>
+            <v-btn color="blue darken-1" text  @click="searchJob(dialogm1)">ตกลง</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>        </v-col>
+      </v-footer>
+    </v-container>
+
+
+  
+  
  </v-card>
 
 
@@ -122,11 +168,35 @@ export default {
       img: "",
       uid_user: "",
       uid: "",
-      
+       dialogm1: '',
+      dialog: false,
 
     
     };
   },
+methods: {
+
+
+searchJob(type){
+
+console.log(type);
+if(type == "photo1"){
+this.$router.push('/profilephoto/all/photo1.vue')
+}else if(type == "phot2"){
+this.$router.push('/profilephoto/all/photo2.vue')
+}else if(type == "phot3"){
+this.$router.push('/profilephoto/all/photo3.vue')
+}else if(type == "phot4"){
+this.$router.push('/profilephoto/all/photo4.vue')
+}else if(type == "phot5"){
+this.$router.push('/profilephoto/all/photo5.vue')
+}else if(type == "phot6"){
+this.$router.push('/profilephoto/all/photo6.vue')
+}else if(type == "phot7"){
+this.$router.push('/profilephoto/all/photo7.vue')
+}
+},
+},
 
   mounted() {
     photographerRef.on("value", snapshot => {

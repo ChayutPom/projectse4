@@ -28,6 +28,9 @@
       </v-card-actions>
     </div>
     </v-card>
+
+         <v-btn small v-on:click="selectJob()">Normal</v-btn>
+
     </div>
 </template>
 
@@ -125,6 +128,10 @@ taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
 }
 
 })
+},
+
+selectJob(){
+
 }
    },
 

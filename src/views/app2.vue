@@ -1,7 +1,8 @@
 <template>  
 <div>   
     <v-card      height="650"  >
- 
+     <v-btn small v-on:click="say()">Normal</v-btn>
+
 <longdo-map 
    @load="test" 
    :zoom="10" 
@@ -17,7 +18,6 @@
 
 
     </v-card >
-    <v-btn small v-on:click="say()">Normal</v-btn>
 
 </div>
 </template>

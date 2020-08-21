@@ -5,18 +5,37 @@
           <v-card
       max-width="344"
       class="mx-auto"
-      :key="key" v-for="(item, key) in chatRoom"
+      :key="key" v-for="(item, key) in chatRoom "
     >
       <v-list-item>
         <v-list-item-avatar color="grey"></v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="headline">{{item.id1}}</v-list-item-title>
+          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id2)" >{{item.id2}}</v-btn>
+</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
- 
-  
       <v-card-text>
-        Visit ten places on our planet that are undergoing the biggest changes today.
+       1
+      </v-card-text>
+  
+     
+    </v-card>
+
+
+            <v-card
+      max-width="344"
+      class="mx-auto"
+      :key="key" v-for="(item, key) in chatRoom2 "
+    >
+      <v-list-item>
+        <v-list-item-avatar color="grey"></v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id1)" >{{item.id1}}</v-btn>
+</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-card-text>
+        2
       </v-card-text>
   
      
@@ -40,8 +59,22 @@ var chatRoomRef = database.ref("/chatRoom");
    data () {
      return {
    chatRoom: {},
+   chatRoom2: {},
      }
   },
+
+
+methods: {
+
+
+chat(id1,id2){
+console.log(id1+id2);
+
+this.$router.push('/schedule/PrivateChat/' +id2)
+
+},
+},
+
 
  mounted() {
  
@@ -68,6 +101,11 @@ console.log(key2);
 chatRoomRef.orderByChild("id1").equalTo(key2).on("value", snapshot => {
         this.chatRoom = snapshot.val();
           console.log(this.chatRoom);  
+
+   }); 
+  chatRoomRef.orderByChild("id2").equalTo(key2).on("value", snapshot => {
+        this.chatRoom2 = snapshot.val();
+          console.log(this.chatRoom2);  
 
    }); 
 

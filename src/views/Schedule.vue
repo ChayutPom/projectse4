@@ -105,9 +105,11 @@ export default {
     };
   },
 methods: {
+
 chat(keyPhoto,keyModel){
   console.log(keyPhoto);
   console.log(keyModel);
+  // =======================================================================
   if(keyPhoto==null){
     console.log('a');
     modelRef.orderByKey().equalTo(keyModel).on("value", snapshot => {
@@ -115,7 +117,7 @@ chat(keyPhoto,keyModel){
       console.log(snapshot.val()[keyM].keyUser);
       var key123 = snapshot.val()[keyM].keyUser;
 
-          this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyM].keyUser)
+          // this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyM].keyUser)
         userRef.on("value", snapshot => {
 var i=0
 for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
@@ -202,13 +204,6 @@ let data = {
       }     
 }  
     });
-
-
-
-
-
-
-
          }); 
 
   }else{
