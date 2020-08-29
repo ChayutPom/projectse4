@@ -23,7 +23,7 @@
           <v-col cols="4">
             <v-btn class="ma-6"   fab color="#90CAF9" href="photo.vue">
 <v-img
-                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/32officeicons-6_89731.png?alt=media&token=62dff3cf-1100-4b84-89bd-bdb28ef4cac3"        
+                    src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2F32officeicons-6_89731.png?alt=media&token=901526d1-2284-45b6-bb52-b3baf64ec249"        
                     aspect-ratio="1"
                   >
                     <template v-slot:placeholder>
@@ -212,14 +212,12 @@
 
 <script>
 import firebase from "./forms/firebaseConfig";
-
 var database = firebase.database();
 var photographerRef = database.ref("/photographer");
 var modelRef = database.ref("/model");
 var reviewRef = database.ref("/review");
-var userRef = database.ref("/userdata");
+// var userRef = database.ref("/userdata");
 // const db = firebase.firestore();
-
 
 
 export default {
@@ -307,6 +305,10 @@ export default {
     };
   },
   mounted() {
+
+
+console.log(this.$store.state.keyUser);
+console.log(this.$store.state.keyUserF);
     photographerRef.on("value", snapshot => {
       this.photographers = snapshot.val();
     });
@@ -317,29 +319,29 @@ export default {
       this.reviews = snapshot.val();
       
     });
-    userRef.on("value", snapshot => {
+//     userRef.on("value", snapshot => {
 
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
+// var i=0
+// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+// var key = Object.keys(snapshot.val())[i];
 
-var data = snapshot.child(key).val();
+// var data = snapshot.child(key).val();
 
-      if(data.email == firebase.auth().currentUser.email){
+//       if(data.email == firebase.auth().currentUser.email){
         
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
     
-     var key2 = Object.keys(snapshot.val())[0];
-  this.users = snapshot.val()[key2];
-  console.log(this.users);
+//      var key2 = Object.keys(snapshot.val())[0];
+//   this.users = snapshot.val()[key2];
+//   console.log(this.users);
   
-});
+// });
         
-      }
+//       }
       
-}
+// }
     
-    });
+//     });
 
   }
 };

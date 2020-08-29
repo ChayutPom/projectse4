@@ -7,7 +7,8 @@ import vuetify from './plugins/vuetify';
 import * as firebase from 'firebase'
 
 import Chat from 'vue-beautiful-chat'
-
+var database = firebase.database();
+var userRef = database.ref("/userdata");
 
 Vue.use(Chat)
 
@@ -27,6 +28,33 @@ new Vue({
         // store.dispatch('autoSignIn', firebaseUser)
       }
     })
+  },
+  mounted() {
+console.log('test123333');
+
+userRef.on("value", snapshot => {
+
+  var i=0
+  for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+  var key = Object.keys(snapshot.val())[i];
+  
+  var data = snapshot.child(key).val();
+  
+        if(data.email == firebase.auth().currentUser.email){
+          
+          userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+      
+       var key2 = Object.keys(snapshot.val())[0];
+    this.users = snapshot.val()[key2];
+
+  });
+          
+        }
+       
+  } 
+      
+      });    
   }
+  
 }).$mount('#app')
 

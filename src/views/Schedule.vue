@@ -88,9 +88,6 @@ var taskRef = database.ref("/taskphoto");
 var modelRef = database.ref("/model");
 var photographerRef = database.ref("/photographer");
 var chatRoomRef = database.ref("/chatRoom");
-
-
-
 export default {
     components: {
     sctab,
@@ -99,13 +96,11 @@ export default {
   data() {
     return {
       task:{},
-
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
   },
 methods: {
-
 chat(keyPhoto,keyModel){
   console.log(keyPhoto);
   console.log(keyModel);
@@ -116,7 +111,6 @@ chat(keyPhoto,keyModel){
       var keyM =Object.keys(snapshot.val())
       console.log(snapshot.val()[keyM].keyUser);
       var key123 = snapshot.val()[keyM].keyUser;
-
           // this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyM].keyUser)
         userRef.on("value", snapshot => {
 var i=0
@@ -128,7 +122,6 @@ var data = snapshot.child(key).val();
         
         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
      var key2 = Object.keys(snapshot.val())[0];
-
     chatRoomRef.on("value", snapshot => {
 var i=0
 var id;
@@ -142,13 +135,11 @@ var data = snapshot.child(key).val();
  id = 1    
       }     else { 
  id =2    
-
 }
 }  
-
 if(id == 1 ){
 console.log('5555555');
-}else {
+}else if(id == 2 ){
  userRef.on("value", snapshot => {
 var i=0
 for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
@@ -159,7 +150,6 @@ var data = snapshot.child(key).val();
         
         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
      var key2 = Object.keys(snapshot.val())[0];
-
     chatRoomRef.on("value", snapshot => {
 var i=0
 var id;
@@ -173,39 +163,29 @@ var data = snapshot.child(key).val();
  id = 1    
       }     else { 
  id =2    
-
 }
 }  
-
 if(id == 1 ){
 console.log('5555555');
 }else {
 let data = {
-
         id1:  key2,
         id2: key123,
       }
       chatRoomRef.push(data)
 }
-
-
     });
-
 });    
       }     
 }  
     });
 }
-
-
     });
-
 });    
       }     
 }  
     });
          }); 
-
   }else{
     console.log('b');
     photographerRef.orderByKey().equalTo(keyPhoto).on("value", snapshot => {
@@ -214,56 +194,25 @@ let data = {
     this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyP].keyUser)
     /////////////สร้างห้องแชท
      let data = {
-
         id1:  snapshot.val()[keyP].keyUser,
         id2: 'asdasd',
       }
       
       chatRoomRef.push(data)
-
          }); 
   }
-
 }
 },
   mounted() {
-    // userRef.on("value", snapshot => {
+console.log(this.$store.state.keyUser);
+console.log(this.$store.state.keyUserF);
 
-    //     });  
-    userRef.on("value", snapshot => {
-
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-
-var data = snapshot.child(key).val();
-      // console.log(data.email);
-
-      if(data.email == firebase.auth().currentUser.email){
-        console.log(data.email);
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-  // console.log(snapshot.val().firstname);
-    
-     var key2 = Object.keys(snapshot.val())[0];
-     this.users = snapshot.val()[key2];
-  console.log(this.users.email);
-
-     
-taskRef.orderByChild("keyUser").equalTo(key2).on("value", snapshot => {
+taskRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
         this.task = snapshot.val();
           console.log(this.task);  
-
    }); 
 
-});    
-      }     
-}  
-    });
     
-
   }
-
-
 };
 </script>

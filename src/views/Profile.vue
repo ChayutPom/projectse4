@@ -57,11 +57,11 @@
 </template> 
 
 <script>
-import firebase from "./forms/firebaseConfig";
+// import firebase from "./forms/firebaseConfig";
 
 // const db = firebase.firestore();
-var database = firebase.database();
-var userRef = database.ref("/userdata");
+// var database = firebase.database();
+// var userRef = database.ref("/userdata");
 export default {
   data: () => {
     return {
@@ -114,35 +114,8 @@ export default {
     },
   mounted() {
 
-
-    userRef.on("value", snapshot => {
-
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-
-var data = snapshot.child(key).val();
-      // console.log(data.email);
-
-      if(data.email == firebase.auth().currentUser.email){
-        console.log(data.email);
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-  // console.log(snapshot.val().firstname);
-    
-     var key2 = Object.keys(snapshot.val())[0];
-console.log(key2);
-  this.users = snapshot.val()[key2];
-  console.log(this.users.email);
-  
-});
-        
-      }
-      
-}
-      
-    
-    });
+console.log(this.$store.state.keyUser);
+console.log(this.$store.state.keyUserF);
     
   }
 };

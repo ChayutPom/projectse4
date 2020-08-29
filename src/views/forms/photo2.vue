@@ -47,7 +47,6 @@ import firebase from '../forms/firebaseConfig'
 
 var database = firebase.database()
 var taskPhotoRef = database.ref('/taskphoto')
-var userRef = database.ref("/userdata");
 
 export default {
   data: () => ({
@@ -62,19 +61,8 @@ export default {
  methods: {
     
     insertToTaskphoto (taskDetail,taskLocation,taskLocationName,taskNum,taskStart,taskEnd) {
-      userRef.on("value", snapshot => {
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
 
-var data = snapshot.child(key).val();
 
-      if(data.email == firebase.auth().currentUser.email){
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-    
-     var key2 = Object.keys(snapshot.val())[0];
-  this.users = snapshot.val()[key2];
   console.log(this.users);
        let data = {
         taskDetail: taskDetail,
@@ -84,7 +72,7 @@ var data = snapshot.child(key).val();
          taskStart: taskStart,
          taskEnd: taskEnd,
          taskType: 'รับปริญญา',
-                  keyUser: key2 ,
+                  keyUser: this.$store.state.keyUserF ,
          keyPhoto:  this.$route.params.key,
                   statusTask: 'รอการตอบรับ'
 
@@ -99,13 +87,7 @@ var data = snapshot.child(key).val();
           .catch((error) => {
             console.error("Error writing document: ", error);
              });
-});
-        
-      }
-      
-}
-    
-    });
+
       
  
     },

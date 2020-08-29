@@ -13,8 +13,9 @@
 
               <v-flex xs12 class="form-wrapper">
                 <v-text-field
-                  full-width
-                  single-line
+               filled
+              rounded
+              dense
                   label="FirstName"
                   background-color="#f4f8f7"
                   color="grey darken-2"
@@ -27,8 +28,9 @@
                 ></v-text-field>
 
                 <v-text-field
-                  full-width
-                  single-line
+                  filled
+              rounded
+              dense
                   label="LastName"
                   background-color="#f4f8f7"
                   color="grey darken-2"
@@ -41,8 +43,9 @@
                 ></v-text-field>
 
                 <v-text-field
-                  full-width
-                  single-line
+                   filled
+              rounded
+              dense
                   label="Phone"
                   background-color="#f4f8f7"
                   color="grey darken-2"
@@ -55,8 +58,9 @@
                 ></v-text-field>
 
                 <v-text-field
-                  full-width
-                  single-line
+                   filled
+              rounded
+              dense
                   label="Email"
                   background-color="#f4f8f7"
                   color="grey darken-2"
@@ -69,8 +73,9 @@
                 ></v-text-field>
 
                 <v-text-field
-                  full-width
-                  single-line
+                   filled
+              rounded
+              dense
                   label="Password"
                   background-color="#f4f8f7"
                   color="grey darken-2"
@@ -88,8 +93,9 @@
                   type="password"
                   v-model="passwordConfirm"
                   :rules="[comparePasswords]"
-                  full-width
-                  single-line
+                   filled
+              rounded
+              dense
                   background-color="#f4f8f7"
                   color="grey darken-2"
                   prepend-inner-icon="mdi-lock-outline"
@@ -97,8 +103,7 @@
               </v-flex>
 
               <br />
-
-              <v-btn primary  :disabled="loading" @click="addUser(firstname,lastname,phone,email,password)">Sign Up </v-btn>
+<v-btn rounded outlined color="primary" :disabled="loading" @click="addUser(firstname,lastname,phone,email,password)">Sign Up </v-btn>
             </v-layout>
           </v-layout>
         </form>

@@ -2,18 +2,18 @@
   <v-container fluid>
     <div v-if="users.status_model == false">
     <center>
-      <h2>โปรไฟล์ mODEL</h2>
+      <h2>โปรไฟล์ โมเดล</h2>
     </center>
     <br />
 
     <v-col cols="12" sm="6" md="3">
-      <v-text-field label="ชื่อ โปรไฟล์" v-model="name" ></v-text-field>
-      <v-text-field label="ชื่อจริง-นามสกุล" v-model="realname" ></v-text-field>
+      <v-text-field label="ชื่อ โปรไฟล์" filled rounded dense outlined v-model="name" ></v-text-field>
+      <v-text-field label="ชื่อจริง-นามสกุล" filled rounded dense outlined v-model="realname" ></v-text-field>
     </v-col>
 
     <v-col cols="12" sm="6" md="3">
-      <v-text-field label="อีเมล" v-model="email"></v-text-field>
-      <v-text-field label="เบอร์โทรศัพท์" v-model="phone"></v-text-field>
+      <v-text-field label="อีเมล" filled rounded dense outlined v-model="email"></v-text-field>
+      <v-text-field label="เบอร์โทรศัพท์" filled rounded dense outlined v-model="phone"></v-text-field>
     </v-col>
 
     <v-row>
@@ -38,19 +38,44 @@
     </v-row>
 
     <v-col cols="12" sm="6" md="3">
-      <v-textarea label="คำแนะนำตัว" v-model="introduce"></v-textarea>
+      <v-textarea label="คำแนะนำตัว" filled rounded dense outlined v-model="introduce"></v-textarea>
     </v-col>
     <v-col cols="12" sm="6" md="3">
-    <v-text-field label="นำ้หนัก" v-model="weight"></v-text-field>
-    <v-text-field label="ส่วนสูง" v-model="height" ></v-text-field>
+    <v-text-field label="นำ้หนัก" filled rounded dense outlined v-model="weight"></v-text-field>
+    <v-text-field label="ส่วนสูง" filled rounded dense outlined v-model="height" ></v-text-field>
     <v-select
             :items="dropdown_font"
-            label="เพศ " v-model="sex" 
+            label="เพศ " filled rounded dense outlined v-model="sex" 
           ></v-select>
            
 
-      <v-text-field label="ที่อยู่" ></v-text-field>
-         <button @click="insertToModel(name, realname,email,phone,introduce,weight,height,sex,product.images)">Add</button>
+      <v-text-field label="ที่อยู่" filled rounded dense outlined ></v-text-field>
+       <div class="text-center">
+      <v-bottom-sheet v-model="sheet" inset>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="orange"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            ยืนยันสมัคร
+          </v-btn>
+        </template>
+        <v-sheet class="text-center" height="200px">
+          <v-btn
+            class="mt-6"
+            text
+            color="error"
+            @click="sheet = !sheet;insertToModel(name, realname,email,phone,introduce,weight,height,sex,product.images)"
+
+          >close</v-btn>
+          <div class="my-3">ข้อมูลของคุณถูกส่งไปให้แอดมินพิจารณาเรียบร้อย รอระบบอนุมัติ</div>
+        </v-sheet>
+      </v-bottom-sheet>
+    </div>
+
+         <!-- <button @click="insertToModel(name, realname,email,phone,introduce,weight,height,sex,product.images)">Add</button> -->
     </v-col>
     </div>
 
@@ -212,19 +237,6 @@ users: {},
     insertToModel (name, realname,email,phone,introduce,weight,height,sex,images) {
 
 console.log(images);
- userRef.on("value", snapshot => {
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-
-var data = snapshot.child(key).val();
-
-      if(data.email == firebase.auth().currentUser.email){
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-    
-     var key2 = Object.keys(snapshot.val())[0];
-  this.users = snapshot.val()[key2];
   console.log(  this.users.status_model );
 
     let data = {
@@ -234,16 +246,19 @@ var data = snapshot.child(key).val();
         phone: phone,
         introduce: introduce,
         img: images,
-        keyUser:key2,
+        keyUser:this.$store.state.keyUserF,
         weight:weight,
         height:height,
         sex:sex
 
       }
-         userRef.child(key2).update({
-status_photogra: true,
+         userRef.child(this.$store.state.keyUserF).update({
+status_model: true,
   })
-      
+      this.$store.dispatch("editUser", {
+        status_model: true     
+      });
+
       modelRef.push(data)
       .then(() => {
             console.log("Document successfully written!");
@@ -254,16 +269,7 @@ status_photogra: true,
             console.error("Error writing document: ", error);
           });
 
-  
-});
-        
-      }
-      
-}
-      
-    
-    });
-     
+
     },
 deleteImage(img,index){
       let image = firebase.storage().refFromURL(img);
@@ -313,34 +319,36 @@ deleteImage(img,index){
   mounted () {
     modelRef.on('value', (snapshot) => {
       this.models = snapshot.val()
-    }),
-    userRef.on("value", snapshot => {
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
+    })
+    this.users =this.$store.state.keyUser
+    console.log(this.users);
+//     userRef.on("value", snapshot => {
+// var i=0
+// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+// var key = Object.keys(snapshot.val())[i];
 
-var data = snapshot.child(key).val();
-      // console.log(data.email);
+// var data = snapshot.child(key).val();
+//       // console.log(data.email);
 
-      if(data.email == firebase.auth().currentUser.email){
+//       if(data.email == firebase.auth().currentUser.email){
         
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-  // console.log(snapshot.val().firstname);
+//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+//   // console.log(snapshot.val().firstname);
     
-     var key2 = Object.keys(snapshot.val())[0];
-  this.users = snapshot.val()[key2];
+//      var key2 = Object.keys(snapshot.val())[0];
+//   this.users = snapshot.val()[key2];
 
-  // console.log(this.users);
+//   // console.log(this.users);
   
   
-});
+// });
         
-      }
+//       }
       
-}
+// }
       
     
-    });
+//     });
 
 
     

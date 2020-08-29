@@ -117,7 +117,7 @@
           <v-divider></v-divider>
           <v-card-text style="height: 300px;">
             <v-radio-group v-model="dialogm1" column>
-              <v-radio label="ภาพถ่ายบุคคล, The" value="photo1"></v-radio>
+              <v-radio label="ภาพถ่ายบุคคล" value="photo1"></v-radio>
               <v-radio label="รับปริญญา" value="photo2"></v-radio>
               <v-radio label="พรีเวดดิ้ง" value="photo3"></v-radio>
               <v-radio label="งานแต่งงาน" value="photo4"></v-radio>

@@ -34,7 +34,6 @@
 import photographer from '../function/photographer.vue';
 import firebase from "../forms/firebaseConfig";
 var database = firebase.database();
-var userRef = database.ref("/userdata");
 var taskRef = database.ref("/taskphoto");
 var photograRef = database.ref("/photographer");
   export default {
@@ -128,43 +127,21 @@ keystatus:''
 //    },
 
     mounted() {
-    userRef.on("value", snapshot => {
-
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-
-var data = snapshot.child(key).val();
-      // console.log(data.email);
-
-      if(data.email == firebase.auth().currentUser.email){
-        console.log(data.email);
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-  // console.log(snapshot.val().firstname);
     
-     var key2 = Object.keys(snapshot.val())[0];
-     this.users = snapshot.val()[key2];
-  console.log(this.users.email);
-    photograRef.orderByChild("keyUser").equalTo(key2).on("value", snapshot => {
-     var key3 =Object.keys(snapshot.val())[0]
-     console.log(key3);
+    photograRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
+     var keyPhoto =Object.keys(snapshot.val())[0]
+     console.log(keyPhoto);
      
-taskRef.orderByChild("keyPhoto").equalTo(key3).on("value", snapshot => {
+taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
     // var key4 = Object.keys(snapshot.val())[0];
         this.task = snapshot.val();
           console.log(this.task);  
         
    }); 
         });
-});
-        
-      }
-      
-}
-      
-    
-    });
+
+
+
     
 
   }

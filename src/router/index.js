@@ -18,6 +18,7 @@ import Modeling from '../views/function/Modeling.vue';
 import photographer from '../views/function/photographer.vue';
 import profilephoto from '../views/photo/profilephoto.vue';
 import achievement from '../views/photo/achievement.vue';
+import selectJob from '../views/photo/selectJob.vue';
 import profilemodel from '../views/model/profilemodel.vue';
 import formmodel from '../views/model/formmodel.vue';
 
@@ -155,6 +156,12 @@ Vue.use(VueRouter)
       path: '/profilemodel/:key',
       name: 'profilemodel',
       component: profilemodel,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/selectJob',
+      name: 'selectJob',
+      component: selectJob,
       meta: { hideNavigation: true }
     },
     {

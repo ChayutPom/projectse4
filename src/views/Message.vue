@@ -50,7 +50,7 @@
 <script>
 import firebase from "./forms/firebaseConfig";
 var database = firebase.database();
-var userRef = database.ref("/userdata");
+// var userRef = database.ref("/userdata");
 var chatRoomRef = database.ref("/chatRoom");
 
 
@@ -77,42 +77,23 @@ this.$router.push('/schedule/PrivateChat/' +id2)
 
 
  mounted() {
- 
-    userRef.on("value", snapshot => {
+console.log(this.$store.state.keyUser);
+console.log(this.$store.state.keyUserF);
 
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
 
-var data = snapshot.child(key).val();
-      // console.log(data.email);
-
-      if(data.email == firebase.auth().currentUser.email){
-        console.log(data.email);
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-  // console.log(snapshot.val().firstname);
-    
-     var key2 = Object.keys(snapshot.val())[0];
-     this.users = snapshot.val()[key2];
-  console.log(this.users.email);
-console.log(key2);
      
-chatRoomRef.orderByChild("id1").equalTo(key2).on("value", snapshot => {
+chatRoomRef.orderByChild("id1").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
         this.chatRoom = snapshot.val();
           console.log(this.chatRoom);  
 
    }); 
-  chatRoomRef.orderByChild("id2").equalTo(key2).on("value", snapshot => {
+  chatRoomRef.orderByChild("id2").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
         this.chatRoom2 = snapshot.val();
           console.log(this.chatRoom2);  
 
    }); 
 
-});    
-      }     
-}  
-    });
+
     
 
   }

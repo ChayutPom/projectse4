@@ -49,39 +49,27 @@ export default {
   }),
   methods: {
     submit() {
-          userRef.on("value", snapshot => {
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-var data = snapshot.child(key).val();
-      if(data.email == firebase.auth().currentUser.email){
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-    
-     var key2 = Object.keys(snapshot.val())[0];
-  this.users = snapshot.val()[key2];
-  console.log(key2);
+
   
 // ===============================================
   this.logs.push(this.msg);
       
 console.log(this.msg);
-console.log(key2);
+
  let data = {
         Message: this.msg,
-        id1:  key2,
+        id1:  'key2',
         id2: this.$route.params.key,
       }
       
       chatMRef.push(data)
 this.msg = "";
-});
+
         
-      }
+
       
-}
-    
-    });
+
+
       
     }
   },
