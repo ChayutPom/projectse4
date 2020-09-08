@@ -7,7 +7,7 @@
       outlined
      :key="keystatus" v-for="(tasks, keystatus) in task"
     >
-    <div      v-if="tasks.statusTask == 'ช่างภาพรับงาน'">
+    <div      v-if="tasks.statusTask == 'งานที่รอส่ง'">
       <v-list-item three-line>
         <v-list-item-content>
           <div class=" mb-4">ชื่อ{{keystatus}}</div>

@@ -145,31 +145,8 @@ updatePhone = snapshot.val()[key2].phone ;
  mounted() {
 
 userRef.on("value", snapshot => {
-
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-
-var data = snapshot.child(key).val();
-      // console.log(data.email);
-
-      if(data.email == firebase.auth().currentUser.email){
-        
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-  // console.log(snapshot.val().firstname);
-    
-     var key2 = Object.keys(snapshot.val())[0];
-  this.users = snapshot.val()[key2];
-
-  // console.log(this.users);
-  
-  
-});
-        
-      }
-      
-}
-      
+     this.users = this.$store.state.keyUser
+      console.log(snapshot.val());
     
     });
     

@@ -83,7 +83,8 @@ export default {
   
   mounted () {
     taskPhotoRef.on('value', (snapshot) => {
-      this.taskphoto = snapshot.val()
+      this.taskphoto = snapshot.val()     
+      this.users = this.$store.state.keyUser
     })
   },
   

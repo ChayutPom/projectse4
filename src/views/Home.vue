@@ -150,7 +150,7 @@
         <v-slide-group>
           <v-slide-item :key="key" v-for="(photographer, key) in photographers">
             <v-card class="mx-1 my-2" max-width="200">
-              <v-img height="155" max-width="100%" :src="photographer.img"></v-img>
+              <v-img height="155" max-width="100%" :src="photographer.img[0]"></v-img>
 
               <v-card>
                 {{photographer.name}}
@@ -171,7 +171,7 @@
         <v-slide-group>
           <v-slide-item :key="key" v-for="(model, key) in models">
             <v-card class="mx-1 my-auto" max-width="200">
-              <v-img height="155" max-width="100%" :src="model.img"></v-img>
+              <v-img height="155" max-width="100%" :src="model.img[0]"></v-img>
 
               <v-card>
                 {{model.name}}
@@ -192,7 +192,7 @@
         <v-slide-group>
           <v-slide-item :key="key" v-for="(review, key) in reviews">
             <v-card class="mx-1 my-auto" max-width="200">
-              <v-img  height="155" max-width="auto" :src="review.img"
+              <v-img  height="155" max-width="auto" :src="review.img[0]"
               ></v-img>
 
               <v-card>
@@ -311,12 +311,15 @@ console.log(this.$store.state.keyUser);
 console.log(this.$store.state.keyUserF);
     photographerRef.on("value", snapshot => {
       this.photographers = snapshot.val();
+      this.users = this.$store.state.keyUser
     });
     modelRef.on("value", snapshot => {
       this.models = snapshot.val();
+           this.users = this.$store.state.keyUser
     });
     reviewRef.on("value", snapshot => {
       this.reviews = snapshot.val();
+           this.users = this.$store.state.keyUser
       
     });
 //     userRef.on("value", snapshot => {

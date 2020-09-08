@@ -73,7 +73,7 @@ export default {
     modelRef.on("value", snapshot => {
       this.models = snapshot.val();
       console.log(this.models);
-      
+           this.users = this.$store.state.keyUser
     });
   }
 };

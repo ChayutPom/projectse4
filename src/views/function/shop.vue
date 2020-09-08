@@ -77,7 +77,7 @@ export default {
     shopRef.on("value", snapshot => {
       this.shops = snapshot.val();
       console.log(this.shops);
-      
+           this.users = this.$store.state.keyUser
     });
   }
 };

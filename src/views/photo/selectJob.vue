@@ -129,6 +129,7 @@ export default {
       taskphotoRef.orderByChild("keyPhoto").equalTo('all').on("value", snapshot => {
       this.taskphotos = snapshot.val();
         console.log(this.taskphotoRef);
+             this.users = this.$store.state.keyUser
     });
   }
 };

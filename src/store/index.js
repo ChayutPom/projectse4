@@ -98,7 +98,30 @@ userRef.on("value", snapshot => {
           commit('setLoading', false)
           commit('setError', null)    
           console.log(payload.email);
+          userRef.on("value", snapshot => {
+
+            var i=0
+            for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+            var key = Object.keys(snapshot.val())[i];
+            
+            var data = snapshot.child(key).val();
+            
+                  if(data.email == firebase.auth().currentUser.email){
                     
+                    userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+                
+                 var key2 = Object.keys(snapshot.val())[0];
+              this.users = snapshot.val()[key2];
+              console.log(this.users);
+              commit('setkeyUser', this.users)
+              commit('setkeyUserF', key2)
+            });
+                    
+                  }
+                 
+            } 
+                
+                }); 
           router.push('/home')
         })
         .catch(error => {
@@ -108,30 +131,7 @@ userRef.on("value", snapshot => {
 
         // =====================================================
 
-        userRef.on("value", snapshot => {
-
-          var i=0
-          for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-          var key = Object.keys(snapshot.val())[i];
-          
-          var data = snapshot.child(key).val();
-          
-                if(data.email == firebase.auth().currentUser.email){
-                  
-                  userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-              
-               var key2 = Object.keys(snapshot.val())[0];
-            this.users = snapshot.val()[key2];
-            console.log(this.users);
-            commit('setkeyUser', this.users)
-            commit('setkeyUserF', key2)
-          });
-                  
-                }
-               
-          } 
-              
-              });
+       
 
     },
  
@@ -139,6 +139,8 @@ userRef.on("value", snapshot => {
      userSignOut ({commit}) {
       firebase.auth().signOut()
       commit('setUser', null)
+      commit('setkeyUser', null)
+      commit('setkeyUserF', null)
       router.push('/')
     }
   },

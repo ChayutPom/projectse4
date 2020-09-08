@@ -4,7 +4,7 @@
       <v-toolbar
       >
         <v-text-field
-
+v-model="search"
           prepend-icon="fa-search"
           single-line
         ></v-text-field>
@@ -201,7 +201,8 @@ this.$router.push('/profilephoto/all/photo7.vue')
   mounted() {
     photographerRef.on("value", snapshot => {
       this.photographers = snapshot.val();
-      
+           this.users = this.$store.state.keyUser
+
     });
   }
 };

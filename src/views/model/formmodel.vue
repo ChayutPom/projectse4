@@ -110,6 +110,7 @@ var data = snapshot.child(key).val();
   mounted () {
     taskPhotoRef.on('value', (snapshot) => {
       this.taskphoto = snapshot.val()
+           this.users = this.$store.state.keyUser
     })
   },
   

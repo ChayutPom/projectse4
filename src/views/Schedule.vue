@@ -210,6 +210,7 @@ console.log(this.$store.state.keyUserF);
 taskRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
         this.task = snapshot.val();
           console.log(this.task);  
+          this.users =this.$store.state.keyUserF
    }); 
 
     

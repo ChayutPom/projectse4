@@ -5,18 +5,24 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 import * as firebase from 'firebase'
+import InstantSearch from 'vue-instantsearch';
 
 import Chat from 'vue-beautiful-chat'
 var database = firebase.database();
 var userRef = database.ref("/userdata");
+import 'vue-instant/dist/vue-instant.css'
+import VueInstant from 'vue-instant/dist/vue-instant.common'
+Vue.use(VueInstant)
 
 Vue.use(Chat)
+Vue.use(InstantSearch);
 
 
 
 Vue.config.productionTip = false
 
 new Vue({
+  
   router,
   store,
   vuetify,

@@ -25,7 +25,7 @@
         12312
         </v-col > 
 
-          <v-col col="3"><v-btn class="ma-3 sm-12 center" outlined color="indigo">เติมเครดิต</v-btn></v-col > 
+          <v-col col="3"><v-btn class="ma-3 sm-12 center" outlined color="indigo" @click="userSignOut()">ออกจากระบบ</v-btn></v-col > 
 
           <v-col col="3"><v-btn class="ma-3 sm-12 center" outlined color="indigo">ถอนเครดิต</v-btn> </v-col > 
       </v-row>
@@ -86,29 +86,9 @@ export default {
     
   },
   methods: {
-// readEmployees(){
-//   let employeesData = [];
-//       db.collection("userdata")
-//       .where('email','==',this.email)
-//         .get()
-//         .then((querySnapshot) => {
-//           querySnapshot.forEach((doc) => {
-//            employeesData.push({
-//               email: doc.data().email,
-//           firstname: doc.data().firstname
-//             });
-//             console.log(doc.id, " => ", doc.data());
-
-//               console.log(doc.data().firstname);
-//           });
-
-//           console.log(employeesData[0].email);
-//           return employeesData
-//         })
-//         .catch((error) => {
-//           console.log("Error getting documents: ", error);
-//         });
-// }
+userSignOut() {
+    this.$store.dispatch("userSignOut");
+  }
 
 
     },
@@ -116,7 +96,7 @@ export default {
 
 console.log(this.$store.state.keyUser);
 console.log(this.$store.state.keyUserF);
-    
+    this.users = this.$store.state.keyUser
   }
 };
 </script>

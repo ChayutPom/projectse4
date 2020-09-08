@@ -222,7 +222,7 @@ export default {
       console.log(this.photographers);
       this.phototype = snapshot.child(this.$route.params.key+"/typePhoto/type").val();
       this.photoprice = snapshot.child(this.$route.params.key+"/typePhoto/price").val();
-
+     this.users = this.$store.state.keyUser
       console.log(snapshot.child(this.$route.params.key+"/typePhoto/type").val());
       
     });

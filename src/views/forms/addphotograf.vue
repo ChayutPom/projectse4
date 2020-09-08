@@ -255,6 +255,7 @@ var userRef = database.ref("/userdata");
 
 export default {
   data: () => ({
+
     items: ["1", "2", "3", "4", "5"],
     items2: ["ชาย", "หญิง"],
  sheet: false,

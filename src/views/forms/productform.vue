@@ -61,7 +61,8 @@ export default {
   },
   mounted () {
     shopRef.on('value', (snapshot) => {
-      this.shops = snapshot.val()
+      this.shops = snapshot.val()     
+      this.users = this.$store.state.keyUser
     })
   }
 

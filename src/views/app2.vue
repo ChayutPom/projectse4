@@ -95,7 +95,6 @@ alert('เพิ่มที่อยู่เรียบร้อย' )
     mounted() {
     mapRef.on("value", snapshot => {
       this.map = snapshot.val();
-
       console.log(this.map);
       
     });

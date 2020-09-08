@@ -190,10 +190,6 @@
       ></v-img></v-col >
        
       </v-row>
-
-  
-
-     
     </v-container  >
         </div>
   </v-container>
@@ -208,6 +204,7 @@ var userRef = database.ref("/userdata");
 
 export default {
   data: () => ({
+    sheet: false,
     items: ["1", "2", "3", "4", "5"],
     dropdown_font:["ชาย", "หญิง"],
 products: [],
@@ -319,9 +316,10 @@ deleteImage(img,index){
   mounted () {
     modelRef.on('value', (snapshot) => {
       this.models = snapshot.val()
-    })
-    this.users =this.$store.state.keyUser
+        this.users =this.$store.state.keyUser
     console.log(this.users);
+    })
+  
 //     userRef.on("value", snapshot => {
 // var i=0
 // for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {

@@ -77,7 +77,7 @@ export default {
     reviewRef.on("value", snapshot => {
       this.reviews = snapshot.val();
       console.log(this.reviews);
-      
+           this.users = this.$store.state.keyUser
     });
   }
 };
