@@ -1,30 +1,57 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>Display map navigation controls</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
-<style>
-	body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
-</head>
-<body>
-<div id="map"></div>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoiY2hheXV0c2UiLCJhIjoiY2tjN2JpaXMzMHo5aDJ5bHE1czkwNzd4YyJ9.LBPCO_2E0MjepoBa81-2Ww';
-var map = new mapboxgl.Map({
-container: 'map', // container id
-style: 'mapbox://styles/mapbox/streets-v11',
-center: [-74.5, 40], // starting position
-zoom: 9 // starting zoom
-});
- 
-// Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl());
-</script>
- 
-</body>
+  <head>
+	  <meta charset="UTF-8">
+	  <title>Create Map Sample | Longdo Map</title>
+	  <style type="text/css">
+		html{
+		  height:90%; 
+		}
+		body{ 
+		  margin:0px;
+		  height:100%; 
+		}
+		#map {
+		  height: 100%;
+		}
+	  </style>
+
+	  <script type="text/javascript" src="https://api.longdo.com/map/?key=19d834440f9ee5958b68123c8a4c6d6b"></script>
+	  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	  <script>
+
+		function init() {
+		  map = new longdo.Map({
+			placeholder: document.getElementById('map')
+		  });
+		  rerverseGeocoding();
+		}
+
+		function rerverseGeocoding() { 
+		  $.ajax({ 
+				  url: "https://api.longdo.com/map/services/address?", 
+				  dataType: "json", 
+				  type: "GET", 
+				  contentType: "application/json", 
+				  data: {
+					  key: "19d834440f9ee5958b68123c8a4c6d6b",
+					  lon: 100.53726,
+					  lat: 13.72427
+			  },
+			  success: function (results)
+			  {
+				  alert('ghjkl')
+				  console.log(results);
+			  },
+			  error: function (response)
+			  {
+				  console.log(response);
+			  }
+		  });
+		}
+	  </script>
+  </head>
+  <body onload="init();">
+	  <div id="map"></div>
+  </body>
 </html>

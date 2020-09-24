@@ -23,7 +23,7 @@
 
     <v-col cols="12" sm="6" md="3">
       สถานที่
-      <v-text-field solo v-model="taskLocation" ></v-text-field>
+      <v-text-field solo v-model="taskLocation" @click="location('task')"></v-text-field>
     </v-col>
 
 
@@ -57,7 +57,9 @@ export default {
    
   }),
  methods: {
-    
+    location(lo){
+        this.$router.push("/"+lo+"/location.vue");
+    },
     insertToTaskphoto (taskDetail,taskStart,taskEnd,taskLocation,taskNum) {
 
   console.log(this.users);

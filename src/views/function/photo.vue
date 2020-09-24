@@ -21,37 +21,37 @@ v-model="search"
 <v-container  fluid>
 
         <v-row>    
-      <v-col cols="3" sm ="4" ><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+      <v-col cols="3" sm ="4" ><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo1.vue">
         <v-icon >fas fa-street-view</v-icon>
         
       </v-btn><p class="text-center">ภาพถ่ายบุคคล</p></v-col>
 
-      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo2.vue">
         <v-icon >fa-user-graduate</v-icon>
         
       </v-btn><p class="text-center">รับปริญญา</p></v-col>
 
-      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo3.vue">
         <v-icon >fa-heart</v-icon>
         
       </v-btn><p class="text-center">พรีเวดดิ้ง</p></v-col>
 
-      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo4.vue">
         <v-icon > fa-venus-mars</v-icon>
         
       </v-btn><p class="text-center">งานแต่งงาน</p></v-col>
 
-      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo5.vue">
         <v-icon >fa-business-time</v-icon>
         
       </v-btn><p class="text-center">งานอีเวนต์</p></v-col>
 
-      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo6.vue">
         <v-icon >fa-hamburger</v-icon>
         
       </v-btn><p class="text-center">สินค้า/อาหาร</p></v-col>
 
-      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="">
+      <v-col  cols="3" sm ="4"><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo7.vue">
         <v-icon >fa-building</v-icon>
         
       </v-btn><p class="text-center">สถาปัตยกรรม</p></v-col>

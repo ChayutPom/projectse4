@@ -41,7 +41,7 @@
         <v-textarea label="คำแนะนำตัว" filled rounded dense v-model="introduce"></v-textarea>
       </v-col>
       <v-col cols="12" sm="6" md="3">
-        <v-text-field label="ที่อยู่" filled rounded dense v-model="address"></v-text-field>
+        <v-text-field label="ที่อยู่" filled rounded dense v-model="address" @click="location('photogra')"></v-text-field>
       </v-col>
 
       <v-col cols="12" sm="6" md="3">
@@ -293,6 +293,9 @@ export default {
     uploadValue: 0,
   }),
   methods: {
+    location(lo){
+        this.$router.push("/"+lo+"/location.vue");
+    },
     insertToPhotographer(
       name,
       realname,

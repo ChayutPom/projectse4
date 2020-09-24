@@ -7,7 +7,7 @@ import Message from '../views/Message';
 import Profile from '../views/Profile';
 import Schedule from '../views/Schedule';
 import Schedule2 from '../views/Schedule2';
-import app2 from '../views/app2.vue';
+import location from '../views/location.vue';
 import test from '../views/test';
 import PrivateChat from '../views/PrivateChat.vue';
 import photo from '../views/function/photo.vue';
@@ -34,6 +34,7 @@ import tab1 from '../views/tabphotographer/tab1.vue';
 import tab2 from '../views/tabphotographer/tab2.vue';
 import tab3 from '../views/tabphotographer/tab3.vue';
 import tab4 from '../views/tabphotographer/tab4.vue';
+import detailTask from '../views/tabphotographer/detailTask.vue';
 import tabmodel1 from '../views/model/tabmodel1.vue';
 import tabmodel2 from '../views/model/tabmodel2.vue';
 
@@ -97,9 +98,9 @@ Vue.use(VueRouter)
       meta: { hideBack: true }
     },
     {
-      path: '/app2.vue',
-      name: 'app2',
-      component: app2
+      path: '/:type/location.vue',
+      name: 'location',
+      component: location
     },
     {
       path: '/photo.vue',
@@ -276,6 +277,12 @@ Vue.use(VueRouter)
       path: '/tab4.vue',
       name: 'tab4',
       component: tab4,
+      meta: { hideNavigation: true }
+    },
+    {
+      path: '/detailTask.vue/:keytask',
+      name: 'detailTask',
+      component: detailTask,
       meta: { hideNavigation: true }
     },
     {

@@ -1,18 +1,18 @@
 <template >
 <div>
 <photographer/>
-    <v-card
+           <v-card
       class="mx-auto"
       max-width="auto"
       outlined
      :key="keystatus" v-for="(tasks, keystatus) in task"
+     :href="'/detailTask.vue/' + keystatus"
     >
     <div      v-if="tasks.statusTask == 'รอการตอบรับ'">
       <v-list-item three-line>
         <v-list-item-content>
-          <div class=" mb-4">ชื่อ{{keystatus}}</div>
-          <v-list-item-title class="headline mb-1">{{tasks.taskType}}</v-list-item-title>
-          <v-list-item-subtitle>{{tasks.taskDetail}}</v-list-item-subtitle>
+          <div class=" mb-4">{{user.firstname}} {{user.lastname}}</div>
+          <v-list-item-title class="headline mb-1"> ประเภทงาน{{tasks.taskType}}</v-list-item-title>
         </v-list-item-content>
   
         <v-list-item-avatar
@@ -29,6 +29,9 @@
     </div>
     </v-card>
 
+
+   
+
          <v-btn small v-on:click="selectJob()">Normal</v-btn>
 
     </div>
@@ -41,6 +44,8 @@ var database = firebase.database();
 var userRef = database.ref("/userdata");
 var taskRef = database.ref("/taskphoto");
 var photograRef = database.ref("/photographer");
+var taskPhotoRef = database.ref("/taskphoto");
+
   export default {
   components: {
     photographer,
@@ -50,7 +55,10 @@ var photograRef = database.ref("/photographer");
   data: () => {
     return {
 task:{},
-keystatus:''
+keystatus:'',
+ dialog: false,
+ keyUser: '',
+ user: ''
     
     };
   },
@@ -129,6 +137,9 @@ taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
 
 })
 },
+detailTask(){
+console.log('sd');
+},
 
 selectJob(){
 this.$router.push('/selectJob')
@@ -138,27 +149,36 @@ this.$router.push('/selectJob')
 
     mounted() {
 
-
-
-
-
     photograRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
      var keyPhoto =Object.keys(snapshot.val())[0]
      console.log(keyPhoto);
      
 taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
     // var key4 = Object.keys(snapshot.val())[0];
-        this.task = snapshot.val();
-          console.log(this.task);  
-        
-   }); 
-        });
+    this.task = snapshot.val()
+console.log(this.task);              
+              var i=0
+            for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+              var key = Object.keys(snapshot.val())[i];
+var keyU = snapshot.val()[key].keyUser
+                         taskPhotoRef.child(Object.keys(snapshot.val())[i]).update({
+notification: true,
+  })
 
-        
+           userRef.orderByKey().equalTo(snapshot.val()[key].keyUser).on("value", snapshot => {
+             this.user = snapshot.val()[keyU]
+             console.log(snapshot.val()[keyU].firstname);
+                          console.log(snapshot.val()[keyU].lastname);
+
+})
     
-      
+            }
+ 
+   }); 
 
-      
+
+
+        });
     
 
     

@@ -6,6 +6,7 @@ import createPersistedState from 'vuex-persistedstate'
 // import * as Cookies from 'js-cookie'
 var database = firebase.database();
 var userRef = database.ref("/userdata");
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -25,8 +26,19 @@ export default new Vuex.Store({
     error: null,
     loading: false,
     keyUser: '',
-    keyUserF: ','
+    keyUserF: '',
+    location: ''
   },
+
+
+
+
+
+
+
+
+
+
   mutations: {
     setUser (state, payload) {
       state.user = payload
@@ -43,7 +55,21 @@ export default new Vuex.Store({
     setkeyUserF (state, payload) {
       state.keyUserF = payload
     },
+    setLocation (state, payload) {
+      state.location = payload
+    },
   },
+
+
+
+
+
+
+
+
+
+
+
   actions: {
     userSignUp ({commit}, payload) {
       commit('setLoading', true)
@@ -134,7 +160,11 @@ userRef.on("value", snapshot => {
        
 
     },
- 
+    addLocation({commit}, payload) {
+console.log(payload);
+commit('setLocation',payload)
+router.push(window.history.go(-1))
+    },
    
      userSignOut ({commit}) {
       firebase.auth().signOut()
@@ -142,8 +172,20 @@ userRef.on("value", snapshot => {
       commit('setkeyUser', null)
       commit('setkeyUserF', null)
       router.push('/')
-    }
+    },
+
   },
+  
+
+
+
+
+
+
+
+
+
+
   getters: {
     appTitle (state) {
       return state.appName
@@ -162,6 +204,9 @@ userRef.on("value", snapshot => {
     },
     setkeyUserF (state) {
       return state.keyUserF
+    },
+    setLocation (state) {
+      return state.location
     },
     
   }

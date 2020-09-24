@@ -49,7 +49,7 @@
           ></v-select>
            
 
-      <v-text-field label="ที่อยู่" filled rounded dense outlined ></v-text-field>
+      <v-text-field label="ที่อยู่" filled rounded dense outlined @click="location('model')"></v-text-field>
        <div class="text-center">
       <v-bottom-sheet v-model="sheet" inset>
         <template v-slot:activator="{ on, attrs }">
@@ -230,7 +230,9 @@ users: {},
   }),
  methods: {
   
-    
+    location(lo){
+        this.$router.push("/"+lo+"/location.vue");
+    },
     insertToModel (name, realname,email,phone,introduce,weight,height,sex,images) {
 
 console.log(images);
@@ -320,33 +322,7 @@ deleteImage(img,index){
     console.log(this.users);
     })
   
-//     userRef.on("value", snapshot => {
-// var i=0
-// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-// var key = Object.keys(snapshot.val())[i];
 
-// var data = snapshot.child(key).val();
-//       // console.log(data.email);
-
-//       if(data.email == firebase.auth().currentUser.email){
-        
-//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-//   // console.log(snapshot.val().firstname);
-    
-//      var key2 = Object.keys(snapshot.val())[0];
-//   this.users = snapshot.val()[key2];
-
-//   // console.log(this.users);
-  
-  
-// });
-        
-//       }
-      
-// }
-      
-    
-//     });
 
 
     
