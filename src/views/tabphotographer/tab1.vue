@@ -32,7 +32,9 @@
 
    
 
-         <v-btn small v-on:click="selectJob()">Normal</v-btn>
+          <v-col cols="12" > <div class="text-center">
+      <v-btn rounded color="primary" dark>Rounded Button</v-btn>
+    </div></v-col>
 
     </div>
 </template>
@@ -169,14 +171,10 @@ notification: true,
              this.user = snapshot.val()[keyU]
              console.log(snapshot.val()[keyU].firstname);
                           console.log(snapshot.val()[keyU].lastname);
-
 })
     
             }
- 
    }); 
-
-
 
         });
     

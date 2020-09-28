@@ -84,7 +84,7 @@
           </v-col>
 
           <v-col cols="4" v-if="users.status_photogra == true" >
-            <v-badge :content="this.notification" :value="this.notification" color="red" overlap>
+            <v-badge :content="noti" :value="noti >0" color="red" overlap>
               <v-btn class="ma-6" medium fab color="#80CBC4" href="tab1.vue" >
                 <v-img
                   src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Fphotographermale_101118.png?alt=media&token=5f5279f9-feb3-46ad-89a0-03047d2c2f23"
@@ -162,7 +162,7 @@
         </v-slide-group>
       </v-sheet>
 
-      <v-container>
+      <!-- <v-container>
         <h2 BOLD>รีวิวแนะนำ</h2>
       </v-container>
       <v-sheet class="mx-1 my-2" max-width="auto">
@@ -181,7 +181,7 @@
             </v-card>
           </v-slide-item>
         </v-slide-group>
-      </v-sheet>
+      </v-sheet> -->
     </v-app>
   </div>
 </template>
@@ -294,6 +294,37 @@ export default {
 // //   })
 // }
   },
+   computed: {
+    noti: function () {
+         photographerRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", (snapshot) => {
+      this.photographer = Object.keys(snapshot.val())[0]
+console.log(this.photographer);
+
+taskPhotoRef.orderByChild("keyPhoto").equalTo(this.photographer).on("value", (snapshot) => {
+console.log(snapshot.val());
+  taskPhotoRef.orderByChild("notification").equalTo(false).on("value", (snapshot) => {
+    this.notification = snapshot.numChildren()
+    console.log(this.notification);
+     });
+   });
+    });
+
+return this.notification
+      // if (this.searchQuery) {
+        
+      //   return this.dataF.filter((item) => {
+      //     return this.searchQuery
+      //       .toLowerCase()
+      //       .split(" ")
+      //       .every((v) => item.email.toLowerCase().includes(v));
+      //   });
+      // } else {
+      //   // console.log(this.photographers);
+      //   return this.dataF;
+      // }
+    },
+
+  },
   mounted() {
     console.log(this.$store.state.keyUser);
     console.log(this.$store.state.keyUserF);
@@ -311,18 +342,7 @@ export default {
       this.users = this.$store.state.keyUser;
     });
 
-          photographerRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", (snapshot) => {
-      this.photographer = Object.keys(snapshot.val())[0]
-console.log(this.photographer);
-
-taskPhotoRef.orderByChild("keyPhoto").equalTo(this.photographer).on("value", (snapshot) => {
-console.log(snapshot.val());
-  taskPhotoRef.orderByChild("notification").equalTo(false).on("value", (snapshot) => {
-    this.notification = snapshot.numChildren()
-    console.log(snapshot.numChildren());
-     });
-   });
-    });
+       
   },
 };
 </script>

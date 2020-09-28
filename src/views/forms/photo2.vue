@@ -12,7 +12,7 @@
 
     <v-col cols="12" sm="6" md="3">
       สถานที่
-      <v-text-field solo v-model="taskLocation" @click="location('task')"></v-text-field>
+      <v-text-field  :label='this.label' solo v-model="taskLocation" @click="location('task')"></v-text-field>
     </v-col>
 
     <v-col cols="12" sm="6" md="3">
@@ -47,7 +47,7 @@ import firebase from '../forms/firebaseConfig'
 
 var database = firebase.database()
 var taskPhotoRef = database.ref('/taskphoto')
-
+var mapRef = database.ref('/map')
 export default {
   data: () => ({
      items: ["1", "2", "3", "4", "5","6"],
@@ -57,6 +57,11 @@ export default {
    taskNum: '',
    taskStart: '',
    taskEnd: '',
+   label:'',
+   district:'',
+   notification: false
+
+   
   }),
  methods: {
     location(lo){
@@ -68,7 +73,7 @@ export default {
   console.log(this.users);
        let data = {
         taskDetail: taskDetail,
-         taskLocation: taskLocation,
+         taskLocation: this.$store.state.location,
          taskLocationName: taskLocationName,
          taskNum: taskNum,
          taskStart: taskStart,
@@ -81,6 +86,8 @@ export default {
       }
       
       taskPhotoRef.push(data)
+                  mapRef.push(this.$store.state.location)
+
       .then(() => {
             console.log("Document successfully written!");
             console.log(data);
@@ -100,7 +107,9 @@ export default {
   mounted () {
     taskPhotoRef.on('value', (snapshot) => {
       this.taskphoto = snapshot.val()
+      this.label = this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country+this.$store.state.location.locationData.postcode
            this.users = this.$store.state.keyUser
+           
     })
   },
   

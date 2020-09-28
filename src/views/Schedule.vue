@@ -18,7 +18,7 @@
       </v-list-item>
 
        <v-stepper  vertical>
-      <v-stepper-step step="1" complete>
+      <v-stepper-step step="1"  :complete="tasks.statusTask == 'ช่างภาพรับงาน'">
         รอช่างภาพตกลง
       </v-stepper-step>
   
@@ -28,12 +28,11 @@
         <v-btn text>Cancel</v-btn>
       </v-stepper-content> -->
   
-      <v-stepper-step step="2" complete>ชำระเงิน</v-stepper-step>
+      <v-stepper-step step="2" :complete="tasks.statusTask == 'ช่างภาพรับงาน'">ชำระเงิน</v-stepper-step>
   
-      <v-stepper-content step="2">
+      <v-stepper-content step="2" >
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
-        <v-btn color="primary" @click="e13 = 3">Continue</v-btn>
-        <v-btn text>Cancel</v-btn>
+
       </v-stepper-content>
   
       <!-- <v-stepper-step :rules="[() => false]" step="3">
@@ -43,21 +42,17 @@
   
      
   
-      <v-stepper-step step="3">ดำเนินการ</v-stepper-step>
+      <v-stepper-step step="3" :complete="tasks.statusTask == '3'">ดำเนินการ</v-stepper-step>
   
       <v-stepper-content step="4">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
-        <v-btn color="primary" @click="e13 = 1">Continue</v-btn>
-        <v-btn text>Cancel</v-btn>
       </v-stepper-content>
 
 
-      <v-stepper-step step="4">เสร็จสิ้น</v-stepper-step>
+      <v-stepper-step step="4" :complete="tasks.statusTask == '4'">เสร็จสิ้น</v-stepper-step>
   
       <v-stepper-content step="4">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
-        <v-btn color="primary" @click="e13 = 1">Continue</v-btn>
-        <v-btn text>Cancel</v-btn>
       </v-stepper-content>
     </v-stepper>
     </v-card>
@@ -99,6 +94,7 @@ export default {
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
+
   },
 methods: {
 chat(keyPhoto,keyModel){

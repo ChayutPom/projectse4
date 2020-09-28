@@ -53,7 +53,16 @@
             </v-toolbar-items>
           </v-toolbar>
          
-         
+              <!-- <longdo-map 
+   @load="test" 
+   :zoom="10" 
+   :lastViw="false"> 
+  <longdo-map-marker             
+
+            :location="this.task.taskLocation.locations"
+      
+        />    
+</longdo-map> -->
         </v-card>
       </v-dialog>
     </v-row>
@@ -63,14 +72,18 @@
 
 <script>
 import photographer from '../function/photographer.vue';
-import firebase from "../forms/firebaseConfig";
-var database = firebase.database();
-var taskRef = database.ref("/taskphoto");
-var photograRef = database.ref("/photographer");
+// import firebase from "../forms/firebaseConfig";
+// import { LongdoMap ,LongdoMapMarker } from 'longdo-map-vue'
+// LongdoMap.init('19d834440f9ee5958b68123c8a4c6d6b')
+
+// var database = firebase.database();
+// var taskRef = database.ref("/taskphoto");
+// var photograRef = database.ref("/photographer");
   export default {
   components: {
     photographer,
-   
+    // LongdoMap,
+    //  LongdoMapMarker 
   },
 
   data: () => {
@@ -84,20 +97,38 @@ keystatus:''
     
     };
   },
+  methods:{
+// test(map) {
+//   this.map2 = map
+//        var result = map.location();
+//        console.log(result);
+// // map.Event.bind('location', function() {
+// //   var location = map.location();
+// // console.log(location);
+// // });
+// // map.Event.bind('click', function() {
+ 
+// // });
+// map.Event.bind('overlayClick', function(overlay) {
+//     console.log(overlay)
+    
+// });
+//      },
+  },
     mounted() {
 
 
-    photograRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
-     var keyPhoto =Object.keys(snapshot.val())[0]
-     console.log(keyPhoto);
+//     photograRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
+//      var keyPhoto =Object.keys(snapshot.val())[0]
+//      console.log(keyPhoto);
      
-taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
-    // var key4 = Object.keys(snapshot.val())[0];
-        this.task = snapshot.val();
-          console.log(this.task);  
+// taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
+//     // var key4 = Object.keys(snapshot.val())[0];
+//         this.task = snapshot.val();
+//           console.log(this.task);  
         
-   }); 
-        });   
+//    }); 
+//         });   
 
 
   }

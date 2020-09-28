@@ -27,7 +27,8 @@ export default new Vuex.Store({
     loading: false,
     keyUser: '',
     keyUserF: '',
-    location: ''
+    location: '',
+    markerLocation: ''
   },
 
 
@@ -57,6 +58,9 @@ export default new Vuex.Store({
     },
     setLocation (state, payload) {
       state.location = payload
+    },
+    setmarkerLocation (state, payload) {
+      state.markerLocation = payload
     },
   },
 
@@ -161,8 +165,10 @@ userRef.on("value", snapshot => {
 
     },
     addLocation({commit}, payload) {
-console.log(payload);
-commit('setLocation',payload)
+console.log(payload.marker);
+console.log(payload.locationdata);
+commit('setLocation',payload.locationdata)
+commit('setmarkerLocation',payload.marker)
 router.push(window.history.go(-1))
     },
    
@@ -208,6 +214,8 @@ router.push(window.history.go(-1))
     setLocation (state) {
       return state.location
     },
-    
+    setmarkerLocation (state) {
+      return state.markerLocation
+    },
   }
 })

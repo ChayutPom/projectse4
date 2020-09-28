@@ -41,7 +41,7 @@
         <v-textarea label="คำแนะนำตัว" filled rounded dense v-model="introduce"></v-textarea>
       </v-col>
       <v-col cols="12" sm="6" md="3">
-        <v-text-field label="ที่อยู่" filled rounded dense v-model="address" @click="location('photogra')"></v-text-field>
+        <v-text-field :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country+this.$store.state.location.locationData.postcode'  filled rounded dense v-model="address" @click="location('photogra')"></v-text-field>
       </v-col>
 
       <v-col cols="12" sm="6" md="3">
@@ -330,7 +330,7 @@ export default {
                   email: email,
                   gender: gender,
                   introduce: introduce,
-                  address: address,
+                  address: this.$store.state.location,
                   img: images,
                   keyUser:this.$store.state.keyUserF,
                   typePhoto: {
@@ -360,6 +360,7 @@ export default {
 this.$store.dispatch("editUser", {
         status_photogra: true,
       });
+
                 photographerRef
                   .push(data)
                   .then(() => {

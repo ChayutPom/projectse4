@@ -22,8 +22,8 @@
     </v-col>
 
     <v-col cols="12" sm="6" md="3">
-      สถานที่
-      <v-text-field solo v-model="taskLocation" @click="location('task')"></v-text-field>
+      สถานที่{{this.$store.state.location.locationData.country}}
+      <v-text-field :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country+this.$store.state.location.locationData.postcode' solo v-model="taskLocation" @click="location('task')"></v-text-field>
     </v-col>
 
     <v-col cols="12" sm="6" md="3">
@@ -48,7 +48,8 @@ export default {
    taskStart: '',
    taskEnd: '',
    taskLocation: '',
-   taskNum: ''
+   taskNum: '',
+   subdistrict:''
   }),
  methods: {
     location(lo){
@@ -56,12 +57,14 @@ export default {
     },
     insertToTaskphoto (taskDetail, taskStart,taskEnd,taskLocation,taskNum) {
 
+
+
 console.log(this.$route.params.key);
    let data = {
         taskDetail: taskDetail,
          taskStart: taskStart,
          taskEnd: taskEnd,
-         taskLocation: taskLocation,
+         taskLocation: this.$store.state.location,
          taskNum: taskNum,
          taskType: 'ภาพถ่ายบุคคล',
          keyUser: this.$store.state.keyUserF ,
@@ -71,6 +74,8 @@ console.log(this.$route.params.key);
       }
       
       taskPhotoRef.push(data)
+           
+
       .then(() => {
             console.log("Document successfully written!");
             console.log(data);

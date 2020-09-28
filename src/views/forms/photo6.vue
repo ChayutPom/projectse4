@@ -23,7 +23,7 @@
 
     <v-col cols="12" sm="6" md="3">
       สถานที่
-      <v-text-field solo v-model="taskLocation" @click="location('task')"></v-text-field>
+      <v-text-field :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country+this.$store.state.location.locationData.postcode' solo v-model="taskLocation" @click="location('task')"></v-text-field>
     </v-col>
 
 
@@ -45,7 +45,7 @@ import firebase from '../forms/firebaseConfig'
 
 var database = firebase.database()
 var taskPhotoRef = database.ref('/taskphoto')
-
+var mapRef = database.ref('/map')
 export default {
   data: () => ({
      items: ["1", "2", "3", "4", "5"],
@@ -67,16 +67,19 @@ export default {
         taskDetail: taskDetail,
          taskStart: taskStart,
          taskEnd: taskEnd,
-         taskLocation: taskLocation,
+         taskLocation: this.$store.state.location,
          taskNum: taskNum,
          taskType: 'สินค้า/อาหาร',
                   keyUser: this.$store.state.keyUserF ,
          keyPhoto:  this.$route.params.key,
-                  statusTask: 'รอการตอบรับ'
+                  statusTask: 'รอการตอบรับ',
+                  notification: false
 
       }
       
       taskPhotoRef.push(data)
+                  mapRef.push(this.$store.state.location)
+
       .then(() => {
             console.log("Document successfully written!");
             console.log(data);

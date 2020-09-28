@@ -7,12 +7,7 @@
    @load="test" 
    :zoom="10" 
    :lastViw="false"
-> <longdo-map-marker             
-               :key="key" v-for="(maps, key) in map"
-          
-            :location="maps.locations"
-      
-        />     
+> 
 
 </longdo-map>
 
@@ -23,28 +18,25 @@
 
 </template>
 <script>
-import { LongdoMap,LongdoMapMarker   } from 'longdo-map-vue'
+import { LongdoMap   } from 'longdo-map-vue'
 LongdoMap.init('19d834440f9ee5958b68123c8a4c6d6b')
 // import $ from 'jquery'
-import firebase from "./forms/firebaseConfig";
 import axios from 'axios';
 
-var database = firebase.database();
-var mapRef = database.ref("/map");
 
 export default {
    name: 'Foo',
     components: {    
        LongdoMap,
-LongdoMapMarker 
        
     },
   data() {
     return {
+      dialog: false,
             info: null,
       map:{},
- markers: [
-      ]
+//  markers: [
+//       ]
     };
   },
     
@@ -85,10 +77,9 @@ axios
         this.info = response
         console.log(this.info.data);
 
-
  const datalo = {
         locations:this.map2.location(),
-        keyUSer: this.$store.state.keyUserF,
+        keyUser: this.$store.state.keyUserF,
         locationData: {
           country: this.info.data.country,
           district:this.info.data.district,
@@ -100,12 +91,11 @@ axios
          type: this.$route.params.type
       }
       
-      mapRef.push(datalo)
 
-      alert('เพิ่มที่อยู่เรียบร้อย' )
 
       this.$store.dispatch("addLocation", {
-      datalo
+      locationdata: datalo,
+      marker:this.map2.location()
       });        
       })
       .catch(error => {
@@ -121,11 +111,11 @@ axios
 
  },
     mounted() {
-    mapRef.on("value", snapshot => {
-      this.map = snapshot.val();
-      console.log(this.map);
+    // mapRef.on("value", snapshot => {
+    //   this.map = snapshot.val();
+    //   console.log(this.map);
       
-    });
+    // });
 
 
   }
