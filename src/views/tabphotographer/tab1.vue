@@ -32,9 +32,9 @@
 
    
 
-          <v-col cols="12" > <div class="text-center">
-      <v-btn rounded color="primary" dark>Rounded Button</v-btn>
-    </div></v-col>
+         <v-footer padless fixed > <v-col cols="12" > <div class="text-center">
+      <v-btn rounded color="primary" dark>ค้นหางาน</v-btn>
+    </div></v-col></v-footer>
 
     </div>
 </template>

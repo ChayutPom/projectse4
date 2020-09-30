@@ -5,7 +5,7 @@
             justify="center">
             <v-col col="3" class=" ml-6">
       <v-avatar  color="indigo" height="90" width="90">
-        <v-icon size="85" dark>mdi-account-circle</v-icon>
+   <v-img   max-width="90px" max-height="90px" :src="users.profileImg"></v-img>
         
       </v-avatar></v-col >
       

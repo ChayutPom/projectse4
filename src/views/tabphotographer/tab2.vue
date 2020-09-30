@@ -3,20 +3,33 @@
 <photographer/>
 
 
-    <v-row justify="center">
-      <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-        <template v-slot:activator="{ on, attrs }">  
-              <v-card
+
+
+    
+   <v-row justify="center">
+      <v-dialog
+        v-model="dialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+      >
+        <template v-slot:activator="{ on, attrs }">
+             <!-- <v-btn
+   
+            v-on="on"
+            v-bind="attrs"
+          ></v-btn> -->
+            
+            <v-card
       class="mx-auto"
       max-width="auto"
       outlined
      :key="keystatus" v-for="(tasks, keystatus) in task"
-
-            
-            v-bind="attrs"
-            v-on="on"
+  
     >
-    <div      v-if="tasks.statusTask == 'ช่างภาพรับงาน'">
+    
+    <div @click="select(keystatus)"  v-on="on"
+            v-bind="attrs"   v-if="tasks.statusTask == 'ช่างภาพรับงาน'">
       <v-list-item three-line>
         <v-list-item-content>
           <div class=" mb-4">ชื่อ{{keystatus}}</div>
@@ -35,35 +48,83 @@
 
       </v-card-actions>
     </div>
+
     </v-card>
-
+ 
         </template>
-
-        <!-- -------------------modal------------------------- -->
-
         <v-card>
-          <v-toolbar dark color="primary">
-            <v-btn icon dark @click="dialog = false">
-              <v-icon>mdi-close</v-icon>
+          <v-toolbar
+            dark
+            color="primary"
+          >
+            <v-btn
+              icon
+              dark
+              @click="dialog = false"
+            >
             </v-btn>
-            <v-toolbar-title>Photo</v-toolbar-title>
+            <v-toolbar-title>Settings</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn dark text @click="dialog = false">Save</v-btn>
+              <v-btn
+                dark
+                text
+                @click="dialog = false"
+              >
+                Save
+              </v-btn>
             </v-toolbar-items>
           </v-toolbar>
-         
-              <!-- <longdo-map 
+<v-card height="190" :key="keylo" v-for="(tasks, keylo) in taskLo">
+<v-avatar>
+        <img
+          src="https://cdn.vuetifyjs.com/images/john.jpg"
+          alt="John"
+        >
+      </v-avatar>
+ประเภทงาน {{taskLo.taskType}}
+สถานที่ {{taskLo[keylo].taskLocation.locationData.subdistrict}} {{taskLo[keylo].taskLocation.locationData.district}} {{taskLo[keylo].taskLocation.locationData.province}} {{taskLo[keylo].taskLocation.locationData.country}}
+
+</v-card>
+
+
+
+
+
+          <v-card      height="500"   :key="key" v-for="(tasks, key) in taskLo">
+<longdo-map 
    @load="test" 
    :zoom="10" 
-   :lastViw="false"> 
-  <longdo-map-marker             
+   :lastViw="false"
+> 
+<longdo-map-marker             
+            :icon= "{
+    url: 'https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2F120454669_368181401020961_2346759943865085724_n.png?alt=media&token=aa8a5bba-ec33-41ef-9407-7af821e70c17',
+  }"
+            :location=" tasks.taskLocation.locations"
+  />  
+</longdo-map>
 
-            :location="this.task.taskLocation.locations"
-      
-        />    
-</longdo-map> -->
+
+    </v-card >   
+  
+<v-footer padless fixed >
+  เวลาเริ่มงาน: <br>
+  จำนวน ชั่วโมง
+            <v-spacer></v-spacer>
+<v-btn
+        class="ma-2"
+        outlined
+        color="indigo"
+        @click="start()"
+      >
+        เริ่มงาน
+      </v-btn>  
+    </v-footer>
+         
+
         </v-card>
+
       </v-dialog>
     </v-row>
     </div>
@@ -72,18 +133,21 @@
 
 <script>
 import photographer from '../function/photographer.vue';
-// import firebase from "../forms/firebaseConfig";
-// import { LongdoMap ,LongdoMapMarker } from 'longdo-map-vue'
-// LongdoMap.init('19d834440f9ee5958b68123c8a4c6d6b')
+import firebase from "../forms/firebaseConfig";
 
-// var database = firebase.database();
-// var taskRef = database.ref("/taskphoto");
-// var photograRef = database.ref("/photographer");
+import { LongdoMap , LongdoMapMarker  } from 'longdo-map-vue'
+LongdoMap.init('19d834440f9ee5958b68123c8a4c6d6b')
+
+var database = firebase.database();
+var taskRef = database.ref("/taskphoto");
+var photograRef = database.ref("/photographer");
   export default {
   components: {
     photographer,
-    // LongdoMap,
-    //  LongdoMapMarker 
+
+
+    LongdoMap,
+     LongdoMapMarker 
   },
 
   data: () => {
@@ -92,43 +156,68 @@ import photographer from '../function/photographer.vue';
       notifications: false,
       sound: true,
       widgets: false,
+      locationData:{},
 task:{},
-keystatus:''
+taskLo:{},
+keystatus:'',
+    info: null,
+      map:{},
     
     };
   },
+  
   methods:{
-// test(map) {
-//   this.map2 = map
-//        var result = map.location();
-//        console.log(result);
-// // map.Event.bind('location', function() {
-// //   var location = map.location();
-// // console.log(location);
-// // });
-// // map.Event.bind('click', function() {
- 
-// // });
-// map.Event.bind('overlayClick', function(overlay) {
-//     console.log(overlay)
+  
+     test(map) {
+  this.map2 = map
+
+       var result = map.location();
+
+       console.log(result);
+
+map.Event.bind('overlayClick', function(overlay) {
+    console.log(overlay)
     
-// });
-//      },
-  },
+});
+
+
+
+
+     },
+     select(keystatus){
+taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
+        this.taskLo = snapshot.val();
+        
+   }); 
+
+     },
+
+     start(){
+       var today = new Date();
+       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + 
+            today.getSeconds();
+            var dateTime = date+' '+time;
+
+            console.log(dateTime);
+
+            
+     }
+
+
+ },
     mounted() {
 
 
-//     photograRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
-//      var keyPhoto =Object.keys(snapshot.val())[0]
-//      console.log(keyPhoto);
+    photograRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
+     var keyPhoto =Object.keys(snapshot.val())[0]
      
-// taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
-//     // var key4 = Object.keys(snapshot.val())[0];
-//         this.task = snapshot.val();
-//           console.log(this.task);  
+taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
+    // var key4 = Object.keys(snapshot.val())[0];
+        this.task = snapshot.val();
         
-//    }); 
-//         });   
+   }); 
+        });   
 
 
   }

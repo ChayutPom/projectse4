@@ -23,7 +23,9 @@
               รูปภาพ
               <div class="form-group">
                 <!-- <label for="product_image">Product Images</label> -->
-                <input type="file" @change="uploadImage" class="form-control" />
+                
+                <input type="file"       accept="image/png, image/jpeg, image/bmp"
+ @change="uploadImage" class="form-control" />
               </div>
 
               <div class="form-group d-flex">
@@ -41,7 +43,8 @@
         <v-textarea label="คำแนะนำตัว" filled rounded dense v-model="introduce"></v-textarea>
       </v-col>
       <v-col cols="12" sm="6" md="3">
-        <v-text-field :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country+this.$store.state.location.locationData.postcode'  filled rounded dense v-model="address" @click="location('photogra')"></v-text-field>
+        <v-text-field v-if="this.$store.state.location.locationData==null" label='สถานที่'  filled rounded dense v-model="address" @click="location('photogra')"></v-text-field>
+        <v-text-field v-if="this.$store.state.location.locationData!=null" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country+this.$store.state.location.locationData.postcode'  filled rounded dense v-model="address" @click="location('photogra')"></v-text-field>
       </v-col>
 
       <v-col cols="12" sm="6" md="3">
@@ -190,6 +193,11 @@
       >ยืนยัน</v-btn></center> -->
     </div>
 
+
+
+<!-- ===========================================================================================================================================
+=========================================================================================================================================== -->
+
     <div v-if="users.status_photogra == true">
       <v-container>
         <v-card class="mx-auto" max-width="434" tile>
@@ -207,6 +215,7 @@
           <v-form>
             <v-container class="center" style="width:80%;">
               <v-row>
+
                 <v-text-field label="Text input" single-line solo></v-text-field>
 
                 <v-text-field label="Text input" single-line solo></v-text-field>
@@ -224,6 +233,7 @@
         </center>
         <v-row class>
           <v-col cols="4" sm>
+            
             <v-img src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg" height="100" max-width></v-img>
           </v-col>
           <v-col cols="4" sm>
