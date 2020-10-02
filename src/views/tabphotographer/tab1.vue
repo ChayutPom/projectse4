@@ -1,14 +1,58 @@
 <template >
 <div>
 <photographer/>
+
+งานใหม่
            <v-card
       class="mx-auto"
       max-width="auto"
       outlined
-     :key="keystatus" v-for="(tasks, keystatus) in task"
-     :href="'/detailTask.vue/' + keystatus"
+     :key="keystatus" v-for="(tasks, keystatus) in taskwait"
     >
-    <div      v-if="tasks.statusTask == 'รอการตอบรับ'">
+    <div  >
+      <v-list-item three-line :href="'/detailTask.vue/' + keystatus">
+        <v-list-item-content>
+          <div class=" mb-4">{{user.firstname}} {{user.lastname}}</div>
+          <v-list-item-title class="headline mb-1"> ประเภทงาน{{tasks.taskType}}</v-list-item-title>
+        </v-list-item-content>
+  
+        <v-list-item-avatar
+          tile
+          size="80"
+          color="grey"
+        ></v-list-item-avatar>
+      </v-list-item>
+    
+   
+    </div>
+    <v-btn
+        rounded
+        color="primary"
+        dark
+        @click="cancelTask(keystatus)"
+      >
+        ยกเลิก
+      </v-btn>
+       <v-btn
+        rounded
+        color="primary"
+        dark
+       @click="confirmTask(keystatus)"
+      >
+        รับงาน
+      </v-btn>
+    </v-card>
+
+รอลูกค้าชำระเงิน
+   
+           <v-card
+      class="mx-auto"
+      max-width="auto"
+      outlined
+     :key="key" v-for="(tasks, key) in taskpay"
+     :href="'/detailTask.vue/' + key"
+    >
+    <div >
       <v-list-item three-line>
         <v-list-item-content>
           <div class=" mb-4">{{user.firstname}} {{user.lastname}}</div>
@@ -21,17 +65,10 @@
           color="grey"
         ></v-list-item-avatar>
       </v-list-item>
-  
-      <v-card-actions>
-        <v-btn text @click="cancelTask(keystatus)">ยกเลิก</v-btn>
-        <v-btn text @click="confirmTask(keystatus)">รับงาน</v-btn>
-      </v-card-actions>
+
     </div>
     </v-card>
-
-
-   
-
+    
          <v-footer padless fixed > <v-col cols="12" > <div class="text-center">
       <v-btn rounded color="primary" dark>ค้นหางาน</v-btn>
     </div></v-col></v-footer>
@@ -57,6 +94,8 @@ var taskPhotoRef = database.ref("/taskphoto");
   data: () => {
     return {
 task:{},
+taskpay:{},
+taskwait:{},
 keystatus:'',
  dialog: false,
  keyUser: '',
@@ -88,7 +127,7 @@ taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
 
 
               taskRef.child(key4).update({
-    statusTask: 'ช่างภาพรับงาน',
+    statusTask: 'รอชำระเงิน',
 
    }); 
         });
@@ -158,7 +197,17 @@ this.$router.push('/selectJob')
 taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
     // var key4 = Object.keys(snapshot.val())[0];
     this.task = snapshot.val()
-console.log(this.task);              
+    
+taskRef.orderByChild("statusTask").equalTo('รอชำระเงิน').on("value", snapshot => {
+  this.taskpay = snapshot.val()
+console.log(snapshot.val());
+}); 
+taskRef.orderByChild("statusTask").equalTo('รอการตอบรับ').on("value", snapshot => {
+    this.taskwait = snapshot.val()
+
+console.log(snapshot.val());
+
+}); 
               var i=0
             for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
               var key = Object.keys(snapshot.val())[i];

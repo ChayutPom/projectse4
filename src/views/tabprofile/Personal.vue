@@ -11,7 +11,7 @@
 
 <v-flex xs12 class="form-wrapper"><v-col col="6" >
       <v-avatar  color="indigo" height="90" width="90">
-   <v-img v-if="product.images == ''"  max-width="90px" max-height="90px" :src="users.profileImg[0]" >
+   <v-img v-if="product.images == ''"  max-width="90px" max-height="90px" :src="imgPro" >
 </v-img>
      <img v-if="product.images != ''" :src="product.images[0]" alt width="90px" />   
       </v-avatar></v-col >
@@ -84,6 +84,7 @@ export default {
   data: () => {
     return {
 ii: 0,
+imgPro:'',
       updataFirstname: '',
       updateLastname: '',
       updatePhone: '',
@@ -203,7 +204,7 @@ firstname: updataFirstname,
 userRef.on("value", snapshot => {
      this.users = this.$store.state.keyUser
       console.log(snapshot.val());
-
+ this.imgPro   = this.users.profileImg[0]
       console.log(this.users);
     });
     

@@ -71,7 +71,7 @@ console.log( this.map2.location());
 // var marker = new longdo.Marker( this.map2.location());
 // this.map2.Overlays.add(marker);
 
-axios
+  axios
       .get('https://api.longdo.com/map/services/address?lon='+this.map2.location().lon+'&lat='+this.map2.location().lat+'&noelevation=1&key=19d834440f9ee5958b68123c8a4c6d6b&key=19d834440f9ee5958b68123c8a4c6d6b')
       .then(response => {
         this.info = response

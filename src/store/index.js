@@ -28,7 +28,8 @@ export default new Vuex.Store({
     keyUser: '',
     keyUserF: '',
     location: '',
-    markerLocation: ''
+    markerLocation: '',
+    subdistrict:'',
   },
 
 

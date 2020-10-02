@@ -5,7 +5,7 @@
             justify="center">
             <v-col col="3" class=" ml-6">
       <v-avatar  color="indigo" height="90" width="90">
-   <v-img   max-width="90px" max-height="90px" :src="users.profileImg"></v-img>
+   <v-img   max-width="90px" max-height="90px" :src="imgPro"></v-img>
         
       </v-avatar></v-col >
       
@@ -65,6 +65,7 @@
 export default {
   data: () => {
     return {
+      imgPro:'',
       userdata: "",
       usersdata: {},
       firstname: "",
@@ -97,6 +98,7 @@ userSignOut() {
 console.log(this.$store.state.keyUser);
 console.log(this.$store.state.keyUserF);
     this.users = this.$store.state.keyUser
+    this.imgPro   = this.users.profileImg[0]
   }
 };
 </script>
