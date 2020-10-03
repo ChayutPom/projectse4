@@ -23,9 +23,10 @@
               รูปภาพ
               <div class="form-group">
                 <!-- <label for="product_image">Product Images</label> -->
-                
-                <input type="file"       accept="image/png, image/jpeg, image/bmp"
- @change="uploadImage" class="form-control" />
+             
+
+                <input type="file"  id="fileUpload"   multiple  hidden  accept="image/png, image/jpeg, image/bmp"
+ @change="uploadImage" class="form-control" /><button @click="chooseFiles()">Choose</button>
               </div>
 
               <div class="form-group d-flex">
@@ -391,6 +392,9 @@ this.$store.dispatch("editUser", {
         
 
     },
+      chooseFiles() {
+        document.getElementById("fileUpload").click()
+    },
     deleteImage(img, index) {
       let image = firebase.storage().refFromURL(img);
       this.product.images.splice(index, 1);
@@ -408,8 +412,10 @@ this.$store.dispatch("editUser", {
     },
 
     uploadImage(e) {
-      if (e.target.files[0]) {
-        let file = e.target.files[0];
+      var i =0 
+      for(i;i<=e.target.files.length-1;i++){
+         if (e.target.files[i]) {
+        let file = e.target.files[i];
 
         var storageRef = firebase
           .storage()
@@ -437,6 +443,8 @@ this.$store.dispatch("editUser", {
           }
         );
       }
+      }
+     
     },
   },
 

@@ -35,8 +35,8 @@ export default {
       dialog: false,
             info: null,
       map:{},
-//  markers: [
-//       ]
+ markers: [
+      ]
     };
   },
     
@@ -96,7 +96,8 @@ console.log( this.map2.location());
       this.$store.dispatch("addLocation", {
       locationdata: datalo,
       marker:this.map2.location()
-      });        
+      });
+              
       })
       .catch(error => {
         console.log(error)

@@ -26,6 +26,118 @@
 
       </v-card-actions>
     </div>
+
+
+    <v-row justify="center">
+      <v-dialog
+        v-model="dialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            Open Dialog
+          </v-btn>
+        </template>
+        <v-card>
+          <v-toolbar
+            dark
+            color="primary"
+          >
+            <v-btn
+              icon
+              dark
+              @click="dialog = false"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-toolbar-title>Settings</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+              <v-btn
+                dark
+                text
+                @click="dialog = false"
+              >
+                Save
+              </v-btn>
+            </v-toolbar-items>
+          </v-toolbar>
+
+           
+              <div>
+              
+              รูปภาพ
+              <div class="form-group">
+                <!-- <label for="product_image">Product Images</label> -->
+                
+                <input type="file"   multiple    accept="image/png, image/jpeg, image/bmp"
+ @change="uploadImage" class="form-control" />
+              </div>
+
+              <div class="form-group d-flex">
+                <!-- <div class="img-wrapp p-1" v-for="(image, index) in product.images" :key="index"> -->
+         
+<v-card
+      class="mx-auto"
+      max-width="400"
+    >
+        <v-row dense>
+          <v-col
+           v-for="(image, index) in product.images" :key="index"
+            :cols="6"
+          >
+            <v-card>
+
+              <v-img
+                :src="image"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="200px"
+              >
+                <!-- <v-card-title v-text="card.title"></v-card-title> -->
+              </v-img>
+  
+              <v-card-actions>
+                <v-spacer></v-spacer>
+  
+                <v-btn icon>
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+  
+                <v-btn icon>
+                  <v-icon>mdi-bookmark</v-icon>
+                </v-btn>
+  
+                <v-btn icon>
+                  <v-icon>mdi-share-variant</v-icon>
+                </v-btn>
+                 <span class="delete-img" @click="deleteImage(image,index)">X</span> 
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+    </v-card>
+         
+                  <!-- <img :src="image" alt width="80px" />
+                  <span class="delete-img" @click="deleteImage(image,index)">X</span> -->
+   
+              </div>
+            </div>
+
+        </v-card>
+         <v-footer padless fixed > <v-col cols="12" > <div class="text-center">
+      <v-btn rounded color="primary" @click="sendTask(product.images,keystatus)" dark>ส่งงาน</v-btn>
+    </div></v-col></v-footer>
+
+      </v-dialog>
+    </v-row>
     </v-card>
     </div>
 </template>
@@ -44,87 +156,81 @@ var photograRef = database.ref("/photographer");
 
   data: () => {
     return {
+       dialog: false,
+      notifications: false,
+      sound: true,
+      widgets: false,
 task:{},
-keystatus:''
-    
+ img: {},
+ imageData: null,
+    uploadValue: 0,
+keystatus:'',
+   products: [],
+      sheet: false,
+    product: {
+      images: [],
+    }, 
     };
   },
-//    methods: {
-// confirmTask(keystatus){
-//             console.log(keystatus);
+   methods: {
+deleteImage(img, index) {
+      let image = firebase.storage().refFromURL(img);
+      this.product.images.splice(index, 1);
+      image
+        .delete()
+        .then(function () {
+          console.log("image deleted");
+        })
+        .catch(function (error) {
+          console.log(error);
 
-//       firebase.database().ref(userRef).once('value', function(snapshot) {
-// var i=0
-// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-// var key = Object.keys(snapshot.val())[i];
-// var data = snapshot.child(key).val();
-//  if(data.email == firebase.auth().currentUser.email){
-//         console.log(data.email);
-//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+          // Uh-oh, an error occurred!
+          console.log("an error occurred");
+        });
+    },
 
-//      var key2 = Object.keys(snapshot.val())[0];
-// console.log(snapshot.val()[key2].email);
-//     photograRef.orderByChild("keyUser").equalTo(key2).on("value", snapshot => {
-//      var key3 =Object.keys(snapshot.val())[0]
-//      console.log(key3);
-     
-// taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
-//  var key4 =Object.keys(snapshot.val())[0]
+    uploadImage(e) {
+         var i =0 
+      for(i;i<=e.target.files.length-1;i++){
+      if (e.target.files[i]) {
+        let file = e.target.files[i];
 
+        var storageRef = firebase
+          .storage()
+          .ref("test/" + Math.random() + "_" + file.name);
 
-//               taskRef.child(key4).update({
-//     statusTask: 'ช่างภาพรับงาน',
+        let uploadTask = storageRef.put(file);
 
-//    }); 
-//         });
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            console.log(snapshot);
+          },
+          (error) => {
+            // Handle unsuccessful uploads
+            console.log(error);
+          },
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
 
-//   })
-// });
-        
-//       }
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              this.product.images.push(downloadURL);
+              // console.log(this.product.images);
+            });
+          }
+        );
+      }
+      }
+    },
+    sendTask(images,keystatus) {
+console.log(images);
 
-// }
-
-// })
-// },
-// cancelTask(keystatus){
-//             console.log(keystatus);
-
-//       firebase.database().ref(userRef).once('value', function(snapshot) {
-// var i=0
-// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-// var key = Object.keys(snapshot.val())[i];
-// var data = snapshot.child(key).val();
-//  if(data.email == firebase.auth().currentUser.email){
-//         console.log(data.email);
-//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-
-//      var key2 = Object.keys(snapshot.val())[0];
-// console.log(snapshot.val()[key2].email);
-//     photograRef.orderByChild("keyUser").equalTo(key2).on("value", snapshot => {
-//      var key3 =Object.keys(snapshot.val())[0]
-//      console.log(key3);
-     
-// taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
-//  var key4 =Object.keys(snapshot.val())[0]
-
-
-//               taskRef.child(key4).update({
-//     statusTask: 'ยกเลิกงาน',
-
-//    }); 
-//         });
-
-//   })
-// });
-        
-//       }
-
-// }
-
-// })
-// }
-//    },
+          taskRef.child(keystatus).update({
+images
+  })
+    }
+   },
 
     mounted() {
     
@@ -134,9 +240,11 @@ keystatus:''
      
 taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
     // var key4 = Object.keys(snapshot.val())[0];
+    this.taskas = snapshot.val();
+    taskRef.orderByChild("statusTask").equalTo("งานที่รอส่ง").on("value", snapshot => {
         this.task = snapshot.val();
           console.log(this.task);  
-        
+        }); 
    }); 
         });
 

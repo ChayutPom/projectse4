@@ -52,7 +52,7 @@
     </v-card>
  
         </template>
-        <v-card>
+        <v-card :key="keylo" v-for="(tasks, keylo) in taskLo">
           <v-toolbar
             dark
             color="primary"
@@ -75,7 +75,7 @@
               </v-btn>
             </v-toolbar-items>
           </v-toolbar>
-<v-card height="190" :key="keylo" v-for="(tasks, keylo) in taskLo">
+<v-card height="190" >
 <v-avatar>
         <img
           src="https://cdn.vuetifyjs.com/images/john.jpg"
@@ -91,10 +91,9 @@
 
 
 
-          <v-card      height="500"   :key="key" v-for="(tasks, key) in taskLo">
+          <v-card      height="500"   >
 <longdo-map 
    @load="test" 
-   :zoom="10" 
    :lastViw="false"
 > 
 <longdo-map-marker             
@@ -105,22 +104,24 @@
   />  
 </longdo-map>
 
-
-    </v-card >   
-  
 <v-footer padless fixed >
   เวลาเริ่มงาน: <br>
   จำนวน ชั่วโมง
             <v-spacer></v-spacer>
-<v-btn
-        class="ma-2"
+            
+<v-btn class="ma-2"
         outlined
         color="indigo"
-        @click="start()"
+        @click="start(keylo)"
       >
-        เริ่มงาน
+      <div >  เริ่มงาน</div>
+     
       </v-btn>  
+  
     </v-footer>
+    </v-card >   
+  
+
          
 
         </v-card>
@@ -152,12 +153,14 @@ var photograRef = database.ref("/photographer");
 
   data: () => {
     return {
+      btn:null,
       dialog: false,
       notifications: false,
       sound: true,
       widgets: false,
       locationData:{},
 task:{},
+taskS:{},
 taskLo:{},
 keystatus:'',
     info: null,
@@ -187,12 +190,17 @@ map.Event.bind('overlayClick', function(overlay) {
      select(keystatus){
 taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
         this.taskLo = snapshot.val();
-        
+         
+   }); 
+   taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
+        this.taskS = snapshot.val();
+         
    }); 
 
      },
 
-     start(){
+     start(key){
+       this.btn == "stop"
        var today = new Date();
        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + 
@@ -200,8 +208,16 @@ taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
             var dateTime = date+' '+time;
 
             console.log(dateTime);
+            let data = {
+              startTime:dateTime
 
-            
+      };
+          taskRef.child(key).update({
+data,
+statusTask:'งานที่รอส่ง'
+  })
+
+   
      }
 
 

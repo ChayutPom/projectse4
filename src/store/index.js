@@ -29,7 +29,7 @@ export default new Vuex.Store({
     keyUserF: '',
     location: '',
     markerLocation: '',
-    subdistrict:'',
+
   },
 
 
@@ -178,8 +178,13 @@ router.push(window.history.go(-1))
       commit('setUser', null)
       commit('setkeyUser', null)
       commit('setkeyUserF', null)
+      
       router.push('/')
     },
+
+
+
+
 
   },
   

@@ -203,6 +203,9 @@ taskTaotal1,
         notification: false,
       };
 
+
+
+
       taskPhotoRef.push(data);
       mapRef
         .push(this.$store.state.location)

@@ -8,58 +8,26 @@
       <v-list-item three-line>
         <v-list-item-content>
           <div class="font-weight-bold mb-2">{{tasks.taskType}}</div>
-          <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : {{photographer[tasks.keyPhoto].name}}</v-list-item-title></div>
-          <div v-if="tasks.taskType == 'model'"><v-list-item-title class="mb-1" >Modelที่เลือก : {{tasks.keyModel}}</v-list-item-title></div>
+          <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : </v-list-item-title></div>
+          <!-- <div v-if="tasks.taskType == 'model'"><v-list-item-title class="mb-1" >Modelที่เลือก : {{tasks.keyModel}}</v-list-item-title></div> -->
+
 <!-- :href="'/schedule/PrivateChat/' + tasks.keyUser" -->
+              
           <v-list-item-subtitle>สถานะงาน : {{tasks.statusTask}}</v-list-item-subtitle>
           <!-- <v-btn     @click="chat(tasks.keyPhoto,tasks.keyModel)"    >chat</v-btn> -->
 
-
-<div class="text-center">
-      <v-btn
-        color="blue"
-        dark
-        @click="sheet = !sheet"
-      >
-        ชำระเงิน
-      </v-btn>
-      <v-bottom-sheet v-model="sheet">
-        <v-sheet
-          class="text-center"
-          height="300px"
-        >
-          <v-btn
-            class="mt-6"
-            text
-            color="red"
-            @click="sheet = !sheet"
-          >
-            close
-          </v-btn>
-          <div class="py-3">
-{{tasks.price.price1}}    
-
-<v-btn
-        color="blue"
-        dark
-        @click="pay(keystatus)"
-      >
-        ชำระเงิน
-      </v-btn>
-
-  </div>
-        </v-sheet>
-      </v-bottom-sheet>
-    </div>
-
-
         </v-list-item-content>
+        
         <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
       </v-list-item>
 
+
+
+
        <v-stepper  vertical>
-      <v-stepper-step step="1"  :complete="tasks.statusTask == 'ช่างภาพรับงาน'">
+      <v-stepper-step step="1"  :complete="tasks.statusTask == 'รอการตอบรับ'">
         รอช่างภาพตกลง
+        
       </v-stepper-step>
   
       <!-- <v-stepper-content step="1">
@@ -68,10 +36,66 @@
         <v-btn text>Cancel</v-btn>
       </v-stepper-content> -->
   
-      <v-stepper-step step="2" :complete="tasks.statusTask == 'ช่างภาพรับงาน'"> ชำระเงิน</v-stepper-step>
+      <v-stepper-step step="2" :complete="tasks.statusTask == 'ช่างภาพรับงาน'">
+        
+         <!-- <v-btn
+        tile
+        color="success"
+      >
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
+ชำระเงิน      </v-btn> -->
+
+ <div class="text-center">
+      <v-dialog
+        v-model="dialog"
+        width="500"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="red lighten-2"
+            dark
+            v-bind="attrs"
+            v-on="on"
+            @click="asd(keystatus)"
+          >
+            ชำระเงิน{{keystatus}}
+          </v-btn>
+        </template>
+  
+        <v-card>
+          <v-card-title class="headline grey lighten-2">
+            Privacy Policy
+          </v-card-title>
+  
+          <v-card-text>{{price1}}
+         </v-card-text>
+  
+          <v-divider></v-divider>
+  
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="primary"
+              text
+              @click="dialog = false"
+            >
+              I accept
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+
+
+
+</v-stepper-step>
          
       <v-stepper-content step="2" >
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
+
+
 
       </v-stepper-content>
   
@@ -82,14 +106,63 @@
   
      
   
-      <v-stepper-step step="3" :complete="tasks.statusTask == '3'">ดำเนินการ</v-stepper-step>
+      <v-stepper-step  step="3" :complete="tasks.statusTask == '3'"><v-btn
+        tile
+        color="success"
+      >
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
+ดำเนินการ      </v-btn></v-stepper-step>
   
       <v-stepper-content step="4">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
       </v-stepper-content>
 
 
-      <v-stepper-step step="4" :complete="tasks.statusTask == '4'">เสร็จสิ้น</v-stepper-step>
+
+
+
+
+
+
+
+
+
+      <v-stepper-step step="4" :complete="tasks.statusTask == '4'"> <div class="text-center">
+      <v-bottom-sheet
+        v-model="sheet"
+        persistent
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="green"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            เสร็จสิ้น
+          </v-btn>
+        </template>
+        <v-sheet
+          class="text-center"
+          height="400px"
+        >
+          <v-btn
+            class="mt-6"
+            text
+            color="error"
+            @click="sheet = !sheet"
+          >
+            close
+          </v-btn>
+          <div class="py-3">
+ให้คะแนนช่างภาพ
+             </div>
+             
+        </v-sheet>
+      </v-bottom-sheet>
+    </div></v-stepper-step>
   
       <v-stepper-content step="4">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
@@ -99,16 +172,8 @@
 
    
 <br>
-    <!-- <v-card class="mx-auto" max-width="auto" outlined>
-      <v-list-item three-line>
-        <v-list-item-content>
-          <div class="font-weight-bold mb-2">หา Model</div>
-          <v-list-item-title class="mb-1">Model ที่คุณเลือก : 24Pixel</v-list-item-title>
-          <v-list-item-subtitle>สถานะงาน : รอการตอบกลับของModel</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-      </v-list-item>
-    </v-card> -->
+
+  
   </v-card>
 </template>
 
@@ -130,17 +195,32 @@ export default {
   },
   data() {
     return {
-      photographer:{},
-      name:"",
-          sheet: false,
-
+      price1:'',
+      rating: 4,
+      keyclick:'',
+      dialog: false,
+      photographer:{name: '',},
+        
+    
+                sheet: false,
+tasks:{},
       task:{},
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
 
   },
+
+  
 methods: {
+  asd(a){
+console.log(a);
+this.keyclick = a 
+console.log(this.task[this.keyclick]);
+console.log(this.task[this.keyclick].price.price1);
+this.price1 =this.task[this.keyclick].price.price1
+  },
+
   pay(keystatus){
     console.log(keystatus);
      taskRef.child(keystatus).update({
@@ -294,7 +374,8 @@ taskRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", 
           this.users =this.$store.state.keyUserF
     
       photographerRef.on("value", snapshot => {
-  this.photographer = snapshot.val()
+  this.photographer= snapshot.val()
+  
     });
    }); 
 
