@@ -8,8 +8,8 @@ import * as firebase from 'firebase'
 import InstantSearch from 'vue-instantsearch';
 
 import Chat from 'vue-beautiful-chat'
-var database = firebase.database();
-var userRef = database.ref("/userdata");
+// var database = firebase.database();
+// var userRef = database.ref("/userdata");
 import 'vue-instant/dist/vue-instant.css'
 import VueInstant from 'vue-instant/dist/vue-instant.common'
 Vue.use(VueInstant)
@@ -38,28 +38,28 @@ new Vue({
   mounted() {
 console.log('test123333');
 
-userRef.on("value", snapshot => {
+// userRef.on("value", snapshot => {
 
-  var i=0
-  for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-  var key = Object.keys(snapshot.val())[i];
+//   var i=0
+//   for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+//   var key = Object.keys(snapshot.val())[i];
   
-  var data = snapshot.child(key).val();
+//   var data = snapshot.child(key).val();
   
-        if(data.email == firebase.auth().currentUser.email){
+//         if(data.email == firebase.auth().currentUser.email){
           
-          userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+//           userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
       
-       var key2 = Object.keys(snapshot.val())[0];
-    this.users = snapshot.val()[key2];
+//        var key2 = Object.keys(snapshot.val())[0];
+//     this.users = snapshot.val()[key2];
 
-  });
+//   });
           
-        }
+//         }
        
-  } 
+//   } 
       
-      });    
+//       });    
   }
   
 }).$mount('#app')

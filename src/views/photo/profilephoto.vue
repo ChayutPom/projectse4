@@ -1,10 +1,10 @@
 <template>
 <v-container  >
     <v-card
-      class="mx-auto"
+      class="mx-auto text-center "
       max-width="434"
       tile
-      :key="key" v-for="(photographer, key) in photographers"
+      :key="key" v-for="(photogra2, key) in photographers2"
     >
       <v-img
         height="100%"
@@ -38,7 +38,7 @@
               dark
             >
               <v-list-item-content>
-                <v-list-item-title class="title">{{ photographer.name }}</v-list-item-title>
+                <v-list-item-title class="title">{{ photogra2.name }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -69,7 +69,7 @@
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >ถ่ายบุคคล</v-list-item-title>
-                <v-list-item-subtitle>{{this.photoprice.price1}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price1}} /ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item>
       </v-col>
 
@@ -80,7 +80,7 @@
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >รับปริญญา</v-list-item-title>
-                <v-list-item-subtitle>{{this.photoprice.price2}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price2}} /ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6" v-if="this.phototype.photo3 == 'success'"><v-list-item
@@ -90,7 +90,7 @@
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >พรีเวดดิ้ง</v-list-item-title>
-                <v-list-item-subtitle>{{this.photoprice.price3}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price3}} /ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6" v-if="this.phototype.photo4 == 'success'"><v-list-item
@@ -100,7 +100,7 @@
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >งานแต่งงาน</v-list-item-title>
-                <v-list-item-subtitle>{{this.photoprice.price4}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price4}} /ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6" v-if="this.phototype.photo5 == 'success'"><v-list-item
@@ -110,7 +110,7 @@
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >งานอีเวนต์</v-list-item-title>
-                <v-list-item-subtitle>{{this.photoprice.price5}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price5}} /ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col  cols="6" v-if="this.phototype.photo6 == 'success'"><v-list-item
@@ -120,7 +120,7 @@
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >สินค้า/อาหาร</v-list-item-title>
-                <v-list-item-subtitle>{{this.photoprice.price6}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price6}} /ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 
       <v-col   cols="6" v-if="this.phototype.photo7 == 'success'"><v-list-item
@@ -130,13 +130,13 @@
       </v-btn>  
               <v-list-item-content>
                 <v-list-item-title >สถาปัตยกรรม</v-list-item-title>
-                <v-list-item-subtitle>{{this.photoprice.price7}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{this.photoprice.price7}} /ชั่วโมง</v-list-item-subtitle>
               </v-list-item-content></v-list-item></v-col>
 </v-row>
     </v-container>
 
 
-    <center><v-btn text color="primary" href="achievement.vue">ผลงาน</v-btn> </center>
+    <center><v-btn text color="primary" >ผลงาน</v-btn> </center>
      <v-row class="">
        <v-col cols="4" sm>
       <v-img
@@ -196,6 +196,7 @@ export default {
 
   data: () => {
     return {
+      photographers2:{},
       photographers: {},
       phototype: {},
       models: {},
@@ -226,7 +227,12 @@ export default {
       console.log(snapshot.child(this.$route.params.key+"/typePhoto/type").val());
       
     });
-    
+    photographerRef.orderByKey().equalTo(this.$route.params.key).on("value", snapshot => {
+      this.photographers2 = snapshot.val();
+      console.log(this.photographers2);
+
+      
+    });
   }
 };
 </script>

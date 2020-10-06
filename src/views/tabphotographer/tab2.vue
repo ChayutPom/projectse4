@@ -224,13 +224,14 @@ statusTask:'งานที่รอส่ง'
  },
     mounted() {
 
-
+console.log(this.$store.state.keyUserF);
     photograRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", snapshot => {
      var keyPhoto =Object.keys(snapshot.val())[0]
-     
+     console.log(keyPhoto);
 taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
     // var key4 = Object.keys(snapshot.val())[0];
         this.task = snapshot.val();
+        console.log(this.task);
         
    }); 
         });   

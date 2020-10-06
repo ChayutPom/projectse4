@@ -11,7 +11,7 @@
 ></v-textarea>
     </v-col>
 
-    <v-col cols="12" >
+    <!-- <v-col cols="12" >
       <label for>วัน-เวลาเริ่มงาน:</label>
 
        <v-text-field solo  :label="this.task.taskStart"></v-text-field>
@@ -19,11 +19,11 @@
       <label for>วัน-เวลาสิ้นสุดงาน:</label>
       <br />
       <v-text-field solo  :label="this.task.taskEnd"></v-text-field>
-    </v-col>
+    </v-col> -->
 
     <v-col cols="12" >
       สถานที่
-      <v-text-field solo  :label="this.task.taskLocation.locationData.subdistrict+' '+ this.task.taskLocation.locationData.district+' '+ this.task.taskLocation.locationData.province+' '+ this.task.taskLocation.locationData.postcode"></v-text-field>
+      <v-text-field solo  :label="this.task.taskLocation.locationData.subdistrict+' '+ this.task.taskLocation.locationData.district+' '+ this.task.taskLocation.locationData.province"></v-text-field>
 
       <longdo-map 
    @load="test" 
@@ -57,7 +57,7 @@
       <v-text-field solo  :label="this.task.taskNum"></v-text-field>
     </v-col>
 
-<v-row>
+<!-- <v-row>
   <v-col cols="12" >
     <div class="text-center">
       <v-btn rounded color="primary" dark>Rounded Button</v-btn>
@@ -65,7 +65,7 @@
    <v-col cols="12" > <div class="text-center">
       <v-btn rounded color="primary" dark>Rounded Button</v-btn>
     </div></v-col>
-</v-row>
+</v-row> -->
   </v-container>
 
   

@@ -8,7 +8,7 @@
     ><button onclick="window.history.go(-1); return false;"
                v-if="!$route.meta.hideBack" ><v-icon >mdi-keyboard-backspace</v-icon></button>
 
-      <div class="d-flex align-center" centered>
+      <div  class="d-flex text-center align-center" centered>
         
       </div>
       <v-spacer></v-spacer>

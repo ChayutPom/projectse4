@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 // import firebase from 'firebase';
 
 import Home from '../views/Home.vue';
+import imageTask from '../views/imageTask.vue';
 import Message from '../views/Message';
 import Profile from '../views/Profile';
 import Schedule from '../views/Schedule';
@@ -100,7 +101,9 @@ Vue.use(VueRouter)
     {
       path: '/:type/location.vue',
       name: 'location',
-      component: location
+      component: location,
+      meta: { hideNavigation: true }
+
     },
     {
       path: '/photo.vue',
@@ -396,6 +399,14 @@ Vue.use(VueRouter)
       meta: { hideNavigation: true,
         hideBack: true },
     },
+    {
+      path: '/imageTask/:key',
+      name: 'imageTask',
+      component: imageTask,
+      meta: { hideNavigation: true,
+         },
+    },
+
 
 ]
 

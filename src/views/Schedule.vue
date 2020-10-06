@@ -8,7 +8,7 @@
       <v-list-item three-line>
         <v-list-item-content>
           <div class="font-weight-bold mb-2">{{tasks.taskType}}</div>
-          <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : </v-list-item-title></div>
+          <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : {{tasks.keyPhoto}}</v-list-item-title></div>
           <!-- <div v-if="tasks.taskType == 'model'"><v-list-item-title class="mb-1" >Modelที่เลือก : {{tasks.keyModel}}</v-list-item-title></div> -->
 
 <!-- :href="'/schedule/PrivateChat/' + tasks.keyUser" -->
@@ -51,6 +51,7 @@
       <v-dialog
         v-model="dialog"
         width="500"
+        :retain-focus="false"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -81,7 +82,14 @@
               text
               @click="dialog = false"
             >
-              I accept
+              ยกเลิก
+            </v-btn>
+             <v-btn
+              color="primary"
+              text
+              @click="pay(keystatus)"
+            >
+              จ่ายเงิน
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -133,6 +141,7 @@
       <v-bottom-sheet
         v-model="sheet"
         persistent
+        :retain-focus="false"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -140,6 +149,7 @@
             dark
             v-bind="attrs"
             v-on="on"
+            @click="end(keystatus,tasks.keyPhoto)"
           >
             เสร็จสิ้น
           </v-btn>
@@ -158,8 +168,57 @@
           </v-btn>
           <div class="py-3">
 ให้คะแนนช่างภาพ
+   <v-rating
+            v-model="rating"
+            color="yellow darken-3"
+            background-color="grey darken-1"
+            empty-icon="$ratingFull"
+            half-increments
+            hover
+            large
+          ></v-rating>
+            
+
+
+                  <v-textarea
+                
+            label="แสดงความคิดเห็น"
+            auto-grow
+            outlined
+            rows="3"
+            row-height="25"
+            shaped
+            v-model="comment"
+            editable
+          > </v-textarea>
+ความคิดเห็นของคุณ {{taskRate}}
+          <!-- <v-textarea
+          v-if="taskRate!=null"
+          :label=  taskRate
+            auto-grow
+            outlined
+            rows="3"
+            row-height="25"
+            shaped
+            v-model="comment"
+          > </v-textarea> -->
              </div>
-             
+              <v-btn
+            class="mt-6"
+            text
+            color="error"
+            @click="confrim(comment,rating,endTask,keyPhoto)"
+    >
+            ส่ง
+          </v-btn>
+
+             <v-btn
+            class="mt-6"
+            text
+            color="error"
+  :href="'/imageTask/'+endTask"          >
+            ดูรูป
+          </v-btn>
         </v-sheet>
       </v-bottom-sheet>
     </div></v-stepper-step>
@@ -183,6 +242,7 @@
 import sctab from './sctab.vue';
 import firebase from "./forms/firebaseConfig";
 var database = firebase.database();
+
 var userRef = database.ref("/userdata");
 var taskRef = database.ref("/taskphoto");
 var modelRef = database.ref("/model");
@@ -195,12 +255,17 @@ export default {
   },
   data() {
     return {
+      total:0,
+      ratePhoto: 0,
+      taskRate: null,
+      // taskStar: 5,
+      comment:null,
       price1:'',
-      rating: 4,
+      rating: 5,
       keyclick:'',
       dialog: false,
       photographer:{name: '',},
-        
+     endTask   : '',
     
                 sheet: false,
 tasks:{},
@@ -211,56 +276,89 @@ tasks:{},
 
   },
 
+
+
   
 methods: {
+
+
+
   asd(a){
 console.log(a);
-this.keyclick = a 
-console.log(this.task[this.keyclick]);
-console.log(this.task[this.keyclick].price.price1);
-this.price1 =this.task[this.keyclick].price.price1
-  },
+ taskRef.child(a).update({
+    statusTask: 'ช่างภาพรับงาน',
 
+   }); 
+console.log(this.task[a]);
+console.log(this.task[a].price.price1);
+this.price1 =this.task[a].price.price1
+
+ 
+  },
+end(keystatus,photo){
+console.log(photo);
+  console.log(keystatus);
+  this.keyPhoto = photo
+  this.endTask = keystatus
+
+   taskRef.orderByKey().equalTo(this.endTask).on("value", snapshot => {
+      
+        this.taskRate = snapshot.val()[this.endTask].ratingTask.comment;
+this.rating = snapshot.val()[this.endTask].ratingTask.rating;
+   }); 
+}, 
   pay(keystatus){
     console.log(keystatus);
      taskRef.child(keystatus).update({
     statusTask: 'ช่างภาพรับงาน',
 
    }); 
-//       firebase.database().ref(userRef).once('value', function(snapshot) {
-// var i=0
-// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-// var key = Object.keys(snapshot.val())[i];
-// var data = snapshot.child(key).val();
-//  if(data.email == firebase.auth().currentUser.email){
-//         console.log(data.email);
-//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-
-//      var key2 = Object.keys(snapshot.val())[0];
-// console.log(snapshot.val()[key2].email);
-//     photographerRef.orderByChild("keyUser").equalTo(key2).on("value", snapshot => {
-//      var key3 =Object.keys(snapshot.val())[0]
-//      console.log(key3);
-     
-// taskRef.orderByKey().equalTo(keystatus).on("value", snapshot => {
-//  var key4 =Object.keys(snapshot.val())[0]
-
-
-//               taskRef.child(key4).update({
-//     statusTask: 'ช่างภาพรับงาน',
-
-//    }); 
-//         });
-
-//   })
-// });
-        
-//       }
-
-// }
-
-// })
   },
+  confrim(comment,rating,endTask,keyPhoto){
+console.log(keyPhoto);
+taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
+console.log(snapshot.numChildren());
+this.num = snapshot.numChildren()
+// this.starTotal = rating/this.num
+var i =0
+for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+  var key = Object.keys(snapshot.val())[i];
+console.log(snapshot.val()[key].ratingTask.rating);
+this.total = this.total + snapshot.val()[key].ratingTask.rating 
+
+}
+console.log(this.total);
+this.ratePhoto = this.total /this.num
+console.log(this.ratePhoto);
+
+photographerRef.child(keyPhoto).update({
+    ratingPhoto: {
+      ratePhoto:this.ratePhoto,
+      num:this.num
+    }
+  })
+  this.total = 0
+  }); 
+
+
+
+taskRef.child(endTask).update({
+    ratingTask: {
+      rating:rating,
+      comment:comment
+    }
+  })
+//    let data = {
+//  ratingTask: {
+//       comment:comment
+//     }
+//    }
+
+//   taskRef.push( 
+//       data
+//     )
+  },
+
 chat(keyPhoto,keyModel){
   console.log(keyPhoto);
   console.log(keyModel);
@@ -375,11 +473,11 @@ taskRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", 
     
       photographerRef.on("value", snapshot => {
   this.photographer= snapshot.val()
-  
+
     });
    }); 
 
-   
+  
 
   }
 };

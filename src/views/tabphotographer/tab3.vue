@@ -42,7 +42,7 @@
             v-bind="attrs"
             v-on="on"
           >
-            Open Dialog
+            ส่งงาน
           </v-btn>
         </template>
         <v-card>
@@ -57,7 +57,7 @@
             >
               <v-icon>mdi-close</v-icon>
             </v-btn>
-            <v-toolbar-title>Settings</v-toolbar-title>
+            <v-toolbar-title>รายละเอียดงาน</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
               <v-btn
@@ -65,7 +65,7 @@
                 text
                 @click="dialog = false"
               >
-                Save
+                ย้อนกลับ
               </v-btn>
             </v-toolbar-items>
           </v-toolbar>
@@ -204,7 +204,8 @@ deleteImage(img, index) {
         uploadTask.on(
           "state_changed",
           (snapshot) => {
-            console.log(snapshot);
+            this.asd = snapshot
+            // console.log(snapshot);
           },
           (error) => {
             // Handle unsuccessful uploads

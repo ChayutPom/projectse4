@@ -1,7 +1,6 @@
 <template>  
 <div>   
-    <v-card      height="650"  >
-     <v-btn small v-on:click="say()">Normal</v-btn>
+    <v-card      height="700"  >
 
 <longdo-map 
    @load="test" 
@@ -10,10 +9,12 @@
 > 
 
 </longdo-map>
-
+<v-footer padless fixed > <v-col cols="12" > <div class="text-center">
+      <v-btn v-on:click="say()" rounded color="primary" dark>ปักหมุด</v-btn>
+    </div></v-col></v-footer>
 
     </v-card >
->
+ 
 </div>
 
 </template>
@@ -83,8 +84,7 @@ console.log( this.map2.location());
         locationData: {
           country: this.info.data.country,
           district:this.info.data.district,
-          geocode:this.info.data.geocode,
-          postcode:this.info.data.postcode,
+          // geocode:this.info.data.geocode,
           province:this.info.data.province,
           subdistrict:this.info.data.subdistrict,
          },

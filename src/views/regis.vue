@@ -7,9 +7,9 @@
             <v-layout column align-center justify-center pa-3 mt-2>
               <v-flex xs12 mb-3 >
                 <div class="login-wrapper text-xs-center">
-                  <div class="display-1 font-weight-black">Sign Up</div>
+                  <div class="display-1 font-weight-black">สมัครสมาชิก</div>
                 </div>
-              </v-flex>
+              </v-flex><br>
 
               <v-flex xs12 class="form-wrapper">
                 <v-text-field
@@ -19,7 +19,7 @@
                   label="FirstName"
                   background-color="#f4f8f7"
                   color="grey darken-2"
-                  prepend-inner-icon="mdi-lock-outline"
+                  prepend-inner-icon="mdi-account"
                   name="firstname"
                   type="firstname"
                   id="firstname"
@@ -34,7 +34,7 @@
                   label="LastName"
                   background-color="#f4f8f7"
                   color="grey darken-2"
-                  prepend-inner-icon="mdi-lock-outline"
+                  prepend-inner-icon="mdi-account"
                   name="lastname"
                   type="lastname"
                   id="lastname"
@@ -49,7 +49,7 @@
                   label="Phone"
                   background-color="#f4f8f7"
                   color="grey darken-2"
-                  prepend-inner-icon="mdi-lock-outline"
+                  prepend-inner-icon="mdi-phone"
                   name="phone"
                   type="phone"
                   id="phone"
@@ -103,7 +103,7 @@
               </v-flex>
 
               <br />
-<v-btn rounded outlined color="primary" :disabled="loading" @click="addUser(firstname,lastname,phone,email,password)">Sign Up </v-btn>
+<v-btn rounded outlined color="primary" :disabled="loading" @click="addUser(firstname,lastname,phone,email,password)">ยืนยันสมัครสมาชิก </v-btn>
             </v-layout>
           </v-layout>
         </form>

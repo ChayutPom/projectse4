@@ -13,8 +13,7 @@
     <v-col cols="12" sm="6" md="3">
       สถานที่
       <v-text-field v-if="this.$store.state.location.locationData==null" label='สถานที่'  filled rounded dense v-model="taskLocation" @click="location('task')" ></v-text-field>
-      <v-text-field v-if="this.$store.state.location.locationData!=null" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country+this.$store.state.location.locationData.postcode' solo ></v-text-field>
-    </v-col>
+      <v-text-field v-if="this.$store.state.location.locationData!=null" @click="location('task')" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country' solo ></v-text-field>    </v-col>
 
         <v-col cols="12" sm="6" md="3">
       <v-select
@@ -101,8 +100,15 @@
     </v-col>
 
     
-    <button @click="insertToTaskphoto(taskDetail, taskLocation,taskStart1,taskStart2,taskStart3,taskStart4,taskTaotal1,taskTaotal2,taskTaotal3,taskTaotal4)"> Add</button>
-
+    
+<div class="text-center">
+<v-btn
+@click="insertToTaskphoto(taskDetail, taskLocation,taskStart1,taskStart2,taskStart3,taskStart4,taskTaotal1,taskTaotal2,taskTaotal3,taskTaotal4)"        rounded
+        color="primary"
+        dark
+      >
+        ยืนยัน
+      </v-btn></div>
   </v-container>
 </template>
 
@@ -135,7 +141,7 @@ export default {
     insertToTaskphoto (taskDetail, taskLocation,taskStart1,taskStart2,taskStart3,taskStart4,taskTaotal1,taskTaotal2,taskTaotal3,taskTaotal4) {
 
 photographerRef.orderByKey().equalTo(this.$route.params.key).on("value", (snapshot) => {
-this.priceTotal = snapshot.val()[this.$route.params.key].typePhoto.price.price3
+this.priceTotal = snapshot.val()[this.$route.params.key].typePhoto.price.price7
        let data = {
         taskDetail: taskDetail,
         taskLocation: this.$store.state.location,
