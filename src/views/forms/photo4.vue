@@ -5,16 +5,17 @@
     </center>
     <br />
 
+<v-col cols="12" sm="6" md="3">
+      สถานที่
+      <v-text-field v-if="this.$store.state.location.locationData==null" label='สถานที่'  filled rounded dense v-model="taskLocation" @click="location('task')" ></v-text-field>
+           <v-text-field v-if="this.$store.state.location.locationData!=null" @click="location('task')" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country' solo ></v-text-field>
+    </v-col>
     <v-col cols="12" sm="6" md="3">
       รายละเอียดงาน
       <v-textarea solo v-model="taskDetail"></v-textarea>
     </v-col>
 
-    <v-col cols="12" sm="6" md="3">
-      สถานที่
-      <v-text-field v-if="this.$store.state.location.locationData==null" label='สถานที่'  filled rounded dense v-model="taskLocation" @click="location('task')" ></v-text-field>
-           <v-text-field v-if="this.$store.state.location.locationData!=null" @click="location('task')" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country' solo ></v-text-field>
-    </v-col>
+    
 
        <v-col cols="12" sm="6" md="3">
       <v-select
@@ -176,7 +177,8 @@ taskTaotal1,
                   mapRef.push(this.$store.state.location)
 
       .then(() => {
-            console.log("Document successfully written!");
+         alert('จ้างช่างภาพเรียบร้อย รอช่างภาพที่คุณเลือก ยืนยันการรับงาน')
+               window.history.go(-3)
             console.log(data);
             
           })

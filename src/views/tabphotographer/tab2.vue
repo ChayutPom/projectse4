@@ -2,10 +2,6 @@
 <div>
 <photographer/>
 
-
-
-
-    
    <v-row justify="center">
       <v-dialog
         v-model="dialog"
@@ -142,6 +138,8 @@ LongdoMap.init('19d834440f9ee5958b68123c8a4c6d6b')
 var database = firebase.database();
 var taskRef = database.ref("/taskphoto");
 var photograRef = database.ref("/photographer");
+var userRef = database.ref("/userdata");
+
   export default {
   components: {
     photographer,
@@ -232,7 +230,10 @@ taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
     // var key4 = Object.keys(snapshot.val())[0];
         this.task = snapshot.val();
         console.log(this.task);
-        
+
+        userRef.on("value", snapshot => {
+        console.log(snapshot.val());
+   });  
    }); 
         });   
 

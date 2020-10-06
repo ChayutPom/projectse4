@@ -3,10 +3,10 @@ module.exports = {
     "vuetify"
   ],
  
-    devServer: {
-        port: 3454,
-        host: '103.91.206.116'
+    // devServer: {
+    //     port: 345,
+    //     host: '103.91.206.116'
 
-    }
+    // }
 
 }

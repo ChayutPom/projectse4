@@ -55,7 +55,8 @@
               
     >
       <v-list-item >
-        <v-list-item-avatar color="grey"></v-list-item-avatar>
+        <v-list-item-avatar color="grey">      <img  :src="photographer.img[0]" alt width="90px" />   
+</v-list-item-avatar>
         <v-list-item-content >
       <v-list-item-title class="headline">{{photographer.name}}</v-list-item-title>
           <v-list-item-subtitle><i class="fas fa-star-half-alt"></i>5.0<br><i class="fas fa-money-bill-wave"></i>2500-3000</v-list-item-subtitle>

@@ -6,7 +6,7 @@
             <v-col col="3" class=" ml-6">
       <v-avatar  color="indigo" height="90" width="90">
    <v-img   max-width="90px" max-height="90px" :src="imgPro"></v-img>
-        
+
       </v-avatar></v-col >
       
       <v-col col="9" class=" mr-12">
@@ -99,6 +99,7 @@ console.log(this.$store.state.keyUser);
 console.log(this.$store.state.keyUserF);
     this.users = this.$store.state.keyUser
     this.imgPro   = this.users.profileImg[0]
+    console.log(this.users.profileImg[0]);
   }
 };
 </script>

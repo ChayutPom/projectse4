@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <v-carousel cycle height="170" hide-delimiter-background show-arrows-on-hover>
+      <v-carousel cycle height="200" hide-delimiter-background show-arrows-on-hover>
         <v-carousel-item
           v-for="(item,i) in items"
           :key="i"
@@ -266,16 +266,16 @@ export default {
 
       items: [
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
+          src: "https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/slid%2Fphotographer-th.jpg?alt=media&token=b2854541-9549-4810-b597-22170bdccbac",
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
+          src: "https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/slid%2Fph-th.jpg?alt=media&token=bd107ace-afa2-4686-93f8-70a65a762607",
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
+          src: "https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/slid%2Fcv-2-1024x533.jpg?alt=media&token=07710db7-b6e8-4e43-8323-729d99589be4",
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
+          src: "https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/slid%2F1578380945550012550.jpg?alt=media&token=ebeca62f-8927-45d1-92c2-6a79d608885d",
         },
       ],
     };

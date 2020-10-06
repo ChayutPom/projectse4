@@ -8,7 +8,7 @@
       <v-list-item three-line>
         <v-list-item-content>
           <div class="font-weight-bold mb-2">{{tasks.taskType}}</div>
-          <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : {{tasks.keyPhoto}}</v-list-item-title></div>
+          <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : {{photographer[tasks.keyPhoto].name}}</v-list-item-title></div>
           <!-- <div v-if="tasks.taskType == 'model'"><v-list-item-title class="mb-1" >Modelที่เลือก : {{tasks.keyModel}}</v-list-item-title></div> -->
 
 <!-- :href="'/schedule/PrivateChat/' + tasks.keyUser" -->
@@ -61,7 +61,7 @@
             v-on="on"
             @click="asd(keystatus)"
           >
-            ชำระเงิน{{keystatus}}
+            ชำระเงิน
           </v-btn>
         </template>
   
@@ -87,7 +87,7 @@
              <v-btn
               color="primary"
               text
-              @click="pay(keystatus)"
+              @click="dialog = false,pay(keystatus)"
             >
               จ่ายเงิน
             </v-btn>
@@ -473,7 +473,7 @@ taskRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", 
     
       photographerRef.on("value", snapshot => {
   this.photographer= snapshot.val()
-
+console.log(this.photographer['-MIp9Xrx5z-lfByyN14d'].name);
     });
    }); 
 
