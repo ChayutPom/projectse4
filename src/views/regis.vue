@@ -127,7 +127,10 @@ export default {
       firstname: "",
       lastname: "",
       phone:  "",
-      alert: false
+      alert: false,
+      product: {
+      images: [],
+    },
     };
   },
   computed: {
@@ -177,7 +180,9 @@ export default {
         phone: phone,
         status_photogra:false ,
         status_model: false,
-        profileImg: 'https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/image%2Fkisspng-user-profile-computer-icons-profile-5ac09245049c32.0935523415225697970189.jpg?alt=media&token=5bcb1a1a-5dfb-48c9-947e-4d0afe3bf218'
+        profileImg:{
+ [0] :  'https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/kisspng-user-profile-computer-icons-profile-5ac09245049c32.0935523415225697970189.jpg?alt=media&token=9945f225-6db8-417a-ae7b-e239b2be5943'
+}
 
         // uid_user: firebase.auth().currentUser.uid,
       }

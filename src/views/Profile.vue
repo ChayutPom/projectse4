@@ -8,7 +8,6 @@
    <v-img   max-width="90px" max-height="90px" :src="imgPro"></v-img>
 
       </v-avatar></v-col >
-      
       <v-col col="9" class=" mr-12">
 
       <p class=" title center " >{{users.firstname}} {{users.lastname}}</p></v-col >
@@ -57,11 +56,12 @@
 </template> 
 
 <script>
-// import firebase from "./forms/firebaseConfig";
+import firebase from "./forms/firebaseConfig";
+var database = firebase.database();
 
+var userRef = database.ref("/userdata");
 // const db = firebase.firestore();
-// var database = firebase.database();
-// var userRef = database.ref("/userdata");
+
 export default {
   data: () => {
     return {
@@ -98,8 +98,12 @@ userSignOut() {
 console.log(this.$store.state.keyUser);
 console.log(this.$store.state.keyUserF);
     this.users = this.$store.state.keyUser
-    this.imgPro   = this.users.profileImg[0]
-    console.log(this.users.profileImg[0]);
+    // this.imgPro   = this.users.profileImg[0]
+    console.log(this.users);
+    userRef.orderByKey().equalTo(this.$store.state.keyUserF).on("value", snapshot => { 
+this.imgPro =snapshot.val()[this.$store.state.keyUserF].profileImg[0]
+
+    }); 
   }
 };
 </script>

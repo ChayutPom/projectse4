@@ -130,6 +130,7 @@
               <v-img height="155" max-width="100%" :src="photogra.img[0]"></v-img>
 
               <v-card>
+              
                 {{photogra.name}}
                 <v-row align="center" class="mx-2">
                   <v-rating :value="5" dense half-increments readonly size="10"></v-rating>

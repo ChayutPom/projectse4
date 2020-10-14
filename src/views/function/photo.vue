@@ -1,7 +1,11 @@
 <template>
 
  <v-card>
-
+<div class="row">
+        <div class="search-wrapper panel-heading col-sm-12">
+          <input class="form-control" type="text"  v-model="searchQuery" placeholder="Search" />
+        </div>
+      </div>
       <!-- ------------------------ -->
 <v-container  fluid>
 
@@ -48,17 +52,17 @@
      <v-card
       max-width="auto"
       class="mx-auto"
-        :href="'/profilephoto/' + key"
-     :key="key" v-for="(photographer, key) in photographers"
+        :href="'/profilephoto/' + col.key"
+     v-for="(col, index) in resultQuery" :key="index"
               tile
               outlined
               
     >
-      <v-list-item >
-        <v-list-item-avatar color="grey">      <img  :src="photographer.img[0]" alt width="90px" />   
+      <v-list-item  >
+        <v-list-item-avatar color="grey">      <img  :src="col.img[0]" alt width="90px" />   
 </v-list-item-avatar>
         <v-list-item-content >
-      <v-list-item-title class="headline">{{photographer.name}}</v-list-item-title>
+      <v-list-item-title class="headline" >{{col.name}}</v-list-item-title>
           <v-list-item-subtitle><i class="fas fa-star-half-alt"></i>5.0<br><i class="fas fa-money-bill-wave"></i>2500-3000</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -72,7 +76,7 @@
       </v-chip>
 
       <v-row >
-        <v-col cols="3" :key="key" v-for="(photographer2, key) in photographer.img" sm><v-img 
+        <v-col cols="3" :key="key" v-for="(photographer2, key) in col.img" sm><v-img 
         :src="photographer2"
         height="90" max-width=""
       ></v-img></v-col>
@@ -141,6 +145,12 @@ export default {
 
   data: () => {
     return {
+        dataF: [],
+      asd: [],
+   
+      startDate: null,
+      endDate: null ,
+      searchQuery: null,
       photographers: {},
       models: {},
       reviews: {},
@@ -183,12 +193,45 @@ this.$router.push('/profilephoto/all/photo7.vue')
 }
 },
 },
+computed: {
+    resultQuery: function () {
+    
+      if (this.searchQuery) {
+        
+        return this.dataF.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.name.toLowerCase().includes(v));
+        });
+      } else {
+        // console.log(this.photographers);
+        return this.dataF;
+      }
+    },
 
+
+  },
   mounted() {
-    photographerRef.on("value", snapshot => {
-      this.photographers = snapshot.val();
-           this.users = this.$store.state.keyUser
+   photographerRef.orderByChild("email").on("value", snapshot => {
+    this.photographers =snapshot.val();
+          var i=0
 
+            for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+            var keys = Object.keys(snapshot.val())[i]
+
+console.log(this.photographers[keys].email);
+const datarec ={
+  name: this.photographers[keys].name,
+  key: keys,
+  img:this.photographers[keys].img
+}
+
+this.dataF.push(datarec)
+            }
+      this.photographers = snapshot.val();
+          //  console.log( this.photographers);
+console.log(this.dataF);
     });
   }
 };
