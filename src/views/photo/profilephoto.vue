@@ -1,7 +1,7 @@
 <template>
 <v-container  >
     <v-card
-      class="mx-auto "
+      class="mx-auto"
       max-width="434"
       tile
       :key="key" v-for="(photogra2, key) in photographers2"
@@ -26,7 +26,7 @@
               
               
             >
-              <v-img  :src="photogra2.img[0]"></v-img>
+              <v-img  src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
             </v-avatar>
           </v-col>
           
@@ -136,7 +136,7 @@
     </v-container>
 
 
-    <center><v-btn text color="primary" >ผลงาน</v-btn> </center>
+    <center><v-btn text color="primary" href="achievement.vue">ผลงาน</v-btn> </center>
      <v-row class="">
        <v-col cols="4" sm>
       <v-img
@@ -227,12 +227,12 @@ export default {
       console.log(snapshot.child(this.$route.params.key+"/typePhoto/type").val());
       
     });
-    // photographerRef.orderByKey().equalTo(this.$route.params.key).on("value", snapshot => {
-    //   this.photographers2 = snapshot.val();
-    //   console.log(this.photographers2);
+    photographerRef.orderByKey().equalTo(this.$route.params.key).on("value", snapshot => {
+      this.photographers2 = snapshot.val();
+      console.log(this.photographers2);
 
       
-    // });
+    });
   }
 };
 </script>

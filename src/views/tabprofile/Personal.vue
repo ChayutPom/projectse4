@@ -76,7 +76,6 @@
 
 <script>
 import firebase from "../forms/firebaseConfig";
-
 // const db = firebase.firestore();
 var database = firebase.database();
 var userRef = database.ref("/userdata");
@@ -113,13 +112,10 @@ product: {
     uploadImage(e) {
       if (e.target.files[0]) {
         let file = e.target.files[0];
-
         var storageRef = firebase
           .storage()
           .ref("products/" + Math.random() + "_" + file.name);
-
         let uploadTask = storageRef.put(file);
-
         uploadTask.on(
           "state_changed",
           (snapshot) => {
@@ -132,7 +128,6 @@ product: {
           () => {
             // Handle successful uploads on complete
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
               this.product.images.push(downloadURL);
               console.log(this.product.images);
@@ -141,8 +136,6 @@ product: {
         );
       }
     },
-
-
       updateUser(updataFirstname,updateLastname,updatePhone,image){
           firebase.database().ref(userRef).once('value', function(snapshot) {
     // var data = snapshot.val()
@@ -150,7 +143,6 @@ var i=0
 for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
 var key = Object.keys(snapshot.val())[i];
 var data = snapshot.child(key).val();
-
  if(data.email == firebase.auth().currentUser.email){
         console.log(data.email);
         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
@@ -158,11 +150,8 @@ var data = snapshot.child(key).val();
     
      var key2 = Object.keys(snapshot.val())[0];
 console.log(snapshot.val()[key2].email);
-
-
   // this.users = snapshot.val()[key2];
   // console.log(this.users);
-
   if(updataFirstname==''){
               updataFirstname = snapshot.val()[key2].firstname;          
           }
@@ -179,12 +168,10 @@ updatePhone = snapshot.val()[key2].phone ;
     phone: updatePhone,
     profileImg:image
   })
-
  
 });
         
       }
-
 }
 })
  this.$store.dispatch("editUser", {
@@ -195,12 +182,8 @@ firstname: updataFirstname,
     });
         
       },
-
-
-
     },
  mounted() {
-
 userRef.on("value", snapshot => {
      this.users = this.$store.state.keyUser
       console.log(snapshot.val());
@@ -211,6 +194,3 @@ userRef.on("value", snapshot => {
   }
 };
 </script>
-
-
-

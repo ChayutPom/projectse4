@@ -59,7 +59,7 @@
               @click="dialog = false"
             >
             </v-btn>
-            <v-toolbar-title>Settings</v-toolbar-title>
+            <v-toolbar-title></v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
               <v-btn
@@ -67,7 +67,7 @@
                 text
                 @click="dialog = false"
               >
-                Save
+                ย้อนกลับ
               </v-btn>
             </v-toolbar-items>
           </v-toolbar>

@@ -67,7 +67,10 @@
   
         <v-card>
           <v-card-title class="headline grey lighten-2">
-            Privacy Policy
+          จำนวนเงินที่ต้องชำระ
+
+
+          
           </v-card-title>
   
           <v-card-text>{{price1}}

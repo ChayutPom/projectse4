@@ -95,30 +95,31 @@ export default new Vuex.Store({
 console.log('Edit123');
 console.log(commit);
 console.log(payload);
-userRef.on("value", snapshot => {
+commit('setkeyUser', payload)
+// userRef.on("value", snapshot => {
 
-  var i=0
-  for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-  var key = Object.keys(snapshot.val())[i];
+//   var i=0
+//   for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+//   var key = Object.keys(snapshot.val())[i];
   
-  var data = snapshot.child(key).val();
+//   var data = snapshot.child(key).val();
   
-        if(data.email == firebase.auth().currentUser.email){
+//         if(data.email == firebase.auth().currentUser.email){
           
-          userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+//           userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
       
-       var key2 = Object.keys(snapshot.val())[0];
-    this.users = snapshot.val()[key2];
-    console.log(this.users);
-    commit('setkeyUser', this.users)
-    commit('setkeyUserF', key2)
-  });
+//        var key2 = Object.keys(snapshot.val())[0];
+//     this.users = snapshot.val()[key2];
+//     console.log(this.users);
+//     commit('setkeyUser', this.users)
+//     commit('setkeyUserF', key2)
+//   });
           
-        }
+//         }
        
-  } 
+//   } 
       
-      });
+//       });
     },
 
     userSignIn({commit}, payload) {
