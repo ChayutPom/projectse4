@@ -7,6 +7,7 @@
 >
       <v-list-item three-line>
         <v-list-item-content>
+          {{keystatus}}
           <div class="font-weight-bold mb-2">{{tasks.taskType}}</div>
           <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : {{photographer[tasks.keyPhoto].name}}</v-list-item-title></div>
           <!-- <div v-if="tasks.taskType == 'model'"><v-list-item-title class="mb-1" >Modelที่เลือก : {{tasks.keyModel}}</v-list-item-title></div> -->
@@ -185,7 +186,7 @@
 
                   <v-textarea
                 
-            label="แสดงความคิดเห็น"
+            label= "แสดงความคิดเห็น"
             auto-grow
             outlined
             rows="3"
@@ -194,7 +195,7 @@
             v-model="comment"
             editable
           > </v-textarea>
-ความคิดเห็นของคุณ {{taskRate}}
+ความคิดเห็นของคุณ 
           <!-- <v-textarea
           v-if="taskRate!=null"
           :label=  taskRate
@@ -319,17 +320,22 @@ this.rating = snapshot.val()[this.endTask].ratingTask.rating;
   },
   confrim(comment,rating,endTask,keyPhoto){
 console.log(keyPhoto);
+console.log(endTask);
 taskRef.orderByChild("keyPhoto").equalTo(keyPhoto).on("value", snapshot => {
-console.log(snapshot.numChildren());
+  this.commentF = snapshot.val()
+  console.log(this.commentF[endTask].ratingTask.comment);
+  console.log(snapshot.numChildren());
 this.num = snapshot.numChildren()
-// this.starTotal = rating/this.num
 var i =0
 for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
   var key = Object.keys(snapshot.val())[i];
-console.log(snapshot.val()[key].ratingTask.rating);
-this.total = this.total + snapshot.val()[key].ratingTask.rating 
-
+  this.total = this.total + snapshot.val()[key].ratingTask.rating 
 }
+console.log(this.total);
+// taskRef.orderByKey().equalTo(endTask).on("value", snapshot => {
+
+// console.log(snapshot.val());
+
 console.log(this.total);
 this.ratePhoto = this.total /this.num
 console.log(this.ratePhoto);
@@ -341,8 +347,8 @@ photographerRef.child(keyPhoto).update({
     }
   })
   this.total = 0
-  }); 
-
+  // }); 
+}); 
 
 
 taskRef.child(endTask).update({
@@ -476,7 +482,7 @@ taskRef.orderByChild("keyUser").equalTo(this.$store.state.keyUserF).on("value", 
     
       photographerRef.on("value", snapshot => {
   this.photographer= snapshot.val()
-console.log(this.photographer['-MIp9Xrx5z-lfByyN14d'].name);
+console.log(this.photographer);
     });
    }); 
 

@@ -130,11 +130,12 @@
               <v-img height="155" max-width="100%" :src="photogra.img[0]"></v-img>
 
               <v-card>
-              
+
+
                 {{photogra.name}}
                 <v-row align="center" class="mx-2">
-                  <v-rating :value="5" dense half-increments readonly size="10"></v-rating>
-                  <!-- <div class="grey--text ml-4">{{photos.star}} ({{photos.num}})</div> -->
+                  <v-rating  :value="photographers[key].ratingPhoto.ratePhoto" dense half-increments readonly size="10"></v-rating>
+                  <div class="grey--text ml-4">{{photographers[key].ratingPhoto.ratePhoto.toFixed( 1 )}} ({{photographers[key].ratingPhoto.num}})</div>
                 </v-row>
               </v-card>
             </v-card>
@@ -332,7 +333,7 @@ return this.notification
     photographerRef.on("value", (snapshot) => {
       this.photographers = snapshot.val();
       this.users = this.$store.state.keyUser;
-
+console.log(this.photographers["-MIp9Xrx5z-lfByyN14d"].ratingPhoto.ratePhoto.toFixed( 1 ));
     });
     modelRef.on("value", (snapshot) => {
       this.models = snapshot.val();

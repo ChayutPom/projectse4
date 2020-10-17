@@ -63,7 +63,7 @@
 </v-list-item-avatar>
         <v-list-item-content >
       <v-list-item-title class="headline" >{{col.name}}</v-list-item-title>
-          <v-list-item-subtitle><i class="fas fa-star-half-alt"></i>5.0<br><i class="fas fa-money-bill-wave"></i>2500-3000</v-list-item-subtitle>
+          <v-list-item-subtitle><i class="fas fa-star-half-alt"></i> {{ col.star}}<br><i class="fas fa-money-bill-wave"></i> 2500-3000</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 <v-chip
@@ -224,13 +224,12 @@ console.log(this.photographers[keys].email);
 const datarec ={
   name: this.photographers[keys].name,
   key: keys,
-  img:this.photographers[keys].img
+  img:this.photographers[keys].img,
+  star: this.photographers[keys].ratingPhoto.ratePhoto.toFixed( 1 )
 }
 
 this.dataF.push(datarec)
             }
-      this.photographers = snapshot.val();
-          //  console.log( this.photographers);
 console.log(this.dataF);
     });
   }
