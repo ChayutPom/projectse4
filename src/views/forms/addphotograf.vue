@@ -59,13 +59,59 @@
                   accept="image/png, image/jpeg, image/bmp"
                   @change="uploadImage"
                   class="form-control"
-                /><button @click="chooseFiles()">Choose</button>
-              </div>
+                />
 
+                 <v-row justify="center">
+                   <v-btn color="primary"
+            dark  @click="chooseFiles()">เพิ่มรูปภาพ</v-btn>
+      <v-dialog
+        v-model="dialog"
+        persistent
+        max-width="600px"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            สร้างอัลบั้ม
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">สร้างอัลบั้ม</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                
+            
+                <v-col cols="12">
+                  <v-text-field
+                    label="ชื่ออัลบั้ม"
+                    required
+                    v-model="album"
+                  ></v-text-field>
+                  <input
+                  type="file"
+                  id="fileUploadAl"
+                  multiple
+                  hidden
+                  accept="image/png, image/jpeg, image/bmp"
+                  @change="uploadImageAl"
+                  class="form-control"
+                />
+
+                 <v-row justify="center">
+                   <v-btn color="primary"
+            dark  @click="chooseFilesAl()">เพิ่มรูปภาพ</v-btn></v-row>
+                </v-col>
               <div class="form-group d-flex">
                 <div
                   class="img-wrapp p-1"
-                  v-for="(image, index) in product.images"
+                  v-for="(image, index) in Album.images"
                   :key="index"
                 >
                   <img :src="image" alt width="80px" />
@@ -74,6 +120,204 @@
                   >
                 </div>
               </div>
+              
+              </v-row>
+            </v-container>
+          
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog = false"
+            >
+              Close
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog = false, SavechooseFilesAl(album)"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+              </div>
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+              <div v-if="product.images.length > 0" class="form-group d-flex" >
+        <v-card
+      class="mx-auto"
+      max-width="200"
+    >
+      <v-img
+        class="white--text align-end"
+        height="170px"
+       :src="product.images[0]"
+      >
+        <v-card-title>อัลบั้ม ทั่วไป</v-card-title>
+      </v-img>
+  
+      <v-card-actions>
+        <v-btn
+          color="orange"
+          text
+        >
+          ลบ
+        </v-btn>
+  
+
+   <v-dialog
+        v-model="dialog2"
+        persistent
+        max-width="600px"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            ดูรูปในอัลบั้ม
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">User Profile</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+<!--             //// -->
+<div
+                  v-for="(image, index) in product.images"
+                  :key="index"
+                >
+                <v-img
+                  :src="image"
+                  :lazy-src="image"
+                  aspect-ratio="1"
+                  max-width="70"
+                ></v-img>
+                  
+                  <span class="delete-img" @click="deleteImage(image, index)"
+                    >X</span
+                  >
+                </div>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog2 = false"
+            >
+              Close
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog2 = false"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      </v-card-actions>
+    </v-card>
+              </div>
+
+     <!-- ////////////////////          -->
+     <div v-if="Album.images.length > 0" class="form-group d-flex" >
+        <v-card
+      class="mx-auto"
+      max-width="200"
+    >
+      <v-img
+        class="white--text align-end"
+        height="170px"
+       :src="Album.images[0]"
+      >
+        <v-card-title>อัลบั้ม {{albumname}}</v-card-title>
+      </v-img>
+  
+      <v-card-actions>
+        <v-btn
+          color="orange"
+          text
+        >
+          ลบ
+        </v-btn>
+  
+
+   <v-dialog
+        v-model="dialog2"
+        persistent
+        max-width="600px"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            ดูรูปในอัลบั้ม
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">User Profile</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+<!--             //// -->
+<div
+                  v-for="(image2, index) in Album.images"
+                  :key="index"
+                >
+                <v-img
+                  :src="image2"
+                  :lazy-src="image2"
+                  aspect-ratio="1"
+                  max-width="70"
+                ></v-img>
+                  
+                  <span class="delete-img" @click="deleteImage(image2, index)"
+                    >X</span
+                  >
+                </div>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog2 = false"
+            >
+              Close
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog2 = false"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      </v-card-actions>
+    </v-card>
+              </div>
+
             </div>
           </div>
         </v-col>
@@ -287,6 +531,8 @@
                   introduce,
                   address,
                   product.images,
+                  Album.images,
+                  album,
                   photo1,
                   photo2,
                   photo3,
@@ -325,9 +571,11 @@
 =========================================================================================================================================== -->
 
     <div v-if="users.status_photogra == true">
-      <v-container>
+      <v-container   v-for="(pho, index) in photograProfile"
+                  :key="index">
         <v-card class="mx-auto" max-width="434" tile>
           <v-img height="100%">
+          
             <v-row align="end" class="fill-height">
               <v-col cols="3"></v-col>
               <v-col class cols="7">
@@ -344,25 +592,25 @@
             <v-container class="center" style="width: 80%">
               <v-row>
                 <v-text-field
-                  label="Text input"
+                   :label="pho.email"
                   single-line
                   solo
                 ></v-text-field>
 
                 <v-text-field
-                  label="Text input"
+                  :label="pho.address"
                   single-line
                   solo
                 ></v-text-field>
 
                 <v-text-field
-                  label="Text input"
+                  :label="pho.name"
                   single-line
                   solo
                 ></v-text-field>
 
                 <v-text-field
-                  label="Text input"
+                  :label="pho.realname"
                   single-line
                   solo
                 ></v-text-field>
@@ -373,9 +621,17 @@
 
         <center>
           <v-btn text color="primary" href>อัลบั้ม</v-btn>
-        </center>
+     </center>
         <v-row class>
-          <v-col cols="4" sm>
+          <v-col cols="4" sm v-for="(pho2, index) in pho.img"
+                  :key="index">
+            <v-img
+              :src="pho2.image[0]"
+              height="100"
+              max-width
+            ></v-img>
+          </v-col>
+          <!-- <v-col cols="4" sm>
             <v-img
               src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
               height="100"
@@ -409,14 +665,7 @@
               height="100"
               max-width
             ></v-img>
-          </v-col>
-          <v-col cols="4" sm>
-            <v-img
-              src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-              height="100"
-              max-width
-            ></v-img>
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-container>
     </div>
@@ -431,12 +680,22 @@ var userRef = database.ref("/userdata");
 
 export default {
   data: () => ({
+        dialog: false,
+    show: false,
+        dialog2: false,
+
     items: ["1", "2", "3", "4", "5"],
     items2: ["ชาย", "หญิง"],
     sheet: false,
     products: [],
     users: {},
+    imagePhoto:[],
     product: {
+      images: [],
+    },
+    nameAlbum: '',
+    albumname:'',
+    Album: {
       images: [],
     },
     name: "",
@@ -460,6 +719,7 @@ export default {
     price6: "",
     price7: "",
     img: {},
+    album: '',
     typePhoto: {
       type: [],
       price: [],
@@ -479,6 +739,8 @@ export default {
       introduce,
       address,
       images,
+      images2,
+      album,
       photo1,
       photo2,
       photo3,
@@ -494,9 +756,28 @@ export default {
       price6,
       price7
     ) {
-      console.log(photo1);
-      console.log(images);
 
+      console.log(album);
+      console.log(  images2.length);
+      console.log(  images.length);
+      if(images2.length >0){
+const datarec ={
+ nameAlbum : album,
+image : images2
+}
+console.log(datarec);
+this.imagePhoto.push(datarec)
+      }
+      if(images.length>0){
+const datarec2 ={
+ nameAlbum : 'ทั่วไป',
+image :images
+}
+console.log(datarec2);
+
+this.imagePhoto.push(datarec2)
+      }
+console.log(this.imagePhoto);
       console.log(this.users.status_photogra);
 
       let data = {
@@ -506,7 +787,8 @@ export default {
         gender: gender,
         introduce: introduce,
         address: this.$store.state.location,
-        img: images,
+        img: this.imagePhoto
+        ,
         keyUser: this.$store.state.keyUserF,
         typePhoto: {
           type: {
@@ -552,8 +834,30 @@ export default {
       this.introduce = "";
       this.address = "";
     },
+//     addAlbum(album,img){
+// console.log(album);
+// console.log(img);
+
+// this.nameAlbum = album
+// this.image = img
+
+// const datarec ={
+//  nameAlbum = album,
+// image = img
+// }
+
+// this.imagePhoto.push(datarec)
+//     },
     chooseFiles() {
       document.getElementById("fileUpload").click();
+    },
+    chooseFilesAl() {
+
+      document.getElementById("fileUploadAl").click();
+    },
+    SavechooseFilesAl(album){
+      console.log(album);
+      this.albumname = album
     },
     deleteImage(img, index) {
       let image = firebase.storage().refFromURL(img);
@@ -570,7 +874,40 @@ export default {
           console.log("an error occurred");
         });
     },
+uploadImageAl(e) {
+      var i = 0;
+      for (i; i <= e.target.files.length - 1; i++) {
+        if (e.target.files[i]) {
+          let file = e.target.files[i];
 
+          var storageRef = firebase
+            .storage()
+            .ref("products/" + Math.random() + "_" + file.name);
+
+          let uploadTask = storageRef.put(file);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              console.log(snapshot);
+            },
+            (error) => {
+              // Handle unsuccessful uploads
+              console.log(error);
+            },
+            () => {
+              // Handle successful uploads on complete
+              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+
+              uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                this.Album.images.push(downloadURL);
+                console.log(this.product.images);
+              });
+            }
+          );
+        }
+      }
+    },
     uploadImage(e) {
       var i = 0;
       for (i; i <= e.target.files.length - 1; i++) {
@@ -612,6 +949,13 @@ export default {
       this.photographers = snapshot.val();
       this.users = this.$store.state.keyUser;
       console.log(this.users);
+
+    });
+
+      photographerRef.orderByChild('keyUser').equalTo(this.$store.state.keyUserF).on("value", (snapshot) => {
+      this.photograProfile = snapshot.val();
+      // this.users = this.$store.state.keyUser;
+      console.log(this.photograProfile);
     });
   },
 };

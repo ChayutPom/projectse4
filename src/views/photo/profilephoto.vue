@@ -135,24 +135,16 @@
 </v-row>
     </v-container>
 
-
+<v-container  :key="key2" v-for="(photogra, key2) in photographers">
     <center><v-btn text color="primary" href="achievement.vue">ผลงาน</v-btn> </center>
-     <v-row class="">
-       <v-col cols="4" sm>
+     <v-row class="" >
+       <v-col cols="4" sm :key="key2" v-for="(photogra2, key2) in photogra.img">
       <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        :src="photogra2.image[0]"
         height="100" max-width=""
       ></v-img></v-col >
-   <v-col cols="4" sm><v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-        height="100" max-width=""
-      ></v-img> </v-col >
-      <v-col cols="4" sm><v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-        height="100" max-width="" 
-      ></v-img> </v-col >
       </v-row>
-
+</v-container>
 
       <center>ความคิดเห็น</center>
       <v-card
