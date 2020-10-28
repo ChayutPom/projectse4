@@ -2,14 +2,98 @@
 
  <v-card>
 <div class="row">
+  <v-toolbar
+      
+      
+    >
+
+   <input class="form-control" type="text"  v-model="searchQuery" placeholder="Search" />
+
+    </v-toolbar>
+<!--     
         <div class="search-wrapper panel-heading col-sm-12">
           <input class="form-control" type="text"  v-model="searchQuery" placeholder="Search" />
-        </div>
+        </div> -->
       </div>
+      <!-- <v-row align="center"> <v-col
+          class="d-flex"
+          cols="6"
+          sm="3"
+        >
+          <v-select
+            :items="items"
+            label="จัดเรียงตาม"
+            outlined
+          ></v-select>
+        </v-col></v-row> -->
+        <v-card-text>
+         <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto pa-3"
+            style="background-color: #A3C6C4 "
+          >
+           <h2 style="color:#354649">เลือกประเภทงาน</h2>
+          </v-card>
+        </template>
+      </v-hover>
+  
+        <v-chip-group
+          v-model="amenities"
+          column
+          multiple
+        >
+        <v-chip
+            filter
+            outlined
+          >  <v-icon >fa-building</v-icon>
+           สถาปัตยกรรม
+          </v-chip>
+          <v-chip
+            filter
+            outlined
+          >   <v-icon >fa-hamburger</v-icon>
+            สินค้า/อาหาร
+          </v-chip>
+          <v-chip
+            filter
+            outlined
+          > <v-icon >fa-business-time</v-icon>
+            งานอีเวนต์
+          </v-chip>
+          <v-chip
+            filter
+            outlined
+          > <v-icon > fa-venus-mars</v-icon>
+            งานแต่งงาน
+          </v-chip>
+          <v-chip
+            filter
+            outlined
+          > <v-icon >fa-heart</v-icon>
+           พรีเวดดิ้ง
+          </v-chip>
+          <v-chip
+            filter
+            outlined
+          > <v-icon >fa-user-graduate</v-icon>
+           รับปริญญา
+          </v-chip>
+          <v-chip
+            filter
+            outlined
+          > 
+        <v-icon >fas fa-street-view</v-icon>
+        
+ภาพถ่ายบุคคล
+          </v-chip>
+        </v-chip-group>
+      </v-card-text>
       <!-- ------------------------ -->
 <v-container  fluid>
 
-        <v-row>    
+        <!-- <v-row>    
       <v-col cols="3" sm ="4" ><v-btn class="ma-3" outlined medium fab color="indigo" href="/profilephoto/all/photo1.vue">
         <v-icon >fas fa-street-view</v-icon>
         
@@ -44,19 +128,22 @@
         <v-icon >fa-building</v-icon>
         
       </v-btn><p class="text-center">สถาปัตยกรรม</p></v-col>
-</v-row>
+</v-row> -->
     
 
 
 <!-- ------------------------- -->
-     <v-card
+   <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+          ><v-card
       max-width="auto"
-      class="mx-auto"
+      class="mx-auto "
         :href="'/profilephoto/' + col.key"
      v-for="(col, index) in resultQuery" :key="index"
               tile
               outlined
-              
     >
       <v-list-item  >
         <v-list-item-avatar color="grey">      <img  :src="col.img[0]" alt width="90px" />   
@@ -83,24 +170,36 @@
 </v-row>
   
     </v-card>
+         
+          </v-card>
+        </template>
+      </v-hover>
+
+
+     
     <v-footer
         fixed
         class="font-weight-medium"
       >
-        <v-col
-          class="text-center"
-          cols="12"
-        >
+      
  <v-dialog v-model="dialog" scrollable max-width="300px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="primary"
+   
+            <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto pa-3"
+            style="background-color: #0C4A60 "
             dark
             v-bind="attrs"
             v-on="on"
           >
-            ค้นหาช่างภาพเพื่อเปรียบเทียบ
-          </v-btn>
+           <h2 style="color:#ffffff">ค้นหาช่างภาพด่วน</h2>
+          </v-card>
+        </template>
+      </v-hover>
+
         </template>
         <v-card>
           <v-card-title>เลือกประเภทงาน</v-card-title>
@@ -122,7 +221,7 @@
             <v-btn color="blue darken-1" text  @click="searchJob(dialogm1)">ตกลง</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog>        </v-col>
+      </v-dialog>       
       </v-footer>
     </v-container>
 
@@ -145,6 +244,8 @@ export default {
 
   data: () => {
     return {
+       amenities: [1, 4],
+    neighborhoods: [1],
         dataF: [],
       asd: [],
    
@@ -214,6 +315,7 @@ computed: {
   },
   mounted() {
    photographerRef.orderByChild("email").on("value", snapshot => {
+
     this.photographers =snapshot.val();
           var i=0
 

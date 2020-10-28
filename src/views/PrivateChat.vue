@@ -35,8 +35,10 @@
 <script>
 import firebase from "./forms/firebaseConfig";
 var database = firebase.database();
-var userRef = database.ref("/userdata");
-var chatMRef = database.ref("/chatMessage");
+// var userRef = database.ref("/userdata");
+// var chatMRef = database.ref("/chatMessage");
+var chatRoomRef = database.ref("/chatRoom");
+
 export default {
  data: () => ({
     logs: [],
@@ -55,14 +57,16 @@ export default {
   this.logs.push(this.msg);
       
 console.log(this.msg);
-
+console.log(this.keyroom );
  let data = {
         Message: this.msg,
-        id1:  'key2',
-        id2: this.$route.params.key,
+        id: this.$store.state.keyUserF,
       }
-      
-      chatMRef.push(data)
+      chatRoomRef.child(this.keyroom).push(data)
+
+//      chatRoomRef.child(this.keyroom).update({
+// data
+// });
 this.msg = "";
 
         
@@ -81,41 +85,56 @@ this.msg = "";
     }
   },
     mounted() {
- chatMRef.on("value", snapshot => {
+      chatRoomRef.on("value", snapshot => {
    this.chat = snapshot.val()
-}); 
-        userRef.on("value", snapshot => {
-var i=0
-for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-var key = Object.keys(snapshot.val())[i];
-var data = snapshot.child(key).val();
-      // console.log(data.email);
-      if(data.email == firebase.auth().currentUser.email){
-        console.log(data.email);
+   
+   var i=0
+            for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+            var key = Object.keys(snapshot.val())[i];
+            
+            var data = snapshot.child(key).val();
+
+    if((data.id1 == this.$route.params.key && data.id2 == this.$store.state.keyUserF) || (data.id1 ==  this.$store.state.keyUserF && data.id2 ==  this.$route.params.key)){
+     this.keyroom = key
+     console.log( this.chat[this.keyroom]);
+                  }else{
+                  console.log('sdf');
+                    
+                    // this.createChatroom(keyP,keyUser,tasks);
+    /////////////สร้างห้องแชท
+ 
+  
+                  }
+            }
+});  
+//  chatMRef.on("value", snapshot => {
+//    this.chat = snapshot.val()
+// }); 
+
+
+
+
+//         userRef.on("value", snapshot => {
+// var i=0
+// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+// var key = Object.keys(snapshot.val())[i];
+// var data = snapshot.child(key).val();
+//       // console.log(data.email);
+//       if(data.email == firebase.auth().currentUser.email){
+//         console.log(data.email);
         
-        userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-  // console.log(snapshot.val().firstname);
+//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
+//   // console.log(snapshot.val().firstname);
     
-     var key2 = Object.keys(snapshot.val())[0];
-     this.kkk = Object.keys(snapshot.val())[0]
-     this.users = snapshot.val()[key2];
-  console.log(key2);
-// ========================
-//    chatMRef.orderByChild("id1").equalTo(key2).on("value", snapshot => {
-//       this.chat1 = snapshot.val()
-//       console.log('id1'+snapshot.val());
-      
+//      var key2 = Object.keys(snapshot.val())[0];
+//      this.kkk = Object.keys(snapshot.val())[0]
+//      this.users = snapshot.val()[key2];
+//   console.log(key2);
+
+// });    
+//       }     
+// }  
 //     });
-//     chatMRef.orderByChild("id2").equalTo(this.$route.params.key).on("value", snapshot => {
-// console.log(this.$route.params.key);
-//       this.chat2 = snapshot.val()
-//       console.log('id2'+snapshot.val());
-      
-//     });
-});    
-      }     
-}  
-    });
   }
   }
 </script>

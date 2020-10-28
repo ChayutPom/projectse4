@@ -1,11 +1,11 @@
 <template >
-   <v-footer fixed  padless >
+
+   <v-footer fixed  padless  >
     <v-card flat
           tile
           width="100%"
           class=" text-center " 
            v-if="!$route.meta.hideNavigation"
-
        >
 
       <v-tabs
@@ -16,6 +16,7 @@
         padless
         class="flex-wrap: wrap;
   width: 100%;"
+  color="#0C4A60"
       >
 
         <v-tab v-for="list in lists" :key="list.text"  router :to="list.route" >

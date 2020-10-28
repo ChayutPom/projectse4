@@ -13,7 +13,7 @@
       <p class=" title center " >{{users.firstname}} {{users.lastname}}</p></v-col >
       </v-row>
     </v-container>
-
+ 
     <v-container fluid>
       <v-row 
             centered
@@ -21,36 +21,37 @@
         padless>
         <v-col col="6" class=" mt-2 ">
    <v-img   max-width="30px" max-height="30px" src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fprofile%2Fcash_icon-icons.com_51090.png?alt=media&token=ca110726-6584-4521-9fdd-a4b1a964fe71"></v-img>
-        12312
+        
         </v-col > 
-          <v-col col="3"><v-btn class="ma-3 sm-12 center" outlined color="indigo">ถอนเครดิต</v-btn> </v-col > 
+          <!-- <v-col col="3"><v-btn class="ma-3 sm-12 center" outlined color="indigo">ถอนเครดิต</v-btn> </v-col >  -->
 
           <v-col col="3"><v-btn class="ma-3 sm-12 center" outlined color="indigo" @click="userSignOut()">ออกจากระบบ</v-btn></v-col > 
 
       </v-row>
     </v-container>
+    
+ <v-list rounded>
+        <v-list-item-group
+          v-model="selectedItem"
+          color="primary"
+        >
+          <v-list-item
+             v-for="(item, i) in items" :key="i"
+             :href="item.route"
+          >
+              <v-list-item-icon >
+             <v-img   max-width="40px" max-height="40px" :src="item.icon"></v-img>
 
-    <v-list-item-group color="primary" v-for="(item, i) in items" :key="i">
-      <a  :href="item.route" >  <v-list-item  >
-        <v-list-item-icon>
-<v-img   max-width="40px" max-height="40px" :src="item.icon">
-  <template v-slot:placeholder>
-                      <v-row
-                        class="fill-height ma-0"
-                        align="center"
-                        justify="center"
-                      >
-                        <v-progress-circular indeterminate ></v-progress-circular>
-                      </v-row>
-                    </template>
-</v-img>
-          <!-- <v-icon v-text="item.icon"></v-icon> -->
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.title"></v-list-item-title>
-        </v-list-item-content>
-      </v-list-item></a>
-    </v-list-item-group>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title  v-text="item.title"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+
+    
+
   </v-list>
 
 </template> 

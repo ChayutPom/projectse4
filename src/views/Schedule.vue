@@ -7,7 +7,6 @@
 >
       <v-list-item three-line>
         <v-list-item-content>
-          {{keystatus}}
           <div class="font-weight-bold mb-2">{{tasks.taskType}}</div>
           <div v-if="tasks.taskType != 'model'" ><v-list-item-title  class="mb-1" >ช่างภาพที่คุณเลือก : {{photographer[tasks.keyPhoto].name}}</v-list-item-title></div>
           <!-- <div v-if="tasks.taskType == 'model'"><v-list-item-title class="mb-1" >Modelที่เลือก : {{tasks.keyModel}}</v-list-item-title></div> -->
@@ -15,7 +14,7 @@
 <!-- :href="'/schedule/PrivateChat/' + tasks.keyUser" -->
               
           <v-list-item-subtitle>สถานะงาน : {{tasks.statusTask}}</v-list-item-subtitle>
-          <!-- <v-btn     @click="chat(tasks.keyPhoto,tasks.keyModel)"    >chat</v-btn> -->
+          <v-btn     @click="chat(tasks.keyPhoto,tasks.keyModel,tasks)"    >chat</v-btn>
 
         </v-list-item-content>
         
@@ -368,7 +367,8 @@ taskRef.child(endTask).update({
 //     )
   },
 
-chat(keyPhoto,keyModel){
+chat(keyPhoto,keyModel,tasks){
+  console.log(tasks);
   console.log(keyPhoto);
   console.log(keyModel);
   // =======================================================================
@@ -432,6 +432,7 @@ var data = snapshot.child(key).val();
  id =2    
 }
 }  
+
 if(id == 1 ){
 console.log('5555555');
 }else {
@@ -453,22 +454,84 @@ let data = {
 }  
     });
          }); 
-  }else{
+  }else{ 
     console.log('b');
     photographerRef.orderByKey().equalTo(keyPhoto).on("value", snapshot => {
-           var keyP =Object.keys(snapshot.val())
-      console.log(snapshot.val()[keyP].keyUser);
-    this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyP].keyUser)
+      console.log(snapshot.val());
+      var keyP =Object.keys(snapshot.val())
+      var keyUser = snapshot.val()[keyP].keyUser
+//       let data = {
+//         id1:  keyUser,
+//         id2: tasks.keyUser,
+//       }
+// chatRoomRef.push(data)
+
+chatRoomRef.on("value", snapshot => {
+
+ var i=0
+ var check
+            for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
+            var key = Object.keys(snapshot.val())[i];
+            
+            var data = snapshot.child(key).val();
+            
+                  if((data.id1 == keyUser && data.id2 == tasks.keyUser) || (data.id1 ==  tasks.keyUser && data.id2 ==  keyUser)){
+     check = 1
+              
+                  }else{
+                    check = 2
+                    
+                    // this.createChatroom(keyP,keyUser,tasks);
     /////////////สร้างห้องแชท
+ 
+  
+                  }
+           
+
+            }
+
+            if(check == 1){
+console.log('sds');
+            }else{
+   this.$router.push('/schedule/PrivateChat/' + keyUser)
      let data = {
-        id1:  snapshot.val()[keyP].keyUser,
-        id2: 'asdasd',
+        id1:  keyUser,
+        id2: tasks.keyUser,
       }
+chatRoomRef.push(data)
+            }
+            });
+            
+
+  //  var keyP =Object.keys(snapshot.val())
+  //     console.log(snapshot.val()[keyP].keyUser);
+  //   this.$router.push('/schedule/PrivateChat/' + snapshot.val()[keyP].keyUser)
+  //   /////////////สร้างห้องแชท
+  //    let data = {
+  //       id1:  snapshot.val()[keyP].keyUser,
+  //       id2: tasks.keyUser,
+  //     }
       
-      chatRoomRef.push(data)
-         }); 
+  //     chatRoomRef.push(data)
+
+
+ 
+ 
+
+
+      }); 
+       
+         
   }
-}
+},
+//  createChatroom(keyP,keyUser,tasks){
+//    console.log('sd');
+//         let data = {
+//         id1:  keyUser,
+//         id2: tasks.keyUser,
+//       }
+// chatRoomRef.push(data)
+//  }
 },
   mounted() {
 console.log(this.$store.state.keyUser);

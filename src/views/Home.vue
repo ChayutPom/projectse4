@@ -1,7 +1,15 @@
 <template>
-  <div id="app">
-    <v-app id="inspire">
-      <v-carousel cycle height="200" hide-delimiter-background show-arrows-on-hover>
+  <div id="app" >
+    <v-app id="inspire" >
+       <div style="background-color: #FAFAFA">
+      <v-container >
+      <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            style="background-color: #FFFFFF"
+          >
+             <v-carousel cycle height="200" hide-delimiter-background show-arrows-on-hover>
         <v-carousel-item
           v-for="(item,i) in items"
           :key="i"
@@ -10,6 +18,10 @@
           transition="fade-transition"
         ></v-carousel-item>
       </v-carousel>
+          </v-card>
+        </template>
+      </v-hover>
+      </v-container>
       <!-- <ul>
         <li v-for="user_data in users" :key="user_data.uid_user = uid" >
           <h1 >{{user_data.email}}</h1>
@@ -18,9 +30,17 @@
       </ul>-->
 
       <v-container fluid>
+        
         <v-row>
           <v-col cols="4"  class="text-center">
-            <v-btn class="ma-6" fab color="#90CAF9" href="photo.vue">
+            <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto "
+            style="background-color: #FFFFFF"
+          >
+           <v-btn class="ma-6" fab color="#90CAF9" href="photo.vue">
               <v-img
                 src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2F32officeicons-6_89731.png?alt=media&token=901526d1-2284-45b6-bb52-b3baf64ec249"
                 aspect-ratio="1"
@@ -33,9 +53,21 @@
               </v-img>
             </v-btn>
             <p>Photo</p>
+          </v-card>
+        </template>
+      </v-hover>
+
+            
           </v-col>
 
           <v-col cols="4"  class="text-center">
+            <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto "
+            style="background-color: #FFFFFF"
+          >
             <v-btn class="ma-6" medium fab color="#B39DDB" href="model.vue">
               <v-img
                 src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Favatar_people_person_profile_user_woman_icon_123358.png?alt=media&token=32945597-98a6-4428-8568-37a191cf5427"
@@ -49,10 +81,21 @@
               </v-img>
             </v-btn>
             <p class="text-center">model</p>
+          </v-card>
+        </template>
+      </v-hover>
+
           </v-col>
 
           <v-col cols="4"  class="text-center">
-            <v-btn class="ma-6" medium fab color="#BBDEFB" href="review.vue">
+            <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto "
+            style="background-color: #FFFFFF"
+          >
+           <v-btn class="ma-6" medium fab color="#BBDEFB" href="review.vue">
               <v-img
                 src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2F1-61_icon-icons.com_68882.png?alt=media&token=ffd1e780-6430-4e50-aec9-a86392be8fc7"
                 aspect-ratio="1"
@@ -65,10 +108,20 @@
               </v-img>
             </v-btn>
             <p class="text-center">review</p>
+          </v-card>
+        </template>
+      </v-hover>
           </v-col>
 
           <v-col cols="4"  class="text-center">
-            <v-btn class="ma-6" medium fab color="indigo" href="shop.vue">
+            <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto "
+            style="background-color: #FFFFFF"
+          >
+           <v-btn class="ma-6" medium fab color="indigo" href="shop.vue">
               <v-img
                 src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Fshop-icon_34368.png?alt=media&token=cc72c297-6897-422f-a546-11d854d09714"
                 aspect-ratio="1"
@@ -81,9 +134,19 @@
               </v-img>
             </v-btn>
             <p class="text-center">shop</p>
+          </v-card>
+        </template>
+      </v-hover>
           </v-col>
 
           <v-col cols="4"  class="text-center" v-if="users.status_photogra == true" >
+            <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto"
+            style="background-color: #FFFFFF"
+          >
             <v-badge :content="noti" :value="noti >0" color="red" overlap>
               <v-btn class="ma-6" medium fab color="#80CBC4" href="tab1.vue" >
                 <v-img
@@ -100,10 +163,20 @@
             </v-badge>
 
             <p class="text-center">photographer</p>
+          </v-card>
+        </template>
+      </v-hover>
           </v-col>
 
           <v-col cols="4"  class="text-center" v-if="users.status_model == true">
-            <v-btn class="ma-6" medium fab color="#FFAB91" href="/tabmodel1">
+            <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto "
+            style="background-color: #FFFFFF"
+          >
+          <v-btn class="ma-6" medium fab color="#FFAB91" href="/tabmodel1">
               <v-img
                 src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2Fhome%2Fperson_target_user_icon_127193.png?alt=media&token=f7e308b6-45fd-4476-82b0-e08829ba23ab"
                 aspect-ratio="1"
@@ -116,20 +189,36 @@
               </v-img>
             </v-btn>
             <p class="text-center">Modeling</p>
+          </v-card>
+        </template>
+      </v-hover>
+ 
           </v-col>
         </v-row>
       </v-container>
 
       <v-container>
-        <h2 BOLD>ช่างภาพแนะนำ</h2>
-      </v-container>
+          <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto pa-3"
+            style="background-color: #A3C6C4 "
+          >
+           <h2 style="color:#354649">ช่างภาพแนะนำ</h2>
+          </v-card>
+        </template>
+      </v-hover>
+      
+      
       <v-sheet class="mx-2" max-width="auto">
         <v-slide-group>
           <v-slide-item :key="key" v-for="(photogra, key) in photographers">
             <v-card class="mx-1 my-2" max-width="200">
               <v-img height="155" max-width="100%" :src="photogra.img[0]"></v-img>
 
-              <v-card>
+              <v-card
+              style="background-color: #FFFFFF">
 
 
                 {{photogra.name}}
@@ -142,17 +231,30 @@
           </v-slide-item>
         </v-slide-group>
       </v-sheet>
+      </v-container>
 
       <v-container>
-        <h2 BOLD>แบบแนะนำ</h2>
-      </v-container>
+             <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto pa-3"
+            style="background-color: #A3C6C4"
+          >
+           <h2 style="color:#354649">แบบแนะนำ</h2>
+          </v-card>
+        </template>
+      </v-hover>
+      
       <v-sheet class="mx-1 my-2" max-width="auto">
         <v-slide-group>
           <v-slide-item :key="key" v-for="(model, key) in models">
-            <v-card class="mx-1 my-auto" max-width="200">
+            <v-card class="mx-1 my-auto" max-width="200"
+            style="background-color: #E1DDDB">
               <v-img height="155" max-width="100%" :src="model.img[0]"></v-img>
 
-              <v-card>
+              <v-card
+              style="background-color: #E1DDDB">
                 {{model.name}}
                 <v-row align="center" class="mx-1">
                   <v-rating :value="4.5" color="amber" dense half-increments readonly size="10"></v-rating>
@@ -163,7 +265,7 @@
           </v-slide-item>
         </v-slide-group>
       </v-sheet>
-
+</v-container>
       <!-- <v-container>
         <h2 BOLD>รีวิวแนะนำ</h2>
       </v-container>
@@ -184,6 +286,7 @@
           </v-slide-item>
         </v-slide-group>
       </v-sheet> -->
+      </div>
     </v-app>
   </div>
 </template>

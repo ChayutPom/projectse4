@@ -3,8 +3,20 @@
     <div v-if="users.status_photogra == false">
       <center>
         <h2>โปรไฟล์ ช่างภาพ</h2>
-      </center>
+     
       <br />
+ <v-list-item-avatar color="grey"  height="150" width="150"> <input
+                  type="file"
+                  id="fileUploadProfile"
+                  multiple
+                  hidden
+                  accept="image/png, image/jpeg, image/bmp"
+                  @change="uploadProfile"
+                  class="form-control"
+                />     
+  <img v-if="Profile.images == ''" @click="chooseFilesProfile()"   src="https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/kisspng-user-profile-computer-icons-profile-5ac09245049c32.0935523415225697970189.jpg?alt=media&token=9945f225-6db8-417a-ae7b-e239b2be5943" alt width="150px" />   
+ <img v-if="Profile.images != ''" @click="chooseFilesProfile()"   :src="Profile.images[Profile.images.length-1]" alt width="150px" />   
+</v-list-item-avatar> </center>
 
       <v-col cols="12" sm="6" md="3">
         <v-text-field
@@ -524,6 +536,7 @@
               @click="
                 sheet = !sheet;
                 insertToPhotographer(
+                  Profile.images[Profile.images.length-1],
                   name,
                   realname,
                   email,
@@ -695,6 +708,9 @@ export default {
     },
     nameAlbum: '',
     albumname:'',
+    Profile: {
+      images: [],
+    },
     Album: {
       images: [],
     },
@@ -732,6 +748,7 @@ export default {
       this.$router.push("/" + lo + "/location.vue");
     },
     insertToPhotographer(
+      profile,
       name,
       realname,
       email,
@@ -787,7 +804,8 @@ console.log(this.imagePhoto);
         gender: gender,
         introduce: introduce,
         address: this.$store.state.location,
-        img: this.imagePhoto
+        img: this.imagePhoto,
+        imgProfile: profile
         ,
         keyUser: this.$store.state.keyUserF,
         typePhoto: {
@@ -851,6 +869,10 @@ console.log(this.imagePhoto);
     chooseFiles() {
       document.getElementById("fileUpload").click();
     },
+    chooseFilesProfile(){
+      document.getElementById("fileUploadProfile").click();
+
+    },
     chooseFilesAl() {
 
       document.getElementById("fileUploadAl").click();
@@ -873,6 +895,39 @@ console.log(this.imagePhoto);
           // Uh-oh, an error occurred!
           console.log("an error occurred");
         });
+    },uploadProfile(e) {
+      var i = 0;
+      for (i; i <= e.target.files.length - 1; i++) {
+        if (e.target.files[i]) {
+          let file = e.target.files[i];
+
+          var storageRef = firebase
+            .storage()
+            .ref("products/" + Math.random() + "_" + file.name);
+
+          let uploadTask = storageRef.put(file);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              console.log(snapshot);
+            },
+            (error) => {
+              // Handle unsuccessful uploads
+              console.log(error);
+            },
+            () => {
+              // Handle successful uploads on complete
+              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+
+              uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                this.Profile.images.push(downloadURL);
+                console.log(this.Profile.images[this.Profile.images.length-1]);
+              });
+            }
+          );
+        }
+      }
     },
 uploadImageAl(e) {
       var i = 0;

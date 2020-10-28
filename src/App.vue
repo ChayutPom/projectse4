@@ -1,10 +1,10 @@
 <template>
-  <v-app >
+  <v-app class="background: #EF6C33">
     <div class=" ">
     <v-app-bar
       app
-      color="primary"
-      dark
+      color="#0C4A60"
+      
     ><button onclick="window.history.go(-1); return false;"
                v-if="!$route.meta.hideBack" ><v-icon >mdi-keyboard-backspace</v-icon></button>
 
