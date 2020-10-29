@@ -89,7 +89,32 @@
 ภาพถ่ายบุคคล
           </v-chip>
         </v-chip-group>
+
+
+         <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            :elevation="hover ? 24 : 10"
+            class="mx-auto pa-3"
+            style="background-color: #A3C6C4 "
+          >
+           <h2 style="color:#354649">เลือกสถานที่</h2>
+          </v-card>
+        </template>
+      </v-hover>
+       <v-col cols="12" sm="6" md="3">
+      <v-text-field 
+             outlined
+                v-if="this.$store.state.location.locationData==null" label='สถานที่'  filled rounded dense v-model="taskLocation" @click="location('task')" ></v-text-field>
+      <v-text-field 
+
+              outlined
+               v-if="this.$store.state.location.locationData!=null" @click="location('task')" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country' solo ></v-text-field>
+    </v-col>
       </v-card-text>
+
+
+        
       <!-- ------------------------ -->
 <v-container  fluid>
 
@@ -182,7 +207,7 @@
         class="font-weight-medium"
       >
       
- <v-dialog v-model="dialog" scrollable max-width="300px">
+ <v-dialog v-model="dialog" scrollable max-width="270px">
         <template v-slot:activator="{ on, attrs }">
    
             <v-hover>
@@ -273,7 +298,9 @@ export default {
   },
 methods: {
 
-
+location(lo){
+        this.$router.push("/"+lo+"/location.vue");
+    },
 searchJob(type){
 
 console.log(type);

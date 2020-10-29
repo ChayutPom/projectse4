@@ -30,12 +30,12 @@
       <v-list-item>
         <v-list-item-avatar color="grey"></v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id1)" >{{item.id1}}</v-btn>
+          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id1)" >{{key}}</v-btn>
 </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-card-text>
-        2
+        
       </v-card-text>
   
      
