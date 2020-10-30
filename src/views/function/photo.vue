@@ -192,6 +192,7 @@
         :src="photographer2"
         height="90" max-width=""
       ></v-img></v-col>
+      {{photographer2}}
 </v-row>
   
     </v-card>
