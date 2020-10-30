@@ -215,7 +215,7 @@
         <v-slide-group>
           <v-slide-item :key="key" v-for="(photogra, key) in photographers">
             <v-card class="mx-1 my-2" max-width="200">
-              <v-img height="155" max-width="100%" :src="photogra.img[0]"></v-img>
+              <v-img height="155" max-width="100%" :src="photogra.img[0].image"></v-img>
 
               <v-card
               style="background-color: #FFFFFF">

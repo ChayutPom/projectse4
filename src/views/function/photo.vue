@@ -188,11 +188,11 @@
       </v-chip>
 
       <v-row >
-        <v-col cols="3" :key="key" v-for="(photographer2, key) in col.img" sm><v-img 
+        <v-col cols="3" :key="key" v-for="(photographer2, key) in col.img[0].image" sm><v-img 
         :src="photographer2"
         height="90" max-width=""
       ></v-img></v-col>
-      {{photographer2}}
+      
 </v-row>
   
     </v-card>
