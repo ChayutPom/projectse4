@@ -73,7 +73,11 @@
           
           </v-card-title>
   
-          <v-card-text>{{price1}}
+          <v-card-text>
+            {{price1}}
+            {{price2}}
+            {{price3}}
+            {{price4}}
          </v-card-text>
   
           <v-divider></v-divider>
@@ -264,6 +268,9 @@ export default {
       // taskStar: 5,
       comment:null,
       price1:'',
+      price2:'',
+      price3:'',
+      price4:'',
       rating: 5,
       keyclick:'',
       dialog: false,
@@ -295,6 +302,14 @@ console.log(a);
 console.log(this.task[a]);
 console.log(this.task[a].price.price1);
 this.price1 =this.task[a].price.price1
+this.price2 =this.task[a].price.price2
+this.price3 =this.task[a].price.price3
+this.price4 =this.task[a].price.price4
+
+this.taskStart1 = this.task[a].taskStart.taskStart1
+this.taskStart2 = this.task[a].taskStart.taskStart2
+this.taskStart3 = this.task[a].taskStart.taskStart3
+this.taskStart4 = this.task[a].taskStart.taskStart4
 
  
   },
@@ -549,7 +564,6 @@ console.log(this.photographer);
     });
    }); 
 
-  
 
   }
 };

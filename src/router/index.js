@@ -397,7 +397,7 @@ Vue.use(VueRouter)
       name: 'PrivateChat',
       component: PrivateChat,
       meta: { hideNavigation: true,
-        hideBack: true },
+         },
     },
     {
       path: '/imageTask/:key',

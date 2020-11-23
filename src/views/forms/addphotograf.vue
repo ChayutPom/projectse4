@@ -895,7 +895,8 @@ console.log(this.imagePhoto);
           // Uh-oh, an error occurred!
           console.log("an error occurred");
         });
-    },uploadProfile(e) {
+    },
+    uploadProfile(e) {
       var i = 0;
       for (i; i <= e.target.files.length - 1; i++) {
         if (e.target.files[i]) {

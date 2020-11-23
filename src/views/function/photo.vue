@@ -105,11 +105,11 @@
        <v-col cols="12" sm="6" md="3">
       <v-text-field 
              outlined
-                v-if="this.$store.state.location.locationData==null" label='สถานที่'  filled rounded dense v-model="taskLocation" @click="location('task')" ></v-text-field>
+                v-if="this.$store.state.location.locationData==null" label='สถานที่' v-model="taskLocation" filled rounded dense  @click="location('task')" ></v-text-field>
       <v-text-field 
 
               outlined
-               v-if="this.$store.state.location.locationData!=null" @click="location('task')" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country' solo ></v-text-field>
+               v-if="this.$store.state.location.locationData!=null" v-model="taskLocation" @click="location('task')" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country' solo ></v-text-field>
     </v-col>
       </v-card-text>
 
@@ -171,21 +171,21 @@
               outlined
     >
       <v-list-item  >
-        <v-list-item-avatar color="grey">      <img  :src="col.img[0]" alt width="90px" />   
+        <v-list-item-avatar color="grey">      <img  :src="col.img[0].image[0]" alt width="90px" />   
 </v-list-item-avatar>
-        <v-list-item-content >
+     <v-list-item-content >
       <v-list-item-title class="headline" >{{col.name}}</v-list-item-title>
           <v-list-item-subtitle><i class="fas fa-star-half-alt"></i> {{ col.star}}<br><i class="fas fa-money-bill-wave"></i> 2500-3000</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-<v-chip
+<!-- <v-chip
         class="ma-2"
         x-small
            v-for="n in 3"
               :key="n"
       >
         งานแต่งงาน
-      </v-chip>
+      </v-chip> -->
 
       <v-row >
         <v-col cols="3" :key="key" v-for="(photographer2, key) in col.img[0].image" sm><v-img 
@@ -264,17 +264,18 @@ import firebase from "../forms/firebaseConfig";
 
 var database = firebase.database();
 var photographerRef = database.ref("/photographer");
+var userRef = database.ref("/userdata");
 
 export default {
  
 
   data: () => {
     return {
-       amenities: [1, 4],
+       amenities: [],
     neighborhoods: [1],
         dataF: [],
       asd: [],
-   
+   taskLocation: null,
       startDate: null,
       endDate: null ,
       searchQuery: null,
@@ -305,26 +306,44 @@ location(lo){
 searchJob(type){
 
 console.log(type);
-if(type == "photo1"){
-this.$router.push('/profilephoto/all/photo1.vue')
-}else if(type == "phot2"){
-this.$router.push('/profilephoto/all/photo2.vue')
-}else if(type == "phot3"){
-this.$router.push('/profilephoto/all/photo3.vue')
-}else if(type == "phot4"){
-this.$router.push('/profilephoto/all/photo4.vue')
-}else if(type == "phot5"){
-this.$router.push('/profilephoto/all/photo5.vue')
-}else if(type == "phot6"){
-this.$router.push('/profilephoto/all/photo6.vue')
-}else if(type == "phot7"){
-this.$router.push('/profilephoto/all/photo7.vue')
-}
+// if(type == "photo1"){
+// this.$router.push('/profilephoto/all/photo1.vue')
+// }else if(type == "phot2"){
+// this.$router.push('/profilephoto/all/photo2.vue')
+// }else if(type == "phot3"){
+// this.$router.push('/profilephoto/all/photo3.vue')
+// }else if(type == "phot4"){
+// this.$router.push('/profilephoto/all/photo4.vue')
+// }else if(type == "phot5"){
+// this.$router.push('/profilephoto/all/photo5.vue')
+// }else if(type == "phot6"){
+// this.$router.push('/profilephoto/all/photo6.vue')
+// }else if(type == "phot7"){
+// this.$router.push('/profilephoto/all/photo7.vue')
+// }
 },
 },
 computed: {
     resultQuery: function () {
-    
+      // console.log(this.$store.state.location.locationData.province);
+      console.log(this.amenities);
+//       if(this.amenities==0){
+// this.type == "สถาปัตยกรรม"
+//       }else if(this.amenities==1){
+
+//       }else if(this.amenities==2){
+
+//       }else if(this.amenities==3){
+
+//       }else if(this.amenities==4){
+
+//       }else if(this.amenities==5){
+
+//       }else if(this.amenities==6){
+
+//       }
+
+
       if (this.searchQuery) {
         
         return this.dataF.filter((item) => {
@@ -332,6 +351,7 @@ computed: {
             .toLowerCase()
             .split(" ")
             .every((v) => item.name.toLowerCase().includes(v));
+             
         });
       } else {
         // console.log(this.photographers);
@@ -361,6 +381,11 @@ const datarec ={
 this.dataF.push(datarec)
             }
 console.log(this.dataF);
+    });
+
+    userRef.on("value", snapshot => {
+  this.name = snapshot.val()
+console.log(snapshot.val());
     });
   }
 };

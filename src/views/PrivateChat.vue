@@ -10,9 +10,9 @@
             </v-toolbar>
             <v-card-text>
         <v-list ref="chat" id="logs">
-              <template v-for="(chatM, key) in chat">
-            <v-subheader class="flex-row-reverse"   :key="key"><div v-if="chatM.id1 == kkk">{{ chatM.Message }}</div ></v-subheader>
-             <v-subheader class=" flex-row"   :key="key"><div v-if="chatM.id1 == $route.params.key">{{ chatM.Message }}</div ></v-subheader>
+              <template v-for="(chat, key) in chatM">
+            <v-subheader class="flex-row-reverse"   :key="key"><div v-if="chat.id ==ii1">{{ chat.Message }}</div ></v-subheader>
+             <v-subheader class=" flex-row"   :key="key"><div v-if="chat.id == ii2">{{ chat.Message }}</div ></v-subheader>
           </template>
         </v-list>
             </v-card-text>
@@ -68,12 +68,6 @@ console.log(this.keyroom );
 // data
 // });
 this.msg = "";
-
-        
-
-      
-
-
       
     }
   },
@@ -86,9 +80,18 @@ this.msg = "";
   },
     mounted() {
       chatRoomRef.on("value", snapshot => {
+
+
    this.chat = snapshot.val()
-   
-   var i=0
+   console.log(this.chat);
+  //  console.log(this.chat["-MLl_aMZvrlI9CbQDpL4"]["-MLlevzeKWvMj-zEAwOm"].Message);
+
+   console.log(this.$route.params.key);
+   console.log(this.$store.state.keyUserF);
+this.ii1 = this.$store.state.keyUserF
+this.ii2 = this.$route.params.key
+
+   var i =0
             for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
             var key = Object.keys(snapshot.val())[i];
             
@@ -97,44 +100,21 @@ this.msg = "";
     if((data.id1 == this.$route.params.key && data.id2 == this.$store.state.keyUserF) || (data.id1 ==  this.$store.state.keyUserF && data.id2 ==  this.$route.params.key)){
      this.keyroom = key
      console.log( this.chat[this.keyroom]);
+
+     this.chatM = this.chat[this.keyroom]
                   }else{
                   console.log('sdf');
                     
-                    // this.createChatroom(keyP,keyUser,tasks);
-    /////////////สร้างห้องแชท
+
  
   
                   }
             }
 });  
-//  chatMRef.on("value", snapshot => {
-//    this.chat = snapshot.val()
-// }); 
 
 
 
 
-//         userRef.on("value", snapshot => {
-// var i=0
-// for (Object.keys(snapshot.val())[i]; i < snapshot.numChildren(); i++) {
-// var key = Object.keys(snapshot.val())[i];
-// var data = snapshot.child(key).val();
-//       // console.log(data.email);
-//       if(data.email == firebase.auth().currentUser.email){
-//         console.log(data.email);
-        
-//         userRef.orderByChild("email").equalTo(data.email).on("value", snapshot => {
-//   // console.log(snapshot.val().firstname);
-    
-//      var key2 = Object.keys(snapshot.val())[0];
-//      this.kkk = Object.keys(snapshot.val())[0]
-//      this.users = snapshot.val()[key2];
-//   console.log(key2);
-
-// });    
-//       }     
-// }  
-//     });
   }
   }
 </script>

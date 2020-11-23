@@ -3,19 +3,23 @@
 
         <v-col cols="12" sm="12" md="12">
           <v-card
-      max-width="344"
+      max-width=""
       class="mx-auto"
-      :key="key" v-for="(item, key) in chatRoom "
+      :key="key" v-for="(item, key) in chatRoom"
     >
       <v-list-item>
-        <v-list-item-avatar color="grey"></v-list-item-avatar>
+          <v-avatar  color="indigo">
+   <v-img  :src="name[item.id2].profileImg[0]"></v-img>
+
+      </v-avatar>
+        <!-- <v-list-item-avatar :src="name[item.id1].profileImg[0]"> </v-list-item-avatar> -->
         <v-list-item-content>
-          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id2)" >{{item.id2}}</v-btn>
+          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id2)" >{{name[item.id2].firstname}}</v-btn>
 </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-card-text>
-       1
+        
       </v-card-text>
   
      
@@ -23,14 +27,17 @@
 
 
             <v-card
-      max-width="344"
       class="mx-auto"
       :key="key" v-for="(item, key) in chatRoom2 "
     >
       <v-list-item>
-        <v-list-item-avatar color="grey"></v-list-item-avatar>
+          <v-avatar  color="indigo">
+   <v-img  :src="name[item.id1].profileImg[0]"></v-img>
+
+      </v-avatar>
+        <!-- <v-list-item-avatar :src="name[item.id1].profileImg[0]"> </v-list-item-avatar> -->
         <v-list-item-content>
-          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id1)" >{{key}}</v-btn>
+          <v-list-item-title class="headline"> <v-btn @click="chat(item.id1,item.id2)" >{{name[item.id1].firstname}}</v-btn>
 </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -52,6 +59,7 @@ import firebase from "./forms/firebaseConfig";
 var database = firebase.database();
 // var userRef = database.ref("/userdata");
 var chatRoomRef = database.ref("/chatRoom");
+var userRef = database.ref("/userdata");
 
 
   export default {
@@ -60,6 +68,7 @@ var chatRoomRef = database.ref("/chatRoom");
      return {
    chatRoom: {},
    chatRoom2: {},
+   name: ''
      }
   },
 
@@ -92,9 +101,10 @@ chatRoomRef.orderByChild("id1").equalTo(this.$store.state.keyUserF).on("value", 
           console.log(this.chatRoom2);  
 
    }); 
-
-
-    
+userRef.on("value", snapshot => {
+  this.name = snapshot.val()
+console.log(snapshot.val());
+    });
 
   }
 
