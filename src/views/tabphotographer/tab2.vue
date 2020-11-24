@@ -92,6 +92,7 @@
    @load="test" 
    :lastViw="false"
 > 
+
 <longdo-map-marker             
             :icon= "{
     url: 'https://firebasestorage.googleapis.com/v0/b/photo-992f6.appspot.com/o/icon%2F120454669_368181401020961_2346759943865085724_n.png?alt=media&token=aa8a5bba-ec33-41ef-9407-7af821e70c17',
