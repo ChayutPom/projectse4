@@ -802,6 +802,7 @@ console.log(this.imagePhoto);
         realname: realname,
         email: email,
         gender: gender,
+        status: false,
         introduce: introduce,
         address: this.$store.state.location,
         img: this.imagePhoto,

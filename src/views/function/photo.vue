@@ -26,7 +26,9 @@
             outlined
           ></v-select>
         </v-col></v-row> -->
-        <v-card-text>
+
+        
+        <!-- <v-card-text>
          <v-hover>
         <template v-slot:default="{ hover }">
           <v-card
@@ -111,7 +113,7 @@
               outlined
                v-if="this.$store.state.location.locationData!=null" v-model="taskLocation" @click="location('task')" :label='this.$store.state.location.locationData.subdistrict+this.$store.state.location.locationData.district+this.$store.state.location.locationData.province+this.$store.state.location.locationData.country' solo ></v-text-field>
     </v-col>
-      </v-card-text>
+      </v-card-text> -->
 
 
         
@@ -362,7 +364,7 @@ computed: {
 
   },
   mounted() {
-   photographerRef.orderByChild("email").on("value", snapshot => {
+   photographerRef.orderByChild("status").equalTo(true).on("value", snapshot => {
 
     this.photographers =snapshot.val();
           var i=0
