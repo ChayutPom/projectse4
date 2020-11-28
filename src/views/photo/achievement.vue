@@ -1,34 +1,26 @@
 <template>
+
     <v-card
       class="mx-auto"
       max-width="500"
     >
-      <v-container fluid>
-        <v-row dense>
-          <v-col
-            v-for="card in cards"
-            :key="card.title"
-            :cols="card.flex"
-          >
-            <v-card>
-              <v-img
-                :src="card.src"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                height="190px"
-              >
-                <v-card-title v-text="card.title"></v-card-title>
-              </v-img>
-  
-              
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+
+<v-container  :key="key2" v-for="(photogra, key2) in photographers2">
+ 
+     <v-row class="" >
+       <v-col cols="4"  >
+      <v-img
+        :src="photogra.image[key2]"
+      ></v-img></v-col >
+      </v-row>
+</v-container>
     </v-card>
 </template>
 <script>
+import firebase from "../forms/firebaseConfig";
 
+var database = firebase.database();
+var photographerRef = database.ref("/photographer");
 export default {
  
 
@@ -40,6 +32,17 @@ data: () => ({
        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6 },
         { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6 },
     ],
+    photographers2:{},
   }),
+
+  mounted() {
+   photographerRef.orderByKey().equalTo(this.$route.params.key).on("value", snapshot => {
+      this.photographers2 = snapshot.val()[this.$route.params.key].img;
+      console.log(this.photographers2);
+
+      
+    });
+  }
 };
+
 </script>

@@ -176,6 +176,10 @@ let data = {
           taskStart3,
           taskStart4,    
         },
+         ratingTask: {
+      rating:5,
+      comment:''
+    },
         price:{
           price1: this.priceTotal*taskTaotal1,
           price2: this.priceTotal*taskTaotal2,

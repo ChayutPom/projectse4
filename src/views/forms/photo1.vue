@@ -172,6 +172,10 @@ taskTaotal1,
           price4: this.priceTotal*taskTaotal4,
         },
 
+    ratingTask: {
+      rating:5,
+      comment:''
+    },
          taskLocation: this.$store.state.location,
          taskNum: taskNum,
          taskType: 'ภาพถ่ายบุคคล',

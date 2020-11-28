@@ -168,6 +168,10 @@ this.priceTotal = snapshot.val()[this.$route.params.key].typePhoto.price.price6
           price3: this.priceTotal*taskTaotal3,
           price4: this.priceTotal*taskTaotal4,
         },
+         ratingTask: {
+      rating:5,
+      comment:''
+    },
         taskTotal:{
 taskTaotal1,
           taskTaotal2,

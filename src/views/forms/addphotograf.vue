@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
-    <div v-if="users.status_photogra == false">
+
+    <div v-if="users == false">
       <center>
         <h2>โปรไฟล์ ช่างภาพ</h2>
      
@@ -583,7 +584,8 @@
     <!-- ===========================================================================================================================================
 =========================================================================================================================================== -->
 
-    <div v-if="users.status_photogra == true">
+    <div v-if="users == true">
+      {{users.status_photogra}}
       <v-container   v-for="(pho, index) in photograProfile"
                   :key="index">
         <v-card class="mx-auto" max-width="434" tile>
@@ -633,7 +635,7 @@
         </v-card>
 
         <center>
-          <v-btn text color="primary" href>อัลบั้ม</v-btn>
+          <v-btn text color="primary" :href="'/album/' +index">อัลบั้ม</v-btn>
      </center>
         <v-row class>
           <v-col cols="4" sm v-for="(pho2, index) in pho.img"
@@ -686,17 +688,16 @@
 </template>
 <script>
 import firebase from "./firebaseConfig";
-
 var database = firebase.database();
 var photographerRef = database.ref("/photographer");
 var userRef = database.ref("/userdata");
-
 export default {
   data: () => ({
+    photograProfile:{},
+    status_photogra: null,
         dialog: false,
     show: false,
         dialog2: false,
-
     items: ["1", "2", "3", "4", "5"],
     items2: ["ชาย", "หญิง"],
     sheet: false,
@@ -773,7 +774,6 @@ export default {
       price6,
       price7
     ) {
-
       console.log(album);
       console.log(  images2.length);
       console.log(  images.length);
@@ -791,12 +791,10 @@ const datarec2 ={
 image :images
 }
 console.log(datarec2);
-
 this.imagePhoto.push(datarec2)
       }
 console.log(this.imagePhoto);
       console.log(this.users.status_photogra);
-
       let data = {
         name: name,
         realname: realname,
@@ -836,7 +834,6 @@ console.log(this.imagePhoto);
       this.$store.dispatch("editUser", {
         status_photogra: true,
       });
-
       photographerRef
         .push(data)
         .then(() => {
@@ -856,15 +853,12 @@ console.log(this.imagePhoto);
 //     addAlbum(album,img){
 // console.log(album);
 // console.log(img);
-
 // this.nameAlbum = album
 // this.image = img
-
 // const datarec ={
 //  nameAlbum = album,
 // image = img
 // }
-
 // this.imagePhoto.push(datarec)
 //     },
     chooseFiles() {
@@ -872,10 +866,8 @@ console.log(this.imagePhoto);
     },
     chooseFilesProfile(){
       document.getElementById("fileUploadProfile").click();
-
     },
     chooseFilesAl() {
-
       document.getElementById("fileUploadAl").click();
     },
     SavechooseFilesAl(album){
@@ -892,7 +884,6 @@ console.log(this.imagePhoto);
         })
         .catch(function (error) {
           console.log(error);
-
           // Uh-oh, an error occurred!
           console.log("an error occurred");
         });
@@ -902,13 +893,10 @@ console.log(this.imagePhoto);
       for (i; i <= e.target.files.length - 1; i++) {
         if (e.target.files[i]) {
           let file = e.target.files[i];
-
           var storageRef = firebase
             .storage()
             .ref("products/" + Math.random() + "_" + file.name);
-
           let uploadTask = storageRef.put(file);
-
           uploadTask.on(
             "state_changed",
             (snapshot) => {
@@ -921,7 +909,6 @@ console.log(this.imagePhoto);
             () => {
               // Handle successful uploads on complete
               // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-
               uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 this.Profile.images.push(downloadURL);
                 console.log(this.Profile.images[this.Profile.images.length-1]);
@@ -936,13 +923,10 @@ uploadImageAl(e) {
       for (i; i <= e.target.files.length - 1; i++) {
         if (e.target.files[i]) {
           let file = e.target.files[i];
-
           var storageRef = firebase
             .storage()
             .ref("products/" + Math.random() + "_" + file.name);
-
           let uploadTask = storageRef.put(file);
-
           uploadTask.on(
             "state_changed",
             (snapshot) => {
@@ -955,7 +939,6 @@ uploadImageAl(e) {
             () => {
               // Handle successful uploads on complete
               // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-
               uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 this.Album.images.push(downloadURL);
                 console.log(this.product.images);
@@ -970,13 +953,10 @@ uploadImageAl(e) {
       for (i; i <= e.target.files.length - 1; i++) {
         if (e.target.files[i]) {
           let file = e.target.files[i];
-
           var storageRef = firebase
             .storage()
             .ref("products/" + Math.random() + "_" + file.name);
-
           let uploadTask = storageRef.put(file);
-
           uploadTask.on(
             "state_changed",
             (snapshot) => {
@@ -989,7 +969,6 @@ uploadImageAl(e) {
             () => {
               // Handle successful uploads on complete
               // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-
               uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 this.product.images.push(downloadURL);
                 console.log(this.product.images);
@@ -1000,15 +979,11 @@ uploadImageAl(e) {
       }
     },
   },
-
   mounted() {
-    photographerRef.on("value", (snapshot) => {
-      this.photographers = snapshot.val();
-      this.users = this.$store.state.keyUser;
+    userRef.orderByKey().equalTo(this.$store.state.keyUserF).on("value", (snapshot) => {
+      this.users = snapshot.val()[this.$store.state.keyUserF].status_photogra;
       console.log(this.users);
-
     });
-
       photographerRef.orderByChild('keyUser').equalTo(this.$store.state.keyUserF).on("value", (snapshot) => {
       this.photograProfile = snapshot.val();
       // this.users = this.$store.state.keyUser;

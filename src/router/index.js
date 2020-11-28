@@ -20,6 +20,7 @@ import photographer from '../views/function/photographer.vue';
 import profilephoto from '../views/photo/profilephoto.vue';
 import achievement from '../views/photo/achievement.vue';
 import selectJob from '../views/photo/selectJob.vue';
+import album from '../views/photo/album.vue';
 import profilemodel from '../views/model/profilemodel.vue';
 import formmodel from '../views/model/formmodel.vue';
 
@@ -151,7 +152,7 @@ Vue.use(VueRouter)
       meta: { hideNavigation: true }
     },
     {
-      path: '/achievement.vue',
+      path: '/achievement.vue/:key',
       name: 'achievement',
       component: achievement,
       meta: { hideNavigation: true }
@@ -396,6 +397,13 @@ Vue.use(VueRouter)
       path: '/schedule/PrivateChat/:key',
       name: 'PrivateChat',
       component: PrivateChat,
+      meta: { hideNavigation: true,
+         },
+    },
+    {
+      path: '/album/:key',
+      name: 'album',
+      component: album,
       meta: { hideNavigation: true,
          },
     },

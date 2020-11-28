@@ -137,7 +137,7 @@
     </v-container>
 
 <v-container  :key="key2" v-for="(photogra, key2) in photographers">
-    <center><v-btn text color="primary" href="achievement.vue">ผลงาน</v-btn> </center>
+    <center><v-btn text color="primary" :href="'/achievement.vue/'+ key2">ผลงาน</v-btn> </center>
      <v-row class="" >
        <v-col cols="4" sm :key="key2" v-for="(photogra2, key2) in photogra.img">
       <v-img
@@ -151,15 +151,14 @@
       <v-card
       max-width="auto"
       class="mx-auto"
-      :key="key" v-for="(com, key) in commet"
+      :key="key" v-for="(com, key) in comment"
     >
-      <v-list-item    >
+      <v-list-item   v-if="comment[key].ratingTask.comment != ''" >
         <v-list-item-avatar color="grey"></v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="">ABCD</v-list-item-title>
+          <div ><v-list-item-title class="">{{comment[key].ratingTask.comment}}</v-list-item-title></div>
           <v-list-item-subtitle >
             <div       >
-              <div>{{com.ratingTask.comment}}</div>
             </div>
           </v-list-item-subtitle>
         </v-list-item-content>
@@ -197,10 +196,9 @@ export default {
       img: "",
       uid_user: "",
       uid: "",
-      commet: {},
+      comment: {},
       ratingTask: '',
-      com: ''
-
+      com: '',
     
     };
   },
@@ -229,8 +227,8 @@ console.log(snapshot.val());
             var keys = Object.keys(snapshot.val())[i]
 console.log(keys);
 
-this.commet = snapshot.val()
-console.log(this.commet );
+this.comment = snapshot.val()
+console.log(this.comment );
 
             }
       });

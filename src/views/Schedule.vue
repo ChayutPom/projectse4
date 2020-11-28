@@ -371,15 +371,7 @@ taskRef.child(endTask).update({
       comment:comment
     }
   })
-//    let data = {
-//  ratingTask: {
-//       comment:comment
-//     }
-//    }
 
-//   taskRef.push( 
-//       data
-//     )
   },
 
 chat(keyPhoto,keyModel,tasks){
